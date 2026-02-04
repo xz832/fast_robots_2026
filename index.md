@@ -3,4 +3,6 @@ Hello, I'm Zhou Xianyi Zoey. I'm a junior in mechanical engineering and I am exc
 
 ![doodle](/assets/wigglepaint!.gif)
 
-Take a look at my <a href="{{ "lab_documentation/lab_1.md" | relative_url }}">Lab Documentation</a> here.
+Take a look at my <a href="[def]">Lab Documentation</a> here.
+
+[def]: { "/lab_documentation/lab_1.md/" | relative_url }
