@@ -1,3 +1,5 @@
+# MAE4190 FAST ROBOTS
+# LAB 1
 Prelab:
 Setup: Briefly describe the steps taken to set up your computer for Lab 1, showing any results (i.e. MAC address printing)
 Codebase: Add a brief explanation of your understanding of the codebase and how Bluetooth works between your computer and the Artemis
