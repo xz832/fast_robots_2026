@@ -9,8 +9,15 @@ Include screenshots, screen recordings, pictures, or videos of relevant results 
 Discussion:
 Briefly describe what you’ve learned, challenges that you faced, and/or any unique solutions used to fix problems. It is important to keep these writeups succinct. You will not get extra points for writing more words if the content doesn’t contribute to communicating your understanding of the lab material.
 
-```python
-print(yo)
+```C++
+case GET_TIME_MILLIS:
+
+    tx_estring_value.clear();
+    tx_estring_value.append("T: ");
+    tx_estring_value.append((int)millis());
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+    break;
 ```
 
 arduino C++
