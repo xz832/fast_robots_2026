@@ -8,27 +8,45 @@ description: "writeup for lab 1"
 
 # MAE4190 FAST ROBOTS
 # LAB 1
-Prelab:
+
+Hello! This is lab 1 of fast robots:
+
+## Prelab:
 Setup: Briefly describe the steps taken to set up your computer for Lab 1, showing any results (i.e. MAC address printing)
 Codebase: Add a brief explanation of your understanding of the codebase and how Bluetooth works between your computer and the Artemis
-Lab Tasks:
+
+## Lab Tasks:
 Configurations: Show what the relevant configurations, anything that was specifically needed to address the tasks.
 Include a brief explanation on what you did and results for each task.
 Address all questions posed in the lab.
 Include screenshots, screen recordings, pictures, or videos of relevant results (i.e. messages received in Jupyter Notebook, serial terminal print of messages received by Artemis).
-Discussion:
+
+## Discussion:
 Briefly describe what you’ve learned, challenges that you faced, and/or any unique solutions used to fix problems. It is important to keep these writeups succinct. You will not get extra points for writing more words if the content doesn’t contribute to communicating your understanding of the lab material.
+
 
 ```C++
 case GET_TIME_MILLIS:
 
-    tx_estring_value.clear();
-    tx_estring_value.append("T: ");
-    tx_estring_value.append((int)millis());
-    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+            tx_estring_value.clear();
+            tx_estring_value.append("T: ");
+            tx_estring_value.append((int)millis());
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
 
-    break;
+            Serial.println();
+            Serial.print("T: ");
+            Serial.print(millis());
+
+            break;
 ```
+
+```python
+ble.send_command(CMD.GET_TIME_MILLIS, "")
+print("time")
+```
+The print statement is just there to test that this line works.
+
+![get_time_millis](/assets/timemillis.png)
 
 arduino C++
 command line bash
