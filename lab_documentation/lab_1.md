@@ -1,3 +1,11 @@
+---
+layout: default
+title: "Lab 1"
+permalink: /lab_documentation/lab_1/
+description: "writeup for lab 1"
+---
+
+
 # MAE4190 FAST ROBOTS
 # LAB 1
 Prelab:
