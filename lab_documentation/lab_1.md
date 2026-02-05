@@ -25,6 +25,8 @@ Include screenshots, screen recordings, pictures, or videos of relevant results 
 Briefly describe what you’ve learned, challenges that you faced, and/or any unique solutions used to fix problems. It is important to keep these writeups succinct. You will not get extra points for writing more words if the content doesn’t contribute to communicating your understanding of the lab material.
 
 
+3. Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
+
 ```C++
 case GET_TIME_MILLIS:
 
@@ -50,8 +52,6 @@ The print statement is just there to test that this line works.
 
 arduino C++
 command line bash
-
-Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
 Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
 
