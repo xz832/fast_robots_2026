@@ -46,15 +46,16 @@ case GET_TIME_MILLIS:
 ble.send_command(CMD.GET_TIME_MILLIS, "")
 print("time")
 ```
-The print statement is just there to test that this line works.
-
+The print statement is just there to test that this line works in Jupyter Notebook.
+Here's the timestamp printed in the serial monitor:
 ![get_time_millis](/assets/timemillis.png)
 
-arduino C++
-command line bash
-
-Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
+4. Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
 
 Write a loop that gets the current time in milliseconds and sends it to your laptop to be received and processed by the notification handler. Collect these values for a few seconds and use the time stamps to determine how fast messages can be sent. What is the effective data transfer rate of this method?
 
 Now create an array that can store time stamps. This array should be defined globally so that other functions can access it if need be. In the loop, rather than send each time stamp, place each time stamp into the array. (Note: you’ll need some extra logic to determine when your array is full so you don’t “over fill” the array.) Then add a command SEND_TIME_DATA which loops the array and sends each data point as a string to your laptop to be processed. (You can store these values in a list in python to determine if all the data was sent over.)
+
+
+arduino C++
+command line bash
