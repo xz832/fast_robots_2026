@@ -48,7 +48,7 @@ print("time")
 The print statement is just there to test that this line works in Jupyter Notebook.
 Here's the timestamp printed in the serial monitor:
 
-<img src="/images/timemillis.png" alt="lasagna">
+![time](../images/timemillis.png)
 
 #### 4. Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
 
