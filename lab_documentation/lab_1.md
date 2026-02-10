@@ -20,10 +20,6 @@ Include a brief explanation on what you did and results for each task.
 Address all questions posed in the lab.
 Include screenshots, screen recordings, pictures, or videos of relevant results (i.e. messages received in Jupyter Notebook, serial terminal print of messages received by Artemis).
 
-## Discussion:
-Briefly describe what you’ve learned, challenges that you faced, and/or any unique solutions used to fix problems. It is important to keep these writeups succinct. You will not get extra points for writing more words if the content doesn’t contribute to communicating your understanding of the lab material.
-
-
 #### 3. Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
 ```C++
@@ -48,7 +44,7 @@ print("time")
 The print statement is just there to test that this line works.
 Here's the timestamp printed in the serial monitor:
 
-![time](../images/timemillis.png)
+![time](../images/Lab1/timemillis.png)
 
 #### 4. Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
 
@@ -97,13 +93,36 @@ case TIME_LOOP:{
 ```
 This is my code for sending the current time for a certain time frame determined (interval). I chose 1000ms (1s) arbitrarily to test this out, and in order to test for the effective data transfer rate of this method, I counted the number of timestamps that the loop outputs (count) so that we can see it in the serial monitor:
 
-![time_loop](../images/time_loop.png)
-![time_loop_count](../images/time_loop_count.png)
+![time_loop](../images/Lab1/time_loop.png)
+![time_loop_count](../images/Lab1/time_loop_count.png)
 
-
+As we can see, it can only send 43 data points per second.
 
 #### 6. Now create an array that can store time stamps. This array should be defined globally so that other functions can access it if need be. In the loop, rather than send each time stamp, place each time stamp into the array. (Note: you’ll need some extra logic to determine when your array is full so you don’t “over fill” the array.) Then add a command SEND_TIME_DATA which loops the array and sends each data point as a string to your laptop to be processed. (You can store these values in a list in python to determine if all the data was sent over.)
+
+Here I placed all my timestamps over 3s into a globally defined time_doc array. Tindex is the index (which is also globally defined) that increments from 0. The delay is to prevent the BLE from overfilling.
+
+```C++
+case SEND_TIME_DATA:
+
+            for (int tindex = 0; tindex < 3000; tindex++){
+                time_doc[tindex] = millis();
+
+                tx_estring_value.clear();
+                tx_estring_value.append("T:");
+                tx_estring_value.append((int)time_doc[tindex]);
+                tx_characteristic_string.writeValue(tx_estring_value.c_str());
+                delay(1);
+            }
+
+            break;
+```
+
+![send_time_data](../images/Lab1/send_time_data.gif)
 
 
 arduino C++
 command line bash
+
+## Discussion:
+Briefly describe what you’ve learned, challenges that you faced, and/or any unique solutions used to fix problems. It is important to keep these writeups succinct. You will not get extra points for writing more words if the content doesn’t contribute to communicating your understanding of the lab material.
