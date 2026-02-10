@@ -52,7 +52,7 @@ Here's the timestamp printed in the serial monitor:
 def notifyBle(uuid, data):
     data = data.decode()
     if data.startswith("T:"):
-        read_time = int(data.split(":")[1])
+        read_time.append(int(data.split(":")[1]))
         print(read_time)
     else:
         print("Unexpected data")
@@ -96,7 +96,7 @@ This is my code for sending the current time for a certain time frame determined
 ![time_loop](../images/Lab1/time_loop.png)
 ![time_loop_count](../images/Lab1/time_loop_count.png)
 
-As we can see, it can only send 43 data points per second.
+As we can see, it can only send 43 data points per second, and it varies from 37 to 44 typically.
 
 #### 6. Now create an array that can store time stamps. This array should be defined globally so that other functions can access it if need be. In the loop, rather than send each time stamp, place each time stamp into the array. (Note: you’ll need some extra logic to determine when your array is full so you don’t “over fill” the array.) Then add a command SEND_TIME_DATA which loops the array and sends each data point as a string to your laptop to be processed. (You can store these values in a list in python to determine if all the data was sent over.)
 
@@ -120,6 +120,49 @@ case SEND_TIME_DATA:
 
 ![send_time_data](../images/Lab1/send_time_data.gif)
 
+#### 7. Add a second array that is the same size as the time stamp array. Use this array to store temperature readings. Each element in both arrays should correspond, e.e., the first time stamp was recorded at the same time as the first temperature reading. Then add a command GET_TEMP_READINGS that loops through both arrays concurrently and sends each temperature reading with a time stamp. The notification handler should parse these strings and add populate the data into two lists.
+
+```C++
+case GET_TEMP_READINGS:
+            
+            for (int tindex = 0; tindex < 3000; tindex++){
+                
+                time_doc[tindex] = millis();
+                temp_doc[tindex] = getTempDegC();
+                
+                tx_estring_value.clear();
+                tx_estring_value.append("T:");
+                tx_estring_value.append((int)time_doc[tindex]);
+                tx_estring_value.append(",Temp:");
+                tx_estring_value.append((float)temp_doc[tindex]);
+                tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+                delay(1);
+
+                Serial.println();
+                Serial.print(tx_estring_value.c_str());
+            }
+
+            break;
+```
+
+```python
+time_array = []
+temp_array = []
+
+def notifyBle(uuid, data):
+    data = data.decode()
+    if data.startswith("T:") and "Temp" not in data:
+        read_time = int(data.split(":")[1])
+        time_array.append(read_time)
+        print(read_time)
+    elif "Temp" in data:
+        read_time, read_temp = data.split(",")
+        time_array.append(int(read_time.split(":")[1]))
+        temp_array.append(float(read_temp.split(":")[1]))
+    else:
+        print("Unexpected data")
+```
 
 arduino C++
 command line bash
