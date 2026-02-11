@@ -11,14 +11,91 @@ description: "writeup for lab 1"
 Hello! This is lab 1 of fast robots:
 
 ## Prelab:
-Setup: Briefly describe the steps taken to set up your computer for Lab 1, showing any results (i.e. MAC address printing)
-Codebase: Add a brief explanation of your understanding of the codebase and how Bluetooth works between your computer and the Artemis
+
+I did all the installation and successfully activated a virtual environment. Here is my MAC address and UUID and me connecting to the arduino!
+
+![mac_address](../images/Lab1/mac_address.png)
+![mac_connect](../images/Lab1/mac_connect.png)
+
+Unfortunately my laptop had issues connecting with the Artemis board as it cannot detect any ports. I had to update the CH340 Driver, which was strange since my TA and Professor Helbling said that this was usually a Mac issue.
+
+#### Codebase: Add a brief explanation of your understanding of the codebase and how Bluetooth works between your computer and the Artemis
+
+The BLE codebase is split into two parts, one for the arduino and one for the python. The arduino part of the codebase sends commands to the artemis board, while the python code runs and receives data on our computers, recognizing and connecting with the given MAC address and the UUID of the two devices. The Bluetooth facilitates communication between the Artemis and the computer to send and receive commands as well as data.
+
 
 ## Lab Tasks:
-Configurations: Show what the relevant configurations, anything that was specifically needed to address the tasks.
-Include a brief explanation on what you did and results for each task.
-Address all questions posed in the lab.
-Include screenshots, screen recordings, pictures, or videos of relevant results (i.e. messages received in Jupyter Notebook, serial terminal print of messages received by Artemis).
+
+#### 1. Send a string value from the computer to the Artemis board using the ECHO command. The computer should then receive and print an augmented string.
+
+```C++
+        case ECHO:
+
+            char char_arr[MAX_MSG_SIZE];
+
+            // Extract the next value from the command string as a character array
+                        /*
+             * Your code goes here.
+             */
+            success = robot_cmd.get_next_value(char_arr);
+            if (!success)
+                return;
+
+            tx_estring_value.clear();
+            tx_estring_value.append("Echo ))) ");
+            tx_estring_value.append(char_arr);
+            tx_estring_value.append(" :O");
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+            Serial.print("Echoo))) ");
+            Serial.print(char_arr);
+            Serial.println(" :O");
+            
+            break;
+```
+
+![echo_python](../images/Lab1/echo_python.png)
+![echo_serial](../images/Lab1/echo_serial.png)
+
+#### 2. Send three floats to the Artemis board using the SEND_THREE_FLOATS command and extract the three float values in the Arduino sketch.
+
+```C++
+case SEND_THREE_FLOATS:
+            /*
+             * Your code goes here.
+             */
+            float fl_1, fl_2, fl_3;
+
+            // Extract the next value from the command string as an integer
+            success = robot_cmd.get_next_value(fl_1);
+            if (!success)
+                return;
+
+            // Extract the next value from the command string as an integer
+            success = robot_cmd.get_next_value(fl_2);
+            if (!success)
+                return;
+
+            success = robot_cmd.get_next_value(fl_3);
+            if (!success)
+                return;
+
+            Serial.print("Three floats: ");
+            Serial.print(fl_1);
+            Serial.print(", ");
+            Serial.print(fl_2);
+            Serial.print(", ");
+            Serial.println(fl_3);
+
+            break;
+```
+
+```python
+ble.send_command(CMD.SEND_THREE_FLOATS, "0.52|6.01|90.7")
+```
+
+![send_three_floats](../images/Lab1/send_three_floats.png)
+
 
 #### 3. Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
@@ -41,7 +118,7 @@ case GET_TIME_MILLIS:
 ble.send_command(CMD.GET_TIME_MILLIS, "")
 print("time")
 ```
-The print statement is just there to test that this line works.
+(The print statement in the python code is just there to test that this line works.)
 Here's the timestamp printed in the serial monitor:
 
 ![time](../images/Lab1/timemillis.png)
@@ -164,8 +241,21 @@ def notifyBle(uuid, data):
         print("Unexpected data")
 ```
 
-arduino C++
-command line bash
+[![get_temp_readings](https://img.youtube.com/vi/_pmVKVNQdQs/0.jpg)](https://www.youtube.com/watch?v=_pmVKVNQdQs)
+
+I had to make some modifications for my notification handler due to the appended temperature readings as well, and they are now stored in two arrays, time_array and temp_array. Unfortunately, while my Arduino code supposedly works, as tested by the Serial.print of the estring, it does not output anything in Jupyter Notebook. I have tried to troubleshoot this, but cannot find an answer as of now. If there is some blatant mistake causing this, I am very sorry. I will continue to experiment with testing to find the cause.
+
+#### 8. Discuss the differences between these two methods, the advantages and disadvantages of both and the potential scenarios that you might choose one method over the other. How “quickly” can the second method record data? The Artemis board has 384 kB of RAM. Approximately how much data can you store to send without running out of memory?
+
+The first method is straight forward, takes up less memory since nothing is really stored in the Artemis, as well as allows messages to be sent and received immediately. However, as shown from the duplicating timestamps in the display, this is limited by the bandwidth of the bluetooth, and the messages send faster than the computer can receive them, leading to inconsistent, repeating timestamps being shown.
+
+The second method stores data and sends them over all at once in even intervals, instead of the rapid-fire, less organized messages. This is no longer limited by the bandwidth of the bluetooth, but there are other issues that could arise, such as in overfilling arrays and taking up more memory on the board.
+
+When there is a large quantity of data, and the specific time at which data is being sent matters less, the first method would be better as there would be no worries about running out of memory. However, if the timestamps need to be more precise, especially if sent at high speeds, the second option may be better.
+The speed of the second method recording data would probably depend on the speed at which the measurements are being sent in, such as the sensor being used.
+
+For 384kB, each string contains bytes for the characters of "T:" and ",Temp:", as well as six digits each for all numerical data. In total, this string should have around 17 bytes. So dividing the memory by the number of bytes, we can potentially store around 22500 data entries.
 
 ## Discussion:
-Briefly describe what you’ve learned, challenges that you faced, and/or any unique solutions used to fix problems. It is important to keep these writeups succinct. You will not get extra points for writing more words if the content doesn’t contribute to communicating your understanding of the lab material.
+
+I learned a lot more about communicating via Bluetooth, and got more familiar with the C++ language in general. Troubleshooting with different print statements became very useful, and it gave me a lot of insight into how transmitting data and sending commands worked through Arduino and python.
