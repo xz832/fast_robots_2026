@@ -26,6 +26,9 @@ Sketch of wiring diagram (with brief explanation if you want)
 
 ## Lab Tasks
 Lab Tasks
+
+proved that arduino works just by ble and battery
+
 Picture of your ToF sensor connected to your QWIIC breakout board
 Screenshot of Artemis scanning for I2C device (and discussion on I2C address)
 Discussion and pictures of sensor data with chosen mode
