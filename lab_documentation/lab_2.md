@@ -14,7 +14,6 @@ description: "writeup for lab 2"
 Picture of your Artemis IMU connections
 Show that the IMU example code works
 ![imu_connect](../images/Lab2/imu_connect.jpg)
-![example_code](../images/Lab2/example.gif)
 
 The IMU offers two I2C addresses, corresponding to the two different pins. Two different AD0 configurations are needed to distinguish between the higher and lower addresses while connected to the same I2C bus. That is the purpose of the AD0_VAL. The default is 1, and when the ADR jumper is closed the value becomes 0.
 
