@@ -5,4 +5,4 @@ Hello, I'm Zhou Xianyi Zoey. I'm a junior in mechanical engineering and I am exc
 
 Take a look at my <a href="{{ '/lab_documentation/lab_1/' | relative_url }}" class = "btn"> lab 1 documentation</a> here.
 
-Here comes <a href="{{ '/lab_documentation/lab_1/' | relative_url }}" class = "btn"> lab 2</a> !
+Here comes <a href="{{ '/lab_documentation/lab_2/' | relative_url }}" class = "btn"> lab 2</a> !
