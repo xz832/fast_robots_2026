@@ -32,6 +32,15 @@ proved that arduino works just by ble and battery
 Picture of your ToF sensor connected to your QWIIC breakout board
 Screenshot of Artemis scanning for I2C device (and discussion on I2C address)
 Discussion and pictures of sensor data with chosen mode
+
+### 6. The ToF sensor has three modes (Short, Medium, and Long) that optimize the ranging performance given the maximum expected range. Discuss the pros/cons of each mode, and think about which one could work on the final robot. (Note: medium mode is only available with the Polulu VL53L1X Library).
+
+```C++
+<pre> .setDistanceModeShort(); //1.3m .setDistanceModeMedium(); //3m .setDistanceModeLong(); //4m, Default </pre>
+```
+
+The shorter the range for each mode, the faster the robot can receive data about the environment, and the more accurate the data would be.
+
 2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel
 Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this
 Time v Distance: Include graph of data sent over bluetooth (2 sensors)
