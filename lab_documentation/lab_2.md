@@ -12,6 +12,7 @@ description: "writeup for lab 2"
 
 ### Set up the IMU
 ![imu_connect](../images/Lab2/imu_connect.jpg)
+![example_code](../images/Lab2/example.gif)
 You can see the numbers changing as I change the orientation of the IMU.
 The acceleration values change according to the orientation of the IMU, while the gyroscope data changes based on the motion of me moving the IMU (angular velocity).
 
