@@ -11,17 +11,15 @@ description: "writeup for lab 2"
 ## Lab Tasks
 
 ### Set up the IMU
-Picture of your Artemis IMU connections
-Show that the IMU example code works
 ![imu_connect](../images/Lab2/imu_connect.jpg)
+You can see the numbers changing as I change the orientation of the IMU.
+The acceleration values change according to the orientation of the IMU, while the gyroscope data changes based on the motion of me moving the IMU (angular velocity).
 
 The IMU offers two I2C addresses, corresponding to the two different pins. Two different AD0 configurations are needed to distinguish between the higher and lower addresses while connected to the same I2C bus. That is the purpose of the AD0_VAL. The default is 1, and when the ADR jumper is closed the value becomes 0.
 
-Acceleration and gyroscope data discussion (pictures recommended)
-
-
 ### Accelerometer
 Image of output at {-90, 0, 90} degrees for pitch and roll (include equations)
+
 Accelerometer accuracy discussion
 Noise in the frequency spectrum analysis
 Include graphs for your fourier transform
