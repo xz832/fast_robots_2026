@@ -48,6 +48,17 @@ Here is the jupyter graph that generates with the data obtained with an arbitrar
 
 Noise in the frequency spectrum analysis
 Include graphs for your fourier transform
+
+![fft_acc_roll](../images/Lab2/fft_acc_roll.png)
+![fft_acc_pitch](../images/Lab2/fft_acc_pitch.png)
+
+Low pass filter
+```python
+low_pass_freq = 3.5
+alpha = (2*np.pi*low_pass_freq*dt) / (1 + 2*np.pi*low_pass_freq*dt)
+
+```
+
 Discuss the results
 ### Gyroscope
 Include documentation for pitch, roll, and yaw with images of the results of different IMU positions
