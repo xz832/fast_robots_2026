@@ -20,6 +20,8 @@ The IMU offers two I2C addresses, corresponding to the two different pins. Two d
 
 ### Accelerometer
 
+The accelerometer measures linear acceleration in all directions. Hence, from its x, y and z outputs we are able to determine the orientation angles of the IMU. However, since it is affected by gravity, the accelerometer cannot help us find rotation in yaw as the acceleration would remain around 9.81 m/s^2, regardless of which way we rotate it parallel to the ground.
+
 I converted the data from the accelerometer to roll and pitch using the equations from lecture:
 ```C++
 case ACC_PITCHROLL: {
@@ -115,14 +117,13 @@ Code is very similar, except with the pitch data from the accelerometer instead.
 
 ![fft_acc_pitch](../images/Lab2/fft_acc_pitch.png)
 
-Looking at the FFT graphs, the accelerometer pitch shows significant peaks after around 3.7Hz. Hence, that will be my benchmark for the low pass filter. In order to calculate the alpha:
+Looking at the FFT graphs, the accelerometer pitch shows significant peaks after around 3.5Hz. Hence, that will be my benchmark for the low pass filter. In order to calculate the alpha:
 
 ```python
-low_pass_freq = 3.7
+low_pass_freq = 3.5
 alpha = (2*np.pi*low_pass_freq*dt) / (1 + 2*np.pi*low_pass_freq*dt)
-
-filtered = np.zeros_like()
-filtered[0] = theta[0]
+low_pass = np.zeros_like()
+low_pass[0] = acc_roll[0]
 
 for i in range(1, len(theta)):
     filtered[i] = alpha*theta[i] + (1-alpha)*filtered[i-1]
