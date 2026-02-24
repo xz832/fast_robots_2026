@@ -42,12 +42,50 @@ This is the output of the pitch and roll when the IMU is at {-90, 0, 90}.
 
 The roll of the accelerometer is fairly accurate, I set it squarely against the table and the reading is consistently around -90 degrees. Small adjustments are also pretty stable. However, the pitch fluctuates a lot, potentially due to the vibrations along my table. It also seems to have a slight offset, outputting values up to 166 degrees when it should be at 90.
 
-Here is the jupyter graph that generates with the data obtained with an arbitrary orientation.
+In order to broadcast the data over to python (gyroscope code included, but they are similar):
+
+```python
+timestamp = []
+acc_pitch = []
+acc_roll = []
+gyr_pitch = []
+gyr_roll =[]
+gyr_yaw = []
+
+def notifyBle(uuid, data):
+    data = data.decode().strip()
+    parts = data.split(",")
+    
+    timestamp.append(float(parts[0]))
+    acc_pitch.append(float(parts[1]))
+    acc_roll.append(float(parts[2]))
+    gyr_pitch.append(float(parts[3]))
+    gyr_roll.append(float(parts[4]))
+    gyr_yaw.append(float(parts[5]))
+```
+
+Graphing the accelerometer data:
+
+```python
+plt.plot(timestamp, acc_pitch[0:3000], label="Pitch")
+plt.plot(timestamp, acc_roll[0:3000], label="Roll")
+        
+plt.xlabel("Time")
+plt.ylabel("Pitch / Roll")
+plt.title("Accelerometer Pitch and Roll vs Time")
+plt.legend()
+plt.grid(True)
+        
+plt.show()
+```
+
+Here is the jupyter graph that generates with the data obtained with an arbitrary orientation. As the graph shows, the data is quite noisy.
 ![acc_graph](../images/Lab2/acc_data_graph.png)
 
+Here is a graph that shows the accelerometer data while I'm flipping the IMU around. The sudden spike at the end is due to me setting the IMU down on the table.
+![acc_flip_graph](../images/Lab2/acc_flip_graph.png)
 
-Noise in the frequency spectrum analysis
-Include graphs for your fourier transform
+In order to filter out some of the noise, we want to analyze the frequencies at which the noise occurs at with a Fourier Transform.
 
 ![fft_acc_roll](../images/Lab2/fft_acc_roll.png)
 ![fft_acc_pitch](../images/Lab2/fft_acc_pitch.png)
