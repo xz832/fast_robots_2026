@@ -117,28 +117,40 @@ Code is very similar, except with the pitch data from the accelerometer instead.
 
 ![fft_acc_pitch](../images/Lab2/fft_acc_pitch.png)
 
-Looking at the FFT graphs, the accelerometer pitch shows significant peaks after around 3.5Hz. Hence, that will be my benchmark for the low pass filter. In order to calculate the alpha:
+Looking at the FFT graphs, the accelerometer tends to have higher magnitudes in lower frequencies, which is expected as any motion induced by us would be a much slower change as compared to ambient noise or vibrations in the environment. Since the pitch shows significant peaks after around 3.5Hz, that will be my benchmark for the low pass filter. In order to calculate the alpha:
 
 ```python
 low_pass_freq = 3.5
 alpha = (2*np.pi*low_pass_freq*dt) / (1 + 2*np.pi*low_pass_freq*dt)
-low_pass = np.zeros_like()
+low_pass = np.zeros_like(acc_roll)
+
 low_pass[0] = acc_roll[0]
+for i in range(1, len(acc_roll)):
+    low_pass[i] = alpha*acc_roll[i] + (1-alpha)*low_pass[i-1]
 
-for i in range(1, len(theta)):
-    filtered[i] = alpha*theta[i] + (1-alpha)*filtered[i-1]
-
-plt.plot(times, theta, label="Raw")
-plt.plot(times, filtered, label="Filtered")
+plt.plot(timestamp, acc_roll, label="Raw Data")
+plt.plot(timestamp, low_pass, label="Filtered Data")
+plt.title("Accelerometer Roll Raw and Filtered Data vs Time")
+plt.xlabel("Time")
+plt.ylabel("Raw roll data/filtered roll data")
 plt.legend()
 plt.show()
-
 ```
 
-Discuss the results
+![low_pass_filter_roll](../images/Lab2/low_pass_filter.png)
+![low_pass_filter_pitch](../images/Lab2/low_pass_filter_pitch.png)
+
+The comparison between the raw and unfiltered data are shown above. The spikes and sudden fluctuations for both roll and pitch data are mellowed out, their magnitudes decreased. The changes seems more obvious in the pitch data, which makes sense since while the roll data has a small amount of noise at all frequencies, the pitch data has significant noise at frequencies above 3.5Hz. I therefore chose the frequency threshold to be low enough to filter out most of the contributing noise, but high enough that I do not lose other useful data.
+
 ### Gyroscope
+
+The gyroscope provides another form of data captured by the IMU. 
 Include documentation for pitch, roll, and yaw with images of the results of different IMU positions
 Demonstrate the accuracy and range of the complementary filter, and discuss any design choices
+
+Compare your output to the pitch, roll, and yaw values from the accelerometer and the filtered response. Describe how they differ.
+Try adjusting the sampling frequency to see how it changes the accuracy of your estimated angles.
+
 ### Sample Data
 Speed of sampling discussion
 Demonstrate collected and stored time-stamped IMU data in arrays
