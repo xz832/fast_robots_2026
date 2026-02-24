@@ -87,13 +87,50 @@ Here is a graph that shows the accelerometer data while I'm flipping the IMU aro
 
 In order to filter out some of the noise, we want to analyze the frequencies at which the noise occurs at with a Fourier Transform.
 
+For the accelerometer roll Fourier Transform:
+```python
+dt = np.mean(np.diff(timestamp)) / 1000
+
+N = len(acc_roll)
+fft_roll = np.fft.fft(acc_roll)
+freqs_roll = np.fft.fftfreq(N, d=dt)
+
+pos_freq = freqs_roll > 0
+
+freqs_roll = freqs_roll[pos_freq]
+fft_mag = np.abs(fft_roll[pos_freq])
+
+plt.plot(freqs_roll, fft_mag)
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Amplitude")
+plt.title("FFT of accelerometer roll")
+plt.grid(True)
+plt.show()
+```
+
 ![fft_acc_roll](../images/Lab2/fft_acc_roll.png)
+
+For the accelerometer pitch Fourier Transform:
+Code is very similar, except with the pitch data from the accelerometer instead.
+
 ![fft_acc_pitch](../images/Lab2/fft_acc_pitch.png)
 
-Low pass filter
+Looking at the FFT graphs, the accelerometer pitch shows significant peaks after around 3.7Hz. Hence, that will be my benchmark for the low pass filter. In order to calculate the alpha:
+
 ```python
-low_pass_freq = 3.5
+low_pass_freq = 3.7
 alpha = (2*np.pi*low_pass_freq*dt) / (1 + 2*np.pi*low_pass_freq*dt)
+
+filtered = np.zeros_like()
+filtered[0] = theta[0]
+
+for i in range(1, len(theta)):
+    filtered[i] = alpha*theta[i] + (1-alpha)*filtered[i-1]
+
+plt.plot(times, theta, label="Raw")
+plt.plot(times, filtered, label="Filtered")
+plt.legend()
+plt.show()
 
 ```
 
