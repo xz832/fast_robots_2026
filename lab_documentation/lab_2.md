@@ -215,11 +215,12 @@ The following graph shows the results as I am rotating the IMU about 90 degrees 
 
 ![gyro_data](../images/Lab2/gyro_test.png)
 
+As compared to the accelerometer data, the gyroscope readings have a lot less noise, having relatively smooth plots even comparing with the data with the low pass filter. It is also able to detect changes in yaw. However, there is a visible effect of the drift, as the graph shows a slight deviation towards the end even as the IMU is placed still. This is also reflected in the printed data, as it gradually increments despite no movement from the IMU:
 
-Include documentation for pitch, roll, and yaw with images of the results of different IMU positions
+![gyro_drift](../images/Lab2/drift.gif)
+
 Demonstrate the accuracy and range of the complementary filter, and discuss any design choices
 
-Compare your output to the pitch, roll, and yaw values from the accelerometer and the filtered response. Describe how they differ.
 Try adjusting the sampling frequency to see how it changes the accuracy of your estimated angles.
 
 ### Sample Data
