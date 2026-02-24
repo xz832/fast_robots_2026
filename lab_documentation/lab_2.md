@@ -144,7 +144,78 @@ The comparison between the raw and unfiltered data are shown above. The spikes a
 
 ### Gyroscope
 
-The gyroscope provides another form of data captured by the IMU. 
+The gyroscope provides another form of data captured by the IMU. It measures the rate of angular change, and as a result it is able to provide us with data of all roll, pitch and yaw. The gyroscope and accelerometer on the IMU complement each other in the form of sensor fusion, giving us more reliable and comprehensive results. While the gyroscope gives us the yaw orientation which the accelerometer cannot measure, the accelerometer is less prone to drift, which the gyroscope experiences due to its nature of integrating over small intervals in time with dead reckoning.
+
+In order to incorporate the gyroscope readings as well, the Arduino command is now:
+
+```C++
+case PITCHROLLYAW: {
+
+    for (int tindex = 0; tindex < 3000; tindex++){
+        time_doc[tindex] = millis();
+            
+        myICM.getAGMT();
+        float ax = myICM.accX();
+        float ay = myICM.accY();
+        float az = myICM.accZ();
+        float gx = myICM.gyrX();
+        float gy = myICM.gyrY();
+        float gz = myICM.gyrZ();
+
+        float acc_roll = atan2(ay, az) * 180/M_PI;
+        float acc_pitch = atan2(ax, az) * 180/M_PI;
+            
+        if (tindex == 0){
+            dt = 0;
+        }
+        else {
+            dt = (time_doc[tindex] - time_doc[tindex-1])/1000.;
+        }
+            
+        gyr_roll += gx * dt;
+        gyr_pitch += gy * dt;
+        gyr_yaw += gz * dt;
+
+        SERIAL_PORT.print(dt);
+        SERIAL_PORT.print("    Acc_Roll: ");
+        SERIAL_PORT.print(acc_roll);
+        SERIAL_PORT.print(", Acc_Pitch: ");
+        SERIAL_PORT.print(acc_pitch);
+        SERIAL_PORT.print(", Gyr_Roll: ");
+        SERIAL_PORT.print(gyr_roll);
+        SERIAL_PORT.print(", Gyr_Pitch: ");
+        SERIAL_PORT.print(gyr_pitch);
+        SERIAL_PORT.print(", Gyr_Yaw: ");
+        SERIAL_PORT.println(gyr_yaw);
+            
+        tx_estring_value.clear();
+        tx_estring_value.append((int)time_doc[tindex]);
+        tx_estring_value.append(",");
+        tx_estring_value.append(acc_roll);
+        tx_estring_value.append(",");
+        tx_estring_value.append(acc_pitch);
+        tx_estring_value.append(",");
+        tx_estring_value.append(gyr_roll);
+        tx_estring_value.append(",");
+        tx_estring_value.append(gyr_pitch);
+        tx_estring_value.append(",");
+        tx_estring_value.append(gyr_yaw);
+        tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+    }
+
+
+          break;
+
+}
+```
+
+The time intervals are now calculated by storing them in an array (time_doc). The serial print of dt ensures that each interval is calculated correctly and the gyroscope readings convert and compound as expected.
+The following graph shows the results as I am rotating the IMU about 90 degrees (a little inaccurate) in each of the axes of rotation:
+
+![gyro_data](../images/Lab2/gyro_test.png)
+
+
 Include documentation for pitch, roll, and yaw with images of the results of different IMU positions
 Demonstrate the accuracy and range of the complementary filter, and discuss any design choices
 
