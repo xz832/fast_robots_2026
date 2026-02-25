@@ -235,9 +235,8 @@ gyr_yaw += gz * dt;
 
 My previous code used millis(), but I think the resolution may not be sufficient to run my loops on, leading to my gyroscope data drifting significantly. I changed it to micros() instead. Looking at the gyroscope data in the background, it still drifts a significant amount, but this does not affect my complementary filtered data. It remains fairly even as the IMU stays still.
 
-
-
-Use a complementary filter to compute an estimate of pitch and roll which is both accurate and stable. Demonstrate its working range and accuracy, and that it is not susceptible to drift or quick vibrations.
+![comp_roll](../images/Lab2/comp_roll.png)
+![comp_pitch](../images/Lab2/comp_pitch.png)
 
 ### Sample Data
 To speed up my loops for sending data, I removed all my delays and commented out all my serial prints. I also rewrote my main loop so that it sends data from an array instead of each piece of data individually. I think another improvement I could make to make the loops faster is to move all the calculations into python instead such that the Arduino code does not need to process as much data.
