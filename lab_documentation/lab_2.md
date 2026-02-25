@@ -219,9 +219,15 @@ As compared to the accelerometer data, the gyroscope readings have a lot less no
 
 ![gyro_drift](../images/Lab2/drift.gif)
 
-Demonstrate the accuracy and range of the complementary filter, and discuss any design choices
+To improve the accuracy and stability of the measured angles, the multiple sensors on the IMU allows us to utilize sensor fusion to combine the data from the accelerometer and the gyroscope. To do so, we need to apply a complementary filter.
 
-Try adjusting the sampling frequency to see how it changes the accuracy of your estimated angles.
+![comple_eq](../images/Lab2/comple_eq.png)
+
+We can use this to estimate more accurate and reliable data for roll and pitch, mitigating the effects of noise on the accelerometer and drift on the gyroscope, but unfortunately we cannot do this for yaw as we only have the gyroscope data.
+
+
+
+Use a complementary filter to compute an estimate of pitch and roll which is both accurate and stable. Demonstrate its working range and accuracy, and that it is not susceptible to drift or quick vibrations.
 
 ### Sample Data
 Speed of sampling discussion
