@@ -223,17 +223,51 @@ To improve the accuracy and stability of the measured angles, the multiple senso
 
 ![comple_eq](../images/Lab2/comple_eq.png)
 
-We can use this to estimate more accurate and reliable data for roll and pitch, mitigating the effects of noise on the accelerometer and drift on the gyroscope, but unfortunately we cannot do this for yaw as we only have the gyroscope data.
+We can use this to estimate more accurate and reliable data for roll and pitch, mitigating the effects of noise on the accelerometer and drift on the gyroscope, but unfortunately we cannot do this for yaw as we only have the gyroscope data. To calculate the complementary filter through the equation, I had to implement this
+```C++
+float gx_diff = gx * dt;
+float gy_diff = gy * dt;
+            
+gyr_roll += gx_diff;
+gyr_pitch += gy_diff;
+gyr_yaw += gz * dt;
+```
+
+My previous code used millis(), but I think the resolution may not be sufficient to run my loops on, leading to my gyroscope data drifting significantly. I changed it to micros() instead. Looking at the gyroscope data in the background, it still drifts a significant amount, but this does not affect my complementary filtered data. It remains fairly even as the IMU stays still.
 
 
 
 Use a complementary filter to compute an estimate of pitch and roll which is both accurate and stable. Demonstrate its working range and accuracy, and that it is not susceptible to drift or quick vibrations.
 
 ### Sample Data
-Speed of sampling discussion
+To speed up my loops for sending data, I removed all my delays and commented out all my serial prints. I also rewrote my main loop so that it sends data from an array instead of each piece of data individually. I think another improvement I could make to make the loops faster is to move all the calculations into python instead such that the Arduino code does not need to process as much data.
+
+```C++
+acc_roll_doc[tindex] = atan2(ay, az) * 180/M_PI;
+            acc_pitch_doc[tindex] = atan2(ax, az) * 180/M_PI;
+            
+            if (tindex == 0){
+              dt = 0;
+            }
+            else {
+              dt = (time_doc[tindex] - time_doc[tindex-1])/1000000.;
+            }
+
+            float gx_diff = gx * dt;
+            float gy_diff = gy * dt;
+            
+            gyr_roll += gx_diff;
+            gyr_pitch += gy_diff;
+            gyr_yaw += gz * dt;
+
+            gyr_roll_doc[tindex] = gyr_roll;
+            gyr_pitch_doc[tindex] = gyr_roll;
+            gyr_yaw_doc[tindex] = gyr_roll;
+```
+
+In terms of storage, I think having separate arrays may be better. It is more convenient and more straightforward to check for specific data, and it is easier to prevent the arrays from overfilling and timing out. In terms of format, it would probably be most optimal to have them stored as floats, but sent in one big package as strings over the BLE. I think I currently have the data stored as floats both on the Artemis and on Python, but communication between them is sent as strings.
 Demonstrate collected and stored time-stamped IMU data in arrays
 Demonstrate 5s of IMU data sent over Bluetooth
+
 ### Record a Stunt
 Include a video (or some videos) of you playing with the car and discuss your observations
-
-(Side note to self) I accidentally uploaded some files that were way too big and the way to fix that is to get the log of commits and dial back to the commit before the large file
