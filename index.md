@@ -3,6 +3,8 @@ Hello, I'm Zhou Xianyi Zoey. I'm a junior in mechanical engineering and I am exc
 
 ![doodle](/images/wigglepaint!.gif)
 
-Take a look at my <a href="{{ '/lab_documentation/lab_1/' | relative_url }}" class = "btn"> lab 1 documentation</a> here.
+Take a look at my <a href="{{ '/lab_documentation/lab_1/' | relative_url }}" class = "btn"> Lab 1 Documentation</a> here.
 
-Here comes <a href="{{ '/lab_documentation/lab_2/' | relative_url }}" class = "btn"> lab 2 documentation</a> !
+<a href="{{ '/lab_documentation/lab_2/' | relative_url }}" class = "btn"> Lab 2 Documentation</a> 
+
+<a href="{{ '/lab_documentation/lab_3/' | relative_url }}" class = "btn"> Lab 3 Documentation</a> !
