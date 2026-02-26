@@ -8,17 +8,22 @@ description: "writeup for lab 3"
 
 # LAB 3 - MAE4190 FAST ROBOTS
 
-Welcome to lab 3 of fast robots!
+Welcome to lab 3 of fast robots! In this lab we install and set up the Time-of-Flight sensors that our cars are going to use to detect distance.
 
 ## Prelab
 
-You can change the address programmatically (while powered) or you can continuously enable/disable the two sensors separately through their shutdown pins. Decide and argue for which approach you want to use (and how you will do this). Given their range and angular sensitivity, think about where you will place them on your robot to best detect obstacles in future labs. Discuss scenarios where your robot will miss obstacles.
+Since we will be using two ToF sensors simultaneously, and the two sensors currently share the same address, we have to either change the address programmatically or use their shutdown pins to enable and disable them in order to address them individually. I will most likely use the programming approach as repeated powering up and shutting down the sensor may slow them down while running the robot.
+
+I soldered one of the ToF sensor's XSHUT pin to the Artemis' pin 8. AAAAAAAA!!
+
+![wiring_diagram](../images/Lab3/wiring_diagram.png)
+
+Given their range and angular sensitivity, think about where you will place them on your robot to best detect obstacles in future labs. Discuss scenarios where your robot will miss obstacles.
 
 Think about which connections you want to be detachable and which can be permanent
 Think about which side of the sensors you mount the wires from.
 Think about the placement of each sensor in the chassis and how long the wires have to be.
 
-Prelab
 Note the I2C sensor address
 Briefly discuss the approach to using 2 ToF sensors
 Briefly discuss placement of sensors on robot and scenarios where you will miss obstacles
