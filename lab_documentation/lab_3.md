@@ -16,6 +16,12 @@ Since we will be using two ToF sensors simultaneously, and the two sensors curre
 
 I soldered one of the ToF sensor's XSHUT pin to the Artemis' pin 8. AAAAAAAA!!
 
+
+Note the I2C sensor address
+Briefly discuss the approach to using 2 ToF sensors
+Briefly discuss placement of sensors on robot and scenarios where you will miss obstacles
+Sketch of wiring diagram (with brief explanation if you want)
+
 ![wiring_diagram](../images/Lab3/wiring_diagram.png)
 
 Given their range and angular sensitivity, think about where you will place them on your robot to best detect obstacles in future labs. Discuss scenarios where your robot will miss obstacles.
@@ -23,11 +29,6 @@ Given their range and angular sensitivity, think about where you will place them
 Think about which connections you want to be detachable and which can be permanent
 Think about which side of the sensors you mount the wires from.
 Think about the placement of each sensor in the chassis and how long the wires have to be.
-
-Note the I2C sensor address
-Briefly discuss the approach to using 2 ToF sensors
-Briefly discuss placement of sensors on robot and scenarios where you will miss obstacles
-Sketch of wiring diagram (with brief explanation if you want)
 
 ## Lab Tasks
 Lab Tasks
