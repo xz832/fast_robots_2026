@@ -14,7 +14,8 @@ Welcome to lab 3 of fast robots! In this lab we install and set up the Time-of-F
 
 Since we will be using two ToF sensors simultaneously, and the two sensors currently share the same address, we have to either change the address programmatically or use their shutdown pins to enable and disable them in order to address them individually. I will most likely use the programming approach as repeated powering up and shutting down the sensor may slow them down while running the robot.
 
-I soldered one of the ToF sensor's XSHUT pin to the Artemis' pin 8. AAAAAAAA!!
+I soldered one of the ToF sensor's XSHUT pin to the Artemis' pin 8, then shut down the sensor to reassign the address on start up. Now the two sensors would have two independent addresses and can operate simultaneously.
+
 
 
 Note the I2C sensor address
@@ -31,7 +32,16 @@ Think about which side of the sensors you mount the wires from.
 Think about the placement of each sensor in the chassis and how long the wires have to be.
 
 ## Lab Tasks
-Lab Tasks
+
+We need to power the Artemis with a battery instead of connecting to a power source with a cable, hence a JST connector is soldered to a 750mAh battery pack to plug into the board.
+
+![battery_pack](../images/Lab3/battery_pack.jpg)
+
+This is the configuration of the sensors and the Artemis board after my soldering connections.
+
+![soldered_con](../images/Lab3/soldered_con.jpg)
+
+
 
 proved that arduino works just by ble and battery
 
