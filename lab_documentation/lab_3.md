@@ -41,19 +41,23 @@ This is the configuration of the sensors and the Artemis board after my solderin
 
 ![soldered_con](../images/Lab3/soldered_con.jpg)
 
+By only connecting one ToF sensor for now, we use the Example05_wire_I2C code to print the address of the sensor.
+
+![I2C_example](../images/Lab3/I2C_example.png)
+
+The address is shown to be 0x29. This aligns with what we expect as the default I2C address is 0x52, as stated in the sensor datasheet, but because Arduino is using 7-bit addressing, and the last bit is used for read/write indication, hence it is shifted right toe show 0x29 instead.
+
 
 
 proved that arduino works just by ble and battery
 
-Picture of your ToF sensor connected to your QWIIC breakout board
-Screenshot of Artemis scanning for I2C device (and discussion on I2C address)
+(Picture of your ToF sensor connected to your QWIIC breakout board
+Screenshot of Artemis scanning for I2C device (and discussion on I2C address))
 Discussion and pictures of sensor data with chosen mode
 
-### 6. The ToF sensor has three modes (Short, Medium, and Long) that optimize the ranging performance given the maximum expected range. Discuss the pros/cons of each mode, and think about which one could work on the final robot. (Note: medium mode is only available with the Polulu VL53L1X Library).
+6. The ToF sensor has three modes (Short, Medium, and Long) that optimize the ranging performance given the maximum expected range. Discuss the pros/cons of each mode, and think about which one could work on the final robot. (Note: medium mode is only available with the Polulu VL53L1X Library).
 
-```C++
 <pre> .setDistanceModeShort(); //1.3m .setDistanceModeMedium(); //3m .setDistanceModeLong(); //4m, Default </pre>
-```
 
 The shorter the range for each mode, the faster the robot can receive data about the environment, and the more accurate the data would be.
 
