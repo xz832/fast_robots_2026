@@ -14,18 +14,45 @@ Welcome to lab 3 of fast robots! In this lab we install and set up the Time-of-F
 
 Since we will be using two ToF sensors simultaneously, and the two sensors currently share the same address, we have to either change the address programmatically or use their shutdown pins to enable and disable them in order to address them individually. I will most likely use the programming approach as repeated powering up and shutting down the sensor may slow them down while running the robot.
 
-I soldered one of the ToF sensor's XSHUT pin to the Artemis' pin 8, then shut down the sensor to reassign the address on start up. Now the two sensors would have two independent addresses and can operate simultaneously.
+I soldered one of the ToF sensor's XSHUT pin to the Artemis' pin 8, then shut down the sensor to reassign the address on start up. Now the two sensors would have two independent addresses and can operate simultaneously. Their addresses will be (0x29) and (0x30) respectively. The following is the code with which I will use to change the address every time during start up:
 
+```C++
+  //shutdown
+  pinMode(XSHUT, OUTPUT);
+  digitalWrite(XSHUT, LOW);
 
+  //readdress online sensor
+  distanceSensor1.begin();
+  distanceSensor1.setI2CAddress(0x30);
 
-Note the I2C sensor address
-Briefly discuss the approach to using 2 ToF sensors
-Briefly discuss placement of sensors on robot and scenarios where you will miss obstacles
-Sketch of wiring diagram (with brief explanation if you want)
+  if (distanceSensor1.begin() != 0) //Begin returns 0 on a good init
+  {
+    Serial.println("Sensor 1 failed to begin. Please check wiring. Freezing...");
+  }
+  else{
+    Serial.println("Sensor 1 online!");
+  }
+
+  //turn offline sensor back on
+  digitalWrite(XSHUT, HIGH);
+  distanceSensor2.begin();
+
+  if (distanceSensor2.begin() != 0) //Begin returns 0 on a good init
+  {
+    Serial.println("Sensor 2 failed to begin. Please check wiring. Freezing...");
+  }
+  else{
+    Serial.println("Sensor 2 online!");
+  }
+```
+
+Since we only have two ToF sensors, I will place them on the front and back of the car. this will ensure that no matter which way the car flips and drives, it will always be able to map its surroundings in its path. I will be missing obstacles on the sides 
+
+This is my wiring diagram:
 
 ![wiring_diagram](../images/Lab3/wiring_diagram.png)
 
-Given their range and angular sensitivity, think about where you will place them on your robot to best detect obstacles in future labs. Discuss scenarios where your robot will miss obstacles.
+The two ToF sensors are placed directly opposite to each other to 
 
 Think about which connections you want to be detachable and which can be permanent
 Think about which side of the sensors you mount the wires from.
