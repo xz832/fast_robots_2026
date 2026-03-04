@@ -93,11 +93,12 @@ The following graph shows the data I collected for the ToF sensor under bright a
 
 I also tried to measure beyond the given range, and it does go beyond a little to almost 1500+ mm, but the inaccuracies increase significantly, so the data would not be reliable.
 
-and ranging time (take note of timestamps)
+
 
 proved that arduino works just by ble and battery
 
 2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel
 Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this
+and ranging time (take note of timestamps)
 Time v Distance: Include graph of data sent over bluetooth (2 sensors)
 Time v Angle: Include graph of data sent over bluetooth
