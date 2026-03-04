@@ -91,7 +91,12 @@ The following graph shows the data I collected for the ToF sensor under bright a
 
 ![graph_dis](../images/Lab3/graph_dis.png)
 
-I also tried to measure beyond the given range, and it does go beyond a little to almost 1500+ mm, but the inaccuracies increase significantly, so the data would not be reliable.
+I also tried to measure beyond the given range, and it does go beyond a little to almost 1500+ mm, but the inaccuracies increase significantly, so the data would not be reliable. The speed at which the sensor can send data is limited by the ranging time, as the sensor needs to wait for the returning infrared ray. In order to obtain more useful data, while sending the timestamps with every loop iteration, I added the .checkforDataReady() function to each loop, allowing the data to only be sent when updated.
+
+```C++
+if (distanceSensor1.checkForDataReady() || distanceSensor2.checkForDataReady()) {
+      read_data();
+```
 
 To make sure the IMU and the two ToF sensors can work in conjunction, I edited my previous code to initiate and use all of them simultaneously.
 
@@ -169,19 +174,9 @@ To make sure the IMU and the two ToF sensors can work in conjunction, I edited m
 ```
 My set up is as follows:
 
-
+![all_setup](../images/Lab3/all_setup.png)
 
 Here are the graphs of all of them working together against time
 
 ![acc_tof](../images/Lab3/acc_tof.png)
 ![gyr_tof](../images/Lab3/gyr_tof.png)
-
-To speed up the 
-
-proved that arduino works just by ble and battery
-
-2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel
-Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this
-and ranging time (take note of timestamps)
-Time v Distance: Include graph of data sent over bluetooth (2 sensors)
-Time v Angle: Include graph of data sent over bluetooth
