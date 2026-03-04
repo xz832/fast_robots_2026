@@ -87,12 +87,8 @@ In order to test the accuracy of our ToF sensor in our chosen mode, I made this 
 
 I took the average of the distance measured over 100 data points and plotted against the actual distance across the written range of the ToF sensor.
 
-Under bright ambient lighting, this is the graph for actual distance VS the measured distance. 
-![graph_dis](../images/Lab3/graph_dis.png)
+The following graph shows the data I collected for the ToF sensor under bright ambient lighting as well as in a darker environment. Both graphs are fairly linear, and follows the actual distance quite closely while the wall is close, but the error increases gradually as the distance is farther away. The distance taken for the sensor in darker lighting follows the actual distance a lot more closely though. There may be some deviations due to alignment and human errors.
 
-The graph is fairly linear, and follows the actual distance quite closely while the wall is close, but the error increases gradually as the distance is farther away.
-
-Under darker lighting, this is the graph for actual distance VS the measured distance.
 ![graph_dis](../images/Lab3/graph_dis.png)
 
 I also tried to measure beyond the given range, and it does go beyond a little to almost 1500+ mm, but the inaccuracies increase significantly, so the data would not be reliable.
