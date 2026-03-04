@@ -73,21 +73,26 @@ The address is shown to be 0x29. This aligns with what we expect as the default 
 The ToF sensors have three different modes, Short, Medium and Long. According to the sensor datasheet, the max. distance in dark (cm) and max. distance under strong light (cm) for the three modes are respectively:
 
 Short: 136 / 135
+
 Medium: 290 / 76
+
 Long: 360 / 73
 
-The shorter the range for each mode, the faster the robot can receive data about the environment, and the more accurate the data would be. However, the longer ranges give us a better overview of observable obstacles in the surroundings. I think for now I will be using the Short mode, as for our car, it would be more important for quicker detection speeds as well as being reliable under indoor lighting. As seen from the comparisons, both medium and long are significantly impacted by ambient light.
+The shorter the range for each mode, the faster the robot can receive data about the environment, and the more accurate the data would be. However, the longer ranges give us a better overview of observable obstacles in the surroundings. I think for now I will be using the Short mode, as for our car, it would be more important for quicker detection speeds as well as being reliable under indoor lighting. As seen from the comparisons, both medium and long are significantly impacted by ambient light. The range of around 1.3m is also most likely enough for our car in general.
+
+![test_tof](../images/Lab3/test_tof.png)
+![test_setup](../images/Lab3/test_setup.png)
+
+Document your ToF sensor range
+accuracy (measured VS actual) --> expect a linear graph if accurate
+repeatability (diff lighting?)
+and ranging time (take note of timestamps)
 
 proved that arduino works just by ble and battery
 
-
-*Picture of your ToF sensor connected to your QWIIC breakout board
-*Screenshot of Artemis scanning for I2C device (and discussion on I2C address)
 Discussion and pictures of sensor data with chosen mode
 
 2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel
 Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this
 Time v Distance: Include graph of data sent over bluetooth (2 sensors)
 Time v Angle: Include graph of data sent over bluetooth
-(5000) Discussion on infrared transmission based sensors
-(5000) Sensitivity of sensors to colors and textures
