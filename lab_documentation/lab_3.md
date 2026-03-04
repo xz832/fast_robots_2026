@@ -174,9 +174,10 @@ To make sure the IMU and the two ToF sensors can work in conjunction, I edited m
 ```
 My set up is as follows:
 
-![all_setup](../images/Lab3/all_setup.png)
+![all_setup](../images/Lab3/all_setup.jpeg)
 
 Here are the graphs of all of them working together against time
 
 ![acc_tof](../images/Lab3/acc_tof.png)
 ![gyr_tof](../images/Lab3/gyr_tof.png)
+![tof_tof](../images/Lab3/tof_tof.png)
