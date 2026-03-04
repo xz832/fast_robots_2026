@@ -82,8 +82,8 @@ The shorter the range for each mode, the faster the robot can receive data about
 
 In order to test the accuracy of our ToF sensor in our chosen mode, I made this set up to compare the actual distance VS the measured distance:
 
-![test_tof](../images/Lab3/test_tof.png)
-![test_setup](../images/Lab3/test_setup.png)
+![test_tof](../images/Lab3/test_tof.jpg)
+![test_setup](../images/Lab3/test_setup.jpg)
 
 I took the average of the distance measured over 100 data points and plotted against the actual distance across the written range of the ToF sensor.
 
