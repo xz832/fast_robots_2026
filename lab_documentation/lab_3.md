@@ -179,3 +179,5 @@ My set up is as follows:
 Here are the graphs of all of them working together against time
 
 ![tof_tof](../images/Lab3/tof_tof.png)
+![acc_tof](../images/Lab3/acc_tof.png)
+![gyr_tof](../images/Lab3/gyr_tof.png)
