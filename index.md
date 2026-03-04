@@ -7,4 +7,6 @@ Take a look at my <a href="{{ '/lab_documentation/lab_1/' | relative_url }}" cla
 
 <a href="{{ '/lab_documentation/lab_2/' | relative_url }}" class = "btn"> Lab 2 Documentation</a> 
 
-<a href="{{ '/lab_documentation/lab_3/' | relative_url }}" class = "btn"> Lab 3 Documentation</a> !
+<a href="{{ '/lab_documentation/lab_3/' | relative_url }}" class = "btn"> Lab 3 Documentation</a> 
+
+<a href="{{ '/lab_documentation/lab_4/' | relative_url }}" class = "btn"> Lab 4 Documentation</a> 
