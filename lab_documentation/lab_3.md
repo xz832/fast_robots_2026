@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Lab 1"
+title: "Lab 3"
 permalink: /lab_documentation/lab_3/
 description: "writeup for lab 3"
 ---
