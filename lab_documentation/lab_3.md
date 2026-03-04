@@ -93,7 +93,90 @@ The following graph shows the data I collected for the ToF sensor under bright a
 
 I also tried to measure beyond the given range, and it does go beyond a little to almost 1500+ mm, but the inaccuracies increase significantly, so the data would not be reliable.
 
+To make sure the IMU and the two ToF sensors can work in conjunction, I edited my previous code to initiate and use all of them simultaneously.
 
+```C++
+        case SEND_DISTANCE:
+
+          for (int tindex = 0; tindex < 1000; tindex++){
+            time_doc[tindex] = millis();
+
+            //ToF data
+
+            //IMU data
+            myICM.getAGMT();
+            float ax = myICM.accX();
+            float ay = myICM.accY();
+            float az = myICM.accZ();
+            float gx = myICM.gyrX();
+            float gy = myICM.gyrY();
+            float gz = myICM.gyrZ();
+
+            float acc_roll = atan2(ay, az) * 180/M_PI;
+            float acc_pitch = atan2(ax, az) * 180/M_PI;
+            
+            acc_roll_doc[tindex] = acc_roll;
+            acc_pitch_doc[tindex] = acc_pitch;
+
+            if (tindex == 0){
+              dt = 0;
+            }
+            else {
+              dt = (time_doc[tindex] - time_doc[tindex-1])/1000.;
+            }
+
+            float gx_diff = gx * dt;
+            float gy_diff = gy * dt;
+            
+            gyr_roll += gx_diff;
+            gyr_pitch += gy_diff;
+            gyr_yaw += gz * dt;
+
+            gyr_roll_doc[tindex] = gyr_roll;
+            gyr_pitch_doc[tindex] = gyr_pitch;
+            gyr_yaw_doc[tindex] = gyr_yaw;
+
+            //send data
+            tx_estring_value.clear();
+            tx_estring_value.append((int)time_doc[tindex]);
+            tx_estring_value.append(",");
+            tx_estring_value.append(acc_roll);
+            tx_estring_value.append(",");
+            tx_estring_value.append(acc_pitch);
+            tx_estring_value.append(",");
+            tx_estring_value.append(gyr_roll);
+            tx_estring_value.append(",");
+            tx_estring_value.append(gyr_pitch);
+            tx_estring_value.append(",");
+            tx_estring_value.append(gyr_yaw);
+            tx_estring_value.append(",");
+            tx_estring_value.append(gx_diff);
+            tx_estring_value.append(",");
+            tx_estring_value.append(gy_diff);
+            tx_estring_value.append(",");
+            tx_estring_value.append(distanceSensor1.getDistance());
+            tx_estring_value.append(",");
+            tx_estring_value.append(distanceSensor2.getDistance());
+            distanceSensor1.clearInterrupt();
+            distanceSensor2.clearInterrupt();
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+            //Serial.println(tx_estring_value.c_str());
+          
+          }
+
+            break;
+```
+My set up is as follows:
+
+
+
+Here are the graphs of all of them working together against time
+
+![acc_tof](../images/Lab3/acc_tof.png)
+![gyr_tof](../images/Lab3/gyr_tof.png)
+
+To speed up the 
 
 proved that arduino works just by ble and battery
 
