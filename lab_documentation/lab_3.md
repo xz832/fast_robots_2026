@@ -80,17 +80,26 @@ Long: 360 / 73
 
 The shorter the range for each mode, the faster the robot can receive data about the environment, and the more accurate the data would be. However, the longer ranges give us a better overview of observable obstacles in the surroundings. I think for now I will be using the Short mode, as for our car, it would be more important for quicker detection speeds as well as being reliable under indoor lighting. As seen from the comparisons, both medium and long are significantly impacted by ambient light. The range of around 1.3m is also most likely enough for our car in general.
 
+In order to test the accuracy of our ToF sensor in our chosen mode, I made this set up to compare the actual distance VS the measured distance:
+
 ![test_tof](../images/Lab3/test_tof.png)
 ![test_setup](../images/Lab3/test_setup.png)
 
-Document your ToF sensor range
-accuracy (measured VS actual) --> expect a linear graph if accurate
-repeatability (diff lighting?)
+I took the average of the distance measured over 100 data points and plotted against the actual distance across the written range of the ToF sensor.
+
+Under bright ambient lighting, this is the graph for actual distance VS the measured distance. 
+![graph_dis](../images/Lab3/graph_dis.png)
+
+The graph is fairly linear, and follows the actual distance quite closely while the wall is close, but the error increases gradually as the distance is farther away.
+
+Under darker lighting, this is the graph for actual distance VS the measured distance.
+![graph_dis](../images/Lab3/graph_dis.png)
+
+I also tried to measure beyond the given range, and it does go beyond a little to almost 1500+ mm, but the inaccuracies increase significantly, so the data would not be reliable.
+
 and ranging time (take note of timestamps)
 
 proved that arduino works just by ble and battery
-
-Discussion and pictures of sensor data with chosen mode
 
 2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel
 Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this
