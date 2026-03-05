@@ -12,7 +12,7 @@ Welcome to lab 4 of fast robots! In this lab we change from manual to open loop 
 
 ## Prelab
 
-Prelab
+![wiring](../images/Lab4/wiring.png)
 Diagram with your intended connections between the motor drivers, Artemis, and battery (with specific pin numbers)
 Battery discussion
 
