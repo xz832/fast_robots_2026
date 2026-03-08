@@ -24,7 +24,10 @@ the battery must be detachable for charging --> solder to connectors
 
 ```C++
 void loop() {
-  Serial.println("DRIVE");
+  // put your main code here, to run repeatedly:
+
+  //DRIVE1 - forwards
+  Serial.println("DRIVE1 - forwards");
   analogWrite(MOTOR1PIN1, speed);
   //analogWrite(MOTOR2PIN1, speed);
   delay(3000);
@@ -32,9 +35,39 @@ void loop() {
   analogWrite(MOTOR1PIN1, 0);
   //analogWrite(MOTOR2PIN1, 0);
   delay(3000);
+
+  //DRIVE1 - backwards
+  Serial.println("DRIVE1 - backwards");
+  analogWrite(MOTOR1PIN2, speed);
+  //analogWrite(MOTOR2PIN1, speed);
+  delay(3000);
+
+  analogWrite(MOTOR1PIN2, 0);
+  //analogWrite(MOTOR2PIN1, 0);
+  delay(3000);
+
+  //DRIVE2 - forwards
+  Serial.println("DRIVE2 - forwards");
+  //analogWrite(MOTOR1PIN1, speed);
+  analogWrite(MOTOR2PIN1, speed);
+  delay(3000);
+
+  //analogWrite(MOTOR1PIN1, 0);
+  analogWrite(MOTOR2PIN1, 0);
+  delay(3000);
+
+  //DRIVE2 - backwards
+  Serial.println("DRIVE2 - backwards");
+  //analogWrite(MOTOR1PIN1, speed);
+  analogWrite(MOTOR2PIN2, speed);
+  delay(3000);
+
+  //analogWrite(MOTOR1PIN1, 0);
+  analogWrite(MOTOR2PIN2, 0);
+  delay(3000);
 }
 ```
-
+[![motors_both_sides](https://img.youtube.com/vi/zi30M5Ju1Ow/0.jpg)](https://www.youtube.com/watch?v=zi30M5Ju1Ow)
 
 Lab Tasks
 Picture of your setup with power supply and oscilloscope hookup
