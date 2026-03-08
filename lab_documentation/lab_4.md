@@ -16,10 +16,24 @@ Welcome to lab 4 of fast robots! In this lab we change from manual to open loop 
 Diagram with your intended connections between the motor drivers, Artemis, and battery (with specific pin numbers)
 Battery discussion
 
+In your lab write-up, discuss/show how you decide to hook up/place the motor drivers.
 analog pins
 We ask you to power the Artemis and the motor drivers/motors from separate batteries. Why is that?
 length of wires
 the battery must be detachable for charging --> solder to connectors
+
+```C++
+void loop() {
+  Serial.println("DRIVE");
+  analogWrite(MOTOR1PIN1, speed);
+  //analogWrite(MOTOR2PIN1, speed);
+  delay(3000);
+
+  analogWrite(MOTOR1PIN1, 0);
+  //analogWrite(MOTOR2PIN1, 0);
+  delay(3000);
+}
+```
 
 
 Lab Tasks
