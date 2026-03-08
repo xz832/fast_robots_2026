@@ -83,6 +83,19 @@ The 850mAh battery is in the original battery compartment on the other side of t
 This is more of a temporary setup because I will most likely be cutting some wires and resoldering them to make them shorter and more space efficient and to reduce noise. I also need to elongate the wires for the ToF sensor if I am to do the configuration in which they are on the front and back of the car, since the given QWIIC cables are not long enough.
 
 
+in air at 30: one side runs, other doesn't; 35 barely moving other wheel
+
+Starting from rest: 35 (insert vid)
+
+While running (varying speeds while already running):
+
+i think it depends on the floor material though since mine is heavily carpeted, but it moves much better on the smoother tile of my hallway.
+Unfortunately the lowest limit PWM value starting from rest and while in motion seem to be about to same as the left wheels really struggle to rotate at the same speed as the right even as the car is already moving.
+
+Turning:
+100 for weak wheel --> very wide axis though. (insert vid)
+90 for strong wheel 
+
 Lab Tasks
 Picture of your setup with power supply and oscilloscope hookup
 Power supply setting discussion
@@ -90,8 +103,8 @@ Power supply setting discussion
 Image of your oscilloscope
 **Short video of wheels spinning as expected (including code snippet it’s running on)
 **Short video of both wheels spinning (with battery driving the motor drivers)
-Picture of all the components secured in the car
-Consider labeling your picture if you can’t see all the components
+**Picture of all the components secured in the car
+**Consider labeling your picture if you can’t see all the components
 Lower limit PWM value discussion
 Calibration demonstration (discussion, video, code, pictures as needed)
 Open loop code and video
