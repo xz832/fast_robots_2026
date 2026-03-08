@@ -22,6 +22,9 @@ We ask you to power the Artemis and the motor drivers/motors from separate batte
 length of wires
 the battery must be detachable for charging --> solder to connectors
 
+
+Testing the motors going forwards and backwards individually::
+
 ```C++
 void loop() {
   // put your main code here, to run repeatedly:
@@ -68,6 +71,14 @@ void loop() {
 }
 ```
 [![motors_both_sides](https://img.youtube.com/vi/zi30M5Ju1Ow/0.jpg)](https://www.youtube.com/watch?v=zi30M5Ju1Ow)
+
+Both motors spinning at the same time
+
+[![motors_same_time](https://img.youtube.com/vi/SAu9FWAS-v8/0.jpg)](https://www.youtube.com/watch?v=SAu9FWAS-v8)
+
+
+this is more of a temporary setup because I will most likely be cutting some wires and resoldering them to make them shorter and more space efficient and to reduce noise. I also need to elongate the wires for the ToF sensor if I am to do the configuration in which they are on the front and back of the car, since the given QWIIC cables are not long enough.
+
 
 Lab Tasks
 Picture of your setup with power supply and oscilloscope hookup
