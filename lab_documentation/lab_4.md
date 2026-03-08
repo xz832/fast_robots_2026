@@ -76,17 +76,20 @@ Both motors spinning at the same time
 
 [![motors_same_time](https://img.youtube.com/vi/SAu9FWAS-v8/0.jpg)](https://www.youtube.com/watch?v=SAu9FWAS-v8)
 
+![car_config](../images/Lab4/car_config.png)
 
-this is more of a temporary setup because I will most likely be cutting some wires and resoldering them to make them shorter and more space efficient and to reduce noise. I also need to elongate the wires for the ToF sensor if I am to do the configuration in which they are on the front and back of the car, since the given QWIIC cables are not long enough.
+The 850mAh battery is in the original battery compartment on the other side of the car.
+
+This is more of a temporary setup because I will most likely be cutting some wires and resoldering them to make them shorter and more space efficient and to reduce noise. I also need to elongate the wires for the ToF sensor if I am to do the configuration in which they are on the front and back of the car, since the given QWIIC cables are not long enough.
 
 
 Lab Tasks
 Picture of your setup with power supply and oscilloscope hookup
 Power supply setting discussion
-Include the code snippet for your analogWrite code that tests the motor drivers
+**Include the code snippet for your analogWrite code that tests the motor drivers
 Image of your oscilloscope
-Short video of wheels spinning as expected (including code snippet it’s running on)
-Short video of both wheels spinning (with battery driving the motor drivers)
+**Short video of wheels spinning as expected (including code snippet it’s running on)
+**Short video of both wheels spinning (with battery driving the motor drivers)
 Picture of all the components secured in the car
 Consider labeling your picture if you can’t see all the components
 Lower limit PWM value discussion
