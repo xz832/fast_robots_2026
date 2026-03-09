@@ -87,7 +87,7 @@ in air at 30: one side runs, other doesn't; 35 barely moving other wheel
 
 Starting from rest: 35
 
-![low_pwm](../images/Lab4/low_pwm.gif)
+[![low_pwm](https://img.youtube.com/vi/c4ecCj8Iyd0/0.jpg)](https://www.youtube.com/watch?v=c4ecCj8Iyd0)
 
 While running (varying speeds while already running):
 
@@ -98,7 +98,7 @@ Turning:
 100 for weak wheel --> very wide axis though. Because of the wide radius at which it turns, it is hard to tell that it is turning significantly until after a couple of runs. The pauses were originally set to make it easier for me to catch up to the car.
 90 for strong wheel 
 (turning with one wheel PWM as 0)
-[![low_limit_turn](https://img.youtube.com/vi/SAu9FWAS-v8/0.jpg)](https://www.youtube.com/watch?v=SAu9FWAS-v8)
+[![low_limit_turn](https://img.youtube.com/vi/BHl9-hbGIuM/0.jpg)](https://www.youtube.com/watch?v=BHl9-hbGIuM)
 
 ## Calibration
 
@@ -138,7 +138,8 @@ void loop() {
 ```
 
 The wheels differ in power quite significantly, hence the PWM signals to make sure it travels relatively straight differs by 20.
-(Insert video)
+
+[![calibration](https://img.youtube.com/vi/AQNBQQTfPlk/0.jpg)](https://www.youtube.com/watch?v=AQNBQQTfPlk)
 
 ## Open Loop Control
 
