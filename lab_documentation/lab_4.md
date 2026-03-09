@@ -85,7 +85,9 @@ This is more of a temporary setup because I will most likely be cutting some wir
 
 in air at 30: one side runs, other doesn't; 35 barely moving other wheel
 
-Starting from rest: 35 (insert vid)
+Starting from rest: 35
+
+![low_pwm](../images/Lab4/low_pwm.gif)
 
 While running (varying speeds while already running):
 
@@ -93,8 +95,54 @@ i think it depends on the floor material though since mine is heavily carpeted, 
 Unfortunately the lowest limit PWM value starting from rest and while in motion seem to be about to same as the left wheels really struggle to rotate at the same speed as the right even as the car is already moving.
 
 Turning:
-100 for weak wheel --> very wide axis though. (insert vid)
+100 for weak wheel --> very wide axis though. Because of the wide radius at which it turns, it is hard to tell that it is turning significantly until after a couple of runs. The pauses were originally set to make it easier for me to catch up to the car.
 90 for strong wheel 
+(turning with one wheel PWM as 0)
+[![low_limit_turn](https://img.youtube.com/vi/SAu9FWAS-v8/0.jpg)](https://www.youtube.com/watch?v=SAu9FWAS-v8)
+
+## Calibration
+
+Since the power of the two wheels differ a lot, I need to apply a calibration factor to make sure it can run in a relatively straight path:
+
+```C++
+int speed = 50;
+int mod_speed = 70;
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin();
+  Serial.begin(115200);
+  
+  pinMode(MOTOR1PIN1, OUTPUT);
+  pinMode(MOTOR1PIN2, OUTPUT);
+  pinMode(MOTOR2PIN1, OUTPUT);
+  pinMode(MOTOR2PIN2, OUTPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  //DRIVE1 - forwards
+  //Serial.println("DRIVE1 - forwards");
+  //All wheel drive -forwards
+  analogWrite(MOTOR1PIN1, mod_speed);
+  analogWrite(MOTOR2PIN1, speed);
+  delay(3500);
+
+  analogWrite(MOTOR1PIN1, 0);
+  analogWrite(MOTOR2PIN1, 0);
+  delay(7000);
+}
+```
+
+The wheels differ in power quite significantly, hence the PWM signals to make sure it travels relatively straight differs by 20.
+(Insert video)
+
+## Open Loop Control
+
+
 
 Lab Tasks
 Picture of your setup with power supply and oscilloscope hookup
@@ -106,5 +154,5 @@ Image of your oscilloscope
 **Picture of all the components secured in the car
 **Consider labeling your picture if you can’t see all the components
 Lower limit PWM value discussion
-Calibration demonstration (discussion, video, code, pictures as needed)
+**Calibration demonstration (discussion, video, code, pictures as needed)
 Open loop code and video
