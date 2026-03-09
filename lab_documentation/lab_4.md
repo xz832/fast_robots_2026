@@ -12,13 +12,15 @@ Welcome to lab 4 of fast robots! In this lab we change from manual to open loop 
 
 ## Prelab
 
-![wiring](../images/Lab4/wiring.png)
-Diagram with your intended connections between the motor drivers, Artemis, and battery (with specific pin numbers)
-Battery discussion
+To begin connecting all the components of the car, we solder the motor drivers, Artemis (along with the IMU and ToF sensors on the breakout board) and the 850 mAh battery together. 
 
-In your lab write-up, discuss/show how you decide to hook up/place the motor drivers.
-analog pins
-We ask you to power the Artemis and the motor drivers/motors from separate batteries. Why is that?
+Here is my wiring diagram
+
+![wiring](../images/Lab4/wiring.png)
+
+For the motor drivers, I connected the signal wires to analog pins on the Artemis such that I am able to send PWM signals, one connected to A14 and A15, and the other to A2 and A3. They are connected on opposite sides of the Artemis board to avoid getting too clustered, as well as being more convenient to be placed side by side on the car eventually.
+
+The Artemis and the motor drivers/motors receive power from two separate batteries. This is to ensure both components receive the appropriate amount of 
 length of wires
 the battery must be detachable for charging --> solder to connectors
 
@@ -98,6 +100,7 @@ Turning:
 100 for weak wheel --> very wide axis though. Because of the wide radius at which it turns, it is hard to tell that it is turning significantly until after a couple of runs. The pauses were originally set to make it easier for me to catch up to the car.
 90 for strong wheel 
 (turning with one wheel PWM as 0)
+
 [![low_limit_turn](https://img.youtube.com/vi/BHl9-hbGIuM/0.jpg)](https://www.youtube.com/watch?v=BHl9-hbGIuM)
 
 ## Calibration
@@ -143,6 +146,42 @@ The wheels differ in power quite significantly, hence the PWM signals to make su
 
 ## Open Loop Control
 
+```C++
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  //DRIVE1 - forwards
+  //Serial.println("DRIVE1 - forwards");
+  //All wheel drive -forwards
+  analogWrite(MOTOR1PIN1, mod_speed);
+  analogWrite(MOTOR2PIN1, speed);
+  delay(2000);
+
+  analogWrite(MOTOR1PIN1, 0);
+  analogWrite(MOTOR2PIN1, 0);
+  delay(1000);
+
+  analogWrite(MOTOR1PIN1, 0);
+  analogWrite(MOTOR2PIN1, 150);
+  delay(1000);
+
+  analogWrite(MOTOR1PIN2, 0);
+  analogWrite(MOTOR2PIN1, 0);
+  delay(1000);
+
+  analogWrite(MOTOR1PIN1, mod_speed);
+  analogWrite(MOTOR2PIN1, speed);
+  delay(2000);
+
+  analogWrite(MOTOR1PIN1, 0);
+  analogWrite(MOTOR2PIN1, 0);
+  delay(7000);
+}
+```
+
+[![open_loop](https://img.youtube.com/vi/0NxVBgqRdlE/0.jpg)](https://www.youtube.com/watch?v=0NxVBgqRdlE)
+
+The car is supposed to move forwards, take a turn, and keep going forwards for a little while. I had hoped for the turn to be much more dramatic, considering how the car operated manually on the controller, but it was quite mild in reality. For a full, sharp turn, I would have to increase the PWM speed substantially.
 
 
 Lab Tasks
@@ -156,4 +195,4 @@ Image of your oscilloscope
 **Consider labeling your picture if you can’t see all the components
 Lower limit PWM value discussion
 **Calibration demonstration (discussion, video, code, pictures as needed)
-Open loop code and video
+**Open loop code and video
