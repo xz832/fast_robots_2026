@@ -25,6 +25,49 @@ The Artemis and the motor drivers/motors receive power from two separate batteri
 length of wires
 the battery must be detachable for charging --> solder to connectors
 
+## Testing for PWM (Oscilloscope)
+
+This was my output for the PWM signal with the motor driver before it was soldered onto the car, but unfortunately I did not take a picture of the set up. According to the data sheet of the motor drivers, the range of voltage we can use is 2.7V-10.8V. The power supply was set to around 6.8 to have a safe margin around both the high and low boundaries.
+
+![oscilloscope](../images/Lab4/oscilloscope.jpeg)
+
+This is my PWM signal and the oscilloscope set up after the motor driver had been connected to the rest of the car:
+
+![wiring](../images/Lab4/wiring.png)
+
+The signal is a lot shakier due to the vibrations of the car running, and the power source has also been changed to the 850mAh battery pack.
+
+```C++
+#include <Wire.h>
+
+#define MOTOR1PIN1 A14
+#define MOTOR1PIN2 A15
+#define MOTOR2PIN1 A2
+#define MOTOR2PIN2 A3
+
+int speed = 70;
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin();
+  Serial.begin(115200);
+  
+  pinMode(MOTOR1PIN1, OUTPUT);
+  pinMode(MOTOR1PIN2, OUTPUT);
+  pinMode(MOTOR2PIN1, OUTPUT);
+  pinMode(MOTOR2PIN2, OUTPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  //DRIVE1 - forwards
+  analogWrite(MOTOR1PIN1, mod_speed);
+  delay(2000);
+}
+```
+
 
 Testing the motors going forwards and backwards individually::
 
