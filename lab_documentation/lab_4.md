@@ -14,13 +14,14 @@ Welcome to lab 4 of fast robots! In this lab we change from manual to open loop 
 
 To begin connecting all the components of the car, we solder the motor drivers, Artemis (along with the IMU and ToF sensors on the breakout board) and the 850 mAh battery together. 
 
-Here is my wiring diagram
+Here is my wiring diagram:
 
 ![wiring](../images/Lab4/wiring.png)
 
 For the motor drivers, I connected the signal wires to analog pins on the Artemis such that I am able to send PWM signals, one connected to A14 and A15, and the other to A2 and A3. They are connected on opposite sides of the Artemis board to avoid getting too clustered, as well as being more convenient to be placed side by side on the car eventually.
 
-The Artemis and the motor drivers/motors receive power from two separate batteries. This is to ensure both components receive the appropriate amount of 
+The Artemis and the motor drivers/motors receive power from two separate batteries. This is to ensure both components receive the appropriate amount of power, while ensuring that the function of the motors and the Artemis will not interfere with each other. If the motor draws a large amount of voltage, for example when it cannot overcome friction and stalls, the Artemis board should still be able to operate and send commands/data.
+
 length of wires
 the battery must be detachable for charging --> solder to connectors
 
