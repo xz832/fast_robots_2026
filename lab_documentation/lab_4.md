@@ -32,7 +32,7 @@ This was my output for the PWM signal with the motor driver before it was solder
 
 This is my PWM signal and the oscilloscope set up after the motor driver had been connected to the rest of the car:
 
-![oscilloscope_setup](../images/Lab4/oscilloscope_setup.png)
+![oscilloscope_setup](../images/Lab4/oscilloscope_setup.jpg)
 ![oscilloscope_car](../images/Lab4/oscilloscope_car.png)
 
 The signal is a lot shakier due to the vibrations of the car running, and the power source has also been changed to the 850mAh battery pack.
