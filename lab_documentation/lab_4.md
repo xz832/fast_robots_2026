@@ -22,12 +22,11 @@ For the motor drivers, I connected the signal wires to analog pins on the Artemi
 
 The Artemis and the motor drivers/motors receive power from two separate batteries. This is to ensure both components receive the appropriate amount of power, while ensuring that the function of the motors and the Artemis will not interfere with each other. If the motor draws a large amount of voltage, for example when it cannot overcome friction and stalls, the Artemis board should still be able to operate and send commands/data.
 
-length of wires
-the battery must be detachable for charging --> solder to connectors
+In terms of length of wires, ideally they should be as short as possible without causing strain to the connection points to reduce noise (I have overestimated some of the lengths for my soldering, but I will clean them up soon). An important point to note is that the 850mAh car battery must be detachable for charging, hence the power wires are soldered to the original connectors on the car instead of directly to the battery.
 
 ## Testing for PWM (Oscilloscope)
 
-This was my output for the PWM signal with the motor driver before it was soldered onto the car, but unfortunately I did not take a picture of the set up. According to the data sheet of the motor drivers, the range of voltage we can use is 2.7V-10.8V. The power supply was set to around 6.8 to have a safe margin around both the high and low boundaries.
+This was my output for the PWM signal with the motor driver before it was soldered onto the car, unfortunately I did not take a picture of the set up. According to the data sheet of the motor drivers, the range of voltage we can use is 2.7V-10.8V. The power supply was set to around 6.8 to have a safe margin around both the high and low boundaries.
 
 ![oscilloscope](../images/Lab4/oscilloscope.jpeg)
 
