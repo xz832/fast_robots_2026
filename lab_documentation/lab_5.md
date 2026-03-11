@@ -65,6 +65,19 @@ Execute PID control over a fixed amount of time (e.g. 5s) while storing debuggin
 Remember to have a hard stop implemented directly on your Artemis, so that your robot will stop even if the Bluetooth connection fails.
 Upon completion of the behavior, send the debugging data back to the computer over Bluetooth.
 
+## Lab Procedure
+
+### Position Control
+
+![PID_equation](../images/Lab5/PID_eq.png)
+
+### Extrapolation
+
+P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
+Range/Sampling time discussion
+Graphs, code, videos, images, discussion of reaching task goal
+Graph data should include Tof vs time and Motor input vs time (and whatever helps with debugging)
+
 
 ## References
 
