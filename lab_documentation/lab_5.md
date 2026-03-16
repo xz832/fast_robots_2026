@@ -54,7 +54,10 @@ Stop PID controls
 Send PID controls
 (arduino & python; show stored arrays?)
 
+Aside from the stopping protocol 
 just describe hardstop (sets all PWM to 0 once BLE disconnects)
+
+adjustment for deadband, adjustment for wind-up protection
 
 **
 Clearly describe how you handle sending and receiving data over Bluetooth
@@ -73,6 +76,7 @@ Upon completion of the behavior, send the debugging data back to the computer ov
 
 ### Extrapolation
 
+**
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
 Range/Sampling time discussion
 Graphs, code, videos, images, discussion of reaching task goal
