@@ -74,6 +74,23 @@ Upon completion of the behavior, send the debugging data back to the computer ov
 
 ![PID_equation](../images/Lab5/PID_eq.png)
 
+Kp control:
+starting out with only proportional control, starting Kp at around 0.05 to try with a very mild controller
+
+![P_0.5](../images/Lab5/P_0.5.png)
+
+0.04:
+There is not much point in placing the Kp value lower than 0.05 as it is already a very gentle controller, and after trying 0.04 and getting the values of the motor inputs, most of it is capped at the lower limit of 40. I tried a more aggressive Kp instead.
+
+0.09:
+This is about the largest I can make Kp without the car hitting the wall. As we can see the overshoot is much larger and it takes a lot longer to recover and oscillate around the desired location.
+
+![P_0.09](../images/Lab5/P_0.09.png)
+
+Since the 0.05 controller is about right for accuracy, but a little weak for my carpeted floor, I chose Kp = 0.06.
+
+
+
 ### Extrapolation
 
 **
@@ -86,3 +103,9 @@ Graph data should include Tof vs time and Motor input vs time (and whatever help
 ## References
 
 I took reference 
+
+
+**missing:
+testing, troubleshooting,
+extrapolation stuff
+running PID loop without TOF data
