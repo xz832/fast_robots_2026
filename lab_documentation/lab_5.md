@@ -89,7 +89,24 @@ This is about the largest I can make Kp without the car hitting the wall. As we 
 
 Since the 0.05 controller is about right for accuracy, but a little weak for my carpeted floor, I chose Kp = 0.06.
 
+Kd control:
 
+trying to reduce oscillation --> starting with 0.1, more aggressive; oops too aggressive, my car ran into the wall
+down to 0.05: better, still running into the wall
+settled at 0.01, enough to reduce oscillations, but not enough to fully ram into wall. Able to recover
+
+unfortunately at this point my tof sensor broke and when .getDistance() was run returns one constant distance. I had to switch to my other sensor. Hope this one doesn't break!
+
+controlling overshoot with derivative
+
+Ki control:
+
+need anti wind up --> small Ki, overshooting a lot because it's cumulative
+
+
+why PID?
+
+Control more accurately, reduce oscillation/overshoot while increasing power??
 
 ### Extrapolation
 
