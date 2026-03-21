@@ -109,6 +109,8 @@ why PID?
 Control more accurately, reduce oscillation/overshoot while increasing power??
 
 ### Extrapolation
+TOF sampling frequency
+around on average 97ms intervals
 
 **
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
