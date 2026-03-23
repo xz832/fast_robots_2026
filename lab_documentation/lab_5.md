@@ -252,16 +252,18 @@ This is the final performance of my car with the given PID parameters. In the vi
 These are the final ToF sensor outputs and the motor inputs of my PID controls. The motor inputs look a little strange due to the relatively gentle controls producing inputs that are manually constrained to have magnitudes higher than 40. Hence the motor controls keep spiking back and forwards as it performs fine adjustments to rearrange itself back into the 305mm position.
 
 ### Extrapolation
-TOF sampling frequency
+
+In order to get a faster responding car, we need to eliminate the limitations of the loops running by the ToF sampling frequency.
 
 ```C++
 //Testing for ToF sampling frequency
     prev_sensor_time = millis();
     tof_interval[tindex] = dt_ex;
 ```
-around on average 97ms intervals
 
-extrapolation
+The ToF sensors return data in around on average 97ms intervals.
+To decouple the PID loop frequency from the ToF sensor frequency, we need to perform extrapolation of the existing data in between each sensor reading, giving us a guess of where the car is and executing the PID commands based on this prediction.
+
 ```C++
 else{
     distanceSensor2.clearInterrupt();
@@ -288,12 +290,7 @@ else{
 }
 ```
 
-**
-P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
-Range/Sampling time discussion
-Graphs, code, videos, images, discussion of reaching task goal
-Graph data should include Tof vs time and Motor input vs time (and whatever helps with debugging)
-
+This way, when the ToF sensor returns with data, the PID calculates and appends motor inputs as usual. In the interval between each reading, the PID loop executes control of the car based on our linear extrapolation algorithm. This runs much faster than relying purely on ToF data.
 
 ## References
 
