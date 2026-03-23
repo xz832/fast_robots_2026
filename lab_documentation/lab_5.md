@@ -40,6 +40,7 @@ case START_CONTROL:
     break;
 ```
 
+I wanted to be able to change the PID parameter values easily without burning the code on the board every time, hence they will be obtained from the python BLE input.
 
 ```C++
 case STOP_CONTROL:
@@ -51,6 +52,9 @@ case STOP_CONTROL:
             
     break;
 ```
+
+Aside from the stopping protocol over BLE, I also implemented a hardstop that sets all PWM signals to 0 if the while (central.connected()) loop ends, meaning that the Artemis board has disconnected from bluetooth.
+
 
 ```C++
         case SEND_PID_DATA:
@@ -85,52 +89,7 @@ case STOP_CONTROL:
             break;
 ```
 
-Aside from the stopping protocol 
-just describe hardstop (sets all PWM to 0 once BLE disconnects)
-
-adjustment for deadband, adjustment for wind-up protection
-
-Motor code:
-
-```C++
-
-void PID_forward(float PID_u, int i){
-    
-    float adj_speed = PID_u * 1.4; //adjusted for the weaker motor
-    float norm_speed = PID_u;
-
-    //make sure it doesn't go below the deadband or exceed the max PWM signal
-    adj_speed = constrain(adj_speed, 40, 255); //40 to give it some cushion from the actual lowest value, make sure it actually moves the car
-    norm_speed = constrain(norm_speed, 40, 255);
-
-    analogWrite(MOTOR1PIN1, adj_speed);
-    analogWrite(MOTOR2PIN1, norm_speed);
-    analogWrite(MOTOR1PIN2, 0);
-    analogWrite(MOTOR2PIN2, 0);
-    motor_input[i] = adj_speed;
-
-}
-
-void PID_backward(float PID_u, int i){
-    
-    float adj_speed = abs(PID_u) * 1.4; //adjusted for the weaker motor
-    float norm_speed = abs(PID_u);
-
-    //make sure it doesn't go below the deadband or exceed the max PWM signal
-    adj_speed = constrain(adj_speed, 40, 255); //40 to give it some cushion from the actual lowest value, make sure it actually moves the car
-    norm_speed = constrain(norm_speed, 40, 255);
-
-    analogWrite(MOTOR1PIN1, 0);
-    analogWrite(MOTOR2PIN1, 0);
-    analogWrite(MOTOR1PIN2, adj_speed);
-    analogWrite(MOTOR2PIN2, norm_speed);
-    motor_input[i] = adj_speed;
-}
-```
-
-**
-Clearly describe how you handle sending and receiving data over Bluetooth
-Consider adding code snippets as necessary to showcase how you implemented this on Arduino and Python
+This is the code for the receiving end on Python. 
 
 ```python
 time_array = []
@@ -166,15 +125,15 @@ ble.send_command(CMD.SEND_PID_DATA, "")
 print("data got")
 ```
 
-Have the robot controller start on an input from your computer sent over Bluetooth
-Execute PID control over a fixed amount of time (e.g. 5s) while storing debugging data in arrays.
-Upon completion of the behavior, send the debugging data back to the computer over Bluetooth.
-
 ## Lab Procedure
 
 ### Position Control
 
+To implement position control, there are three parameters Kp, Kd and Ki to be considered. The equation to calculate the motor inputs from feedback control is as follows:
+
 ![PID_equation](../images/Lab5/PID_eq.png)
+
+I decided to start with a PID controller as it gives me more flexibility in achieving the best results, able to reduce oscillations or overshoot. If I find that a certain type of control is not benefitting the car's performance much, I can always set that gain to 0.
 
 #### Kp control:
 starting out with only proportional control, starting Kp at around 0.05 to try with a very mild controller
@@ -220,9 +179,6 @@ need anti wind up --> small Ki, overshooting a lot because it's cumulative
 
 0.0001|
 
-why PID?
-
-Control more accurately, reduce oscillation/overshoot while increasing power??
 
 Code for PID:
 
@@ -249,6 +205,44 @@ PIDResult PID_calculation(float distance)
     r.error_r = curr_error;
     r.time_r = curr_time;
     return r;
+}
+```
+
+Motor code:
+
+```C++
+
+void PID_forward(float PID_u, int i){
+    
+    float adj_speed = PID_u * 1.4; //adjusted for the weaker motor
+    float norm_speed = PID_u;
+
+    //make sure it doesn't go below the deadband or exceed the max PWM signal
+    adj_speed = constrain(adj_speed, 40, 255); //40 to give it some cushion from the actual lowest value, make sure it actually moves the car
+    norm_speed = constrain(norm_speed, 40, 255);
+
+    analogWrite(MOTOR1PIN1, adj_speed);
+    analogWrite(MOTOR2PIN1, norm_speed);
+    analogWrite(MOTOR1PIN2, 0);
+    analogWrite(MOTOR2PIN2, 0);
+    motor_input[i] = adj_speed;
+
+}
+
+void PID_backward(float PID_u, int i){
+    
+    float adj_speed = abs(PID_u) * 1.4; //adjusted for the weaker motor
+    float norm_speed = abs(PID_u);
+
+    //make sure it doesn't go below the deadband or exceed the max PWM signal
+    adj_speed = constrain(adj_speed, 40, 255); //40 to give it some cushion from the actual lowest value, make sure it actually moves the car
+    norm_speed = constrain(norm_speed, 40, 255);
+
+    analogWrite(MOTOR1PIN1, 0);
+    analogWrite(MOTOR2PIN1, 0);
+    analogWrite(MOTOR1PIN2, adj_speed);
+    analogWrite(MOTOR2PIN2, norm_speed);
+    motor_input[i] = adj_speed;
 }
 ```
 
