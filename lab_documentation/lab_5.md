@@ -136,25 +136,22 @@ To implement position control, there are three parameters Kp, Kd and Ki to be co
 I decided to start with a PID controller as it gives me more flexibility in achieving the best results, able to reduce oscillations or overshoot. If I find that a certain type of control is not benefitting the car's performance much, I can always set that gain to 0.
 
 #### Kp control:
-starting out with only proportional control, starting Kp at around 0.05 to try with a very mild controller
 
-![P_0.5](../images/Lab5/P_0.5.png)
-
-0.04:
-There is not much point in placing the Kp value lower than 0.05 as it is already a very gentle controller, and after trying 0.04 and getting the values of the motor inputs, most of it is capped at the lower limit of 40. I tried a more aggressive Kp instead.
+I started out with only proportional control for initial testing, starting Kp at around 0.05 to try with a relatively mild controller.
 
 [![proportional_control](https://img.youtube.com/vi/xresUaMSk9s/0.jpg)](https://www.youtube.com/watch?v=xresUaMSk9s)
 
-0.09:
-This is about the largest I can make Kp without the car hitting the wall. As we can see the overshoot is much larger and it takes a lot longer to recover and oscillate around the desired location.
+![P_0.5](../images/Lab5/P_0.5.png)
+
+The car ran fairly reliably. I tried to go lower and higher to explore the boundaries of a viable Kp. On the lower end, there was not much point in placing the Kp value lower than 0.04, as after that the values of the motor inputs are all capped at the lower limit of 40.
+
+0.09 is about the largest I can make Kp without the car hitting the wall. As we can see the overshoot is much larger and it takes a lot longer to recover and oscillate around the desired location.
 
 [![max_p_control](https://img.youtube.com/vi/dVeLnWslfZU/0.jpg)](https://www.youtube.com/watch?v=dVeLnWslfZU)
 
 ![P_0.09](../images/Lab5/P_0.09.png)
 
 Since the 0.05 controller is about right for accuracy, but a little weak for textured floor, I chose Kp = 0.06.
-
-0.06
 
 #### Kd control:
 
