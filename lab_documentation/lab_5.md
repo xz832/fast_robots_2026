@@ -15,24 +15,26 @@ Welcome to lab 5 of fast robots! In this lab we will be implementing linear PID 
 Start PID controls
 
 ```C++
+/*
+* Allow car to be turned on via bluetooth
+*/
 case START_CONTROL:
 
-    success = robot_cmd.get_next_value(Kp);
-    if (!success)
-        return;
+    float set_Kp, set_Kd, set_Ki, set_dis;
 
-    success = robot_cmd.get_next_value(Ki);
-    if (!success)
-        return;
+    robot_cmd.get_next_value(set_Kp);
+    robot_cmd.get_next_value(set_Kd);
+    robot_cmd.get_next_value(set_Ki);
+    robot_cmd.get_next_value(set_dis);
+            
+    Kp = set_Kp;
+    Kd = set_Kd;
+    Ki = set_Ki;
+    target_dis = set_dis;
 
-    success = robot_cmd.get_next_value(Kd);
-    if (!success)
-        return;
-
-    success = robot_cmd.get_next_value(target_dis);
-    if (!success)
-        return;
-
+    tindex = 0;
+    integral = 0;
+    prev_error = 0;
     start_PID = true;
 
     break;
@@ -41,31 +43,135 @@ case START_CONTROL:
 Stop PID controls
 
 ```C++
-    case STOP_CONTROL:
+case STOP_CONTROL:
 
-        start_PID = false;
-        control_stop();
+    start_PID = false;
+    control_stop();
 
-        Serial.println("PID stopped");
+    Serial.println("PID stopped");
             
-        break;
+    break;
 ```
 
 Send PID controls
 (arduino & python; show stored arrays?)
+
+```C++
+        case SEND_PID_DATA:
+
+            for (int tindex = 0; tindex < tindex_max; tindex++){
+                
+                tx_estring_value.clear();
+                //send time data
+                tx_estring_value.append((float)time_doc[tindex]);
+                tx_estring_value.append(",");
+                //send distance data
+                tx_estring_value.append((float)distance_doc[tindex]);
+                tx_estring_value.append(",");
+                //send error
+                tx_estring_value.append((float)error_doc[tindex]);
+                tx_estring_value.append(",");
+                //send motor input
+                tx_estring_value.append((float)motor_input[tindex]);
+                tx_estring_value.append(",");
+                //send PID input
+                tx_estring_value.append((float)PID_doc[tindex]);
+                tx_estring_value.append(",");
+                //tof freq
+                tx_estring_value.append((float)tof_interval[tindex]);
+                tx_estring_value.append(",");
+
+                tx_characteristic_string.writeValue(tx_estring_value.c_str());
+                delay(1000);
+
+            }
+
+            break;
+```
 
 Aside from the stopping protocol 
 just describe hardstop (sets all PWM to 0 once BLE disconnects)
 
 adjustment for deadband, adjustment for wind-up protection
 
+Motor code:
+
+```C++
+
+void PID_forward(float PID_u, int i){
+    
+    float adj_speed = PID_u * 1.4; //adjusted for the weaker motor
+    float norm_speed = PID_u;
+
+    //make sure it doesn't go below the deadband or exceed the max PWM signal
+    adj_speed = constrain(adj_speed, 40, 255); //40 to give it some cushion from the actual lowest value, make sure it actually moves the car
+    norm_speed = constrain(norm_speed, 40, 255);
+
+    analogWrite(MOTOR1PIN1, adj_speed);
+    analogWrite(MOTOR2PIN1, norm_speed);
+    analogWrite(MOTOR1PIN2, 0);
+    analogWrite(MOTOR2PIN2, 0);
+    motor_input[i] = adj_speed;
+
+}
+
+void PID_backward(float PID_u, int i){
+    
+    float adj_speed = abs(PID_u) * 1.4; //adjusted for the weaker motor
+    float norm_speed = abs(PID_u);
+
+    //make sure it doesn't go below the deadband or exceed the max PWM signal
+    adj_speed = constrain(adj_speed, 40, 255); //40 to give it some cushion from the actual lowest value, make sure it actually moves the car
+    norm_speed = constrain(norm_speed, 40, 255);
+
+    analogWrite(MOTOR1PIN1, 0);
+    analogWrite(MOTOR2PIN1, 0);
+    analogWrite(MOTOR1PIN2, adj_speed);
+    analogWrite(MOTOR2PIN2, norm_speed);
+    motor_input[i] = adj_speed;
+}
+```
+
 **
 Clearly describe how you handle sending and receiving data over Bluetooth
 Consider adding code snippets as necessary to showcase how you implemented this on Arduino and Python
 
+```python
+time_array = []
+dist_array = []
+error_array = []
+motor_array = []
+PID_array = []
+tof_freq = []
+
+def notifyBle(uuid, data):
+    data = data.decode()
+    parts = data.split(",")
+    
+    time_array.append(float(parts[0]))
+    dist_array.append(float(parts[1]))
+    error_array.append(float(parts[2]))
+    motor_array.append(float(parts[3]))
+    PID_array.append(float(parts[4]))
+    tof_freq.append(float(parts[5]))
+```
+
+```python
+ble.send_command(CMD.START_CONTROL, "0.06|0.02|0|305")
+#Kp|Kd|Ki|target_dis
+print("car started")
+time.sleep(30)
+
+ble.send_command(CMD.STOP_CONTROL, "")
+print("car stopped")
+time.sleep(5)
+
+ble.send_command(CMD.SEND_PID_DATA, "")
+print("data got")
+```
+
 Have the robot controller start on an input from your computer sent over Bluetooth
 Execute PID control over a fixed amount of time (e.g. 5s) while storing debugging data in arrays.
-Remember to have a hard stop implemented directly on your Artemis, so that your robot will stop even if the Bluetooth connection fails.
 Upon completion of the behavior, send the debugging data back to the computer over Bluetooth.
 
 ## Lab Procedure
@@ -74,7 +180,7 @@ Upon completion of the behavior, send the debugging data back to the computer ov
 
 ![PID_equation](../images/Lab5/PID_eq.png)
 
-Kp control:
+#### Kp control:
 starting out with only proportional control, starting Kp at around 0.05 to try with a very mild controller
 
 ![P_0.5](../images/Lab5/P_0.5.png)
@@ -89,7 +195,9 @@ This is about the largest I can make Kp without the car hitting the wall. As we 
 
 Since the 0.05 controller is about right for accuracy, but a little weak for my carpeted floor, I chose Kp = 0.06.
 
-Kd control:
+0.06|
+
+#### Kd control:
 
 trying to reduce oscillation --> starting with 0.1, more aggressive; oops too aggressive, my car ran into the wall
 down to 0.05: better, still running into the wall
@@ -99,18 +207,82 @@ unfortunately at this point my tof sensor broke and when .getDistance() was run 
 
 controlling overshoot with derivative
 
-Ki control:
+0.05|
+
+#### Ki control:
 
 need anti wind up --> small Ki, overshooting a lot because it's cumulative
+0.0001|
 
 
 why PID?
 
 Control more accurately, reduce oscillation/overshoot while increasing power??
 
+Code for PID:
+
+```C++
+PIDResult PID_calculation(float distance)
+{
+    unsigned long curr_time = millis();
+    float dt = (curr_time - prev_time)/1000.0;
+    prev_time = curr_time;
+    //calculate error for proportional
+    float curr_error = distance - target_dis;
+    //calculate integral term
+    integral += curr_error * dt;
+    //anti-wind up
+    integral = constrain(integral, -300, 300); //change this when Ki is decided
+    //calculate derivative term
+    derivative = (curr_error - prev_error)/dt;
+    prev_error = curr_error;
+    //calculate PID
+    float u = Kp * curr_error + Ki * integral  + Kd * derivative;
+
+    PIDResult r;
+    r.u_r = u;
+    r.error_r = curr_error;
+    r.time_r = curr_time;
+    return r;
+}
+```
+
 ### Extrapolation
 TOF sampling frequency
+
+```C++
+//Testing for ToF sampling frequency
+    prev_sensor_time = millis();
+    tof_interval[tindex] = dt_ex;
+```
 around on average 97ms intervals
+
+extrapolation
+```C++
+else{
+    distanceSensor2.clearInterrupt();
+    float ex_dist = prev_dist + d_dist/dt_ex * (millis()-prev_sensor_time);
+    PIDResult r = PID_calculation(ex_dist);
+    prev_dist = ex_dist;
+
+    float u_store = r.u_r;
+    float curr_error_store = r.error_r;
+    float curr_time_store = r.time_r;
+
+    time_doc[tindex] = curr_time_store;
+    distance_doc[tindex] = ex_dist;
+    PID_doc[tindex] = u_store;
+    error_doc[tindex] = curr_error_store;
+
+    if (u_store > 0){
+        PID_backward(u_store, tindex);
+    }else if (u_store < 0){
+        PID_forward(u_store, tindex);
+    }
+
+    tindex++;
+}
+```
 
 **
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
