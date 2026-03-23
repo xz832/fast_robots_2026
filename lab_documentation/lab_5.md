@@ -155,26 +155,25 @@ Since the 0.05 controller is about right for accuracy, but a little weak for tex
 
 #### Kd control:
 
-trying to reduce oscillation --> starting with 0.1, more aggressive; oops too aggressive, my car ran into the wall
-down to 0.05: better, still running into the wall
-settled at 0.01, enough to reduce oscillations, but not enough to fully ram into wall. Able to recover
-
-unfortunately at this point my tof sensor broke and when .getDistance() was run returns one constant distance. I had to switch to my other sensor. Hope this one doesn't break!
-
-controlling overshoot with derivative
-
-0.05|
+As my car had a little overshoot, I added Kd next to reduce this. I started with 0.1, but this was too aggressive and my car ran into the wall. Unfortunately at this point my ToF sensor broke and when .getDistance() was run returns one constant distance value. I had to switch to my other sensor.
 
 ![no_ki](../images/Lab5/no_ki.png)
 
+I tried again with Kd = 0.05, and this time it was about right. From the distance vs time graph, it improved the overshoot significantly, but now resulted in a steady state error, which we will fix with Ki.
+
 #### Ki control:
 
-It was already pretty accurate, but sometimes it had some trouble recovering back to 305mm when pushed too close to the wall.
-need anti wind up --> small Ki, overshooting a lot because it's cumulative
+I quickly learned that I needed a very small value for Ki as well as an anti-wind-up implemented into my code, as my car became unstable. It overshot a lot, crashing into the wall, and had stronger oscillations about the required distance:
 
 [![integral_control](https://img.youtube.com/vi/6McXPFOPtKU/0.jpg)](https://www.youtube.com/watch?v=6McXPFOPtKU)
 
-0.0001|
+The modification in code:
+
+```C++
+integral = constrain(integral, -300, 300);
+```
+
+I ended up with Ki = 0.0001.
 
 
 Code for PID:
