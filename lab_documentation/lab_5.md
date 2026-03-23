@@ -188,12 +188,16 @@ starting out with only proportional control, starting Kp at around 0.05 to try w
 0.04:
 There is not much point in placing the Kp value lower than 0.05 as it is already a very gentle controller, and after trying 0.04 and getting the values of the motor inputs, most of it is capped at the lower limit of 40. I tried a more aggressive Kp instead.
 
+[![proportional_control](https://img.youtube.com/vi/xresUaMSk9s/0.jpg)](https://www.youtube.com/watch?v=xresUaMSk9s)
+
 0.09:
 This is about the largest I can make Kp without the car hitting the wall. As we can see the overshoot is much larger and it takes a lot longer to recover and oscillate around the desired location.
 
+[![max_p_control](https://img.youtube.com/vi/dVeLnWslfZU/0.jpg)](https://www.youtube.com/watch?v=dVeLnWslfZU)
+
 ![P_0.09](../images/Lab5/P_0.09.png)
 
-Since the 0.05 controller is about right for accuracy, but a little weak for my carpeted floor, I chose Kp = 0.06.
+Since the 0.05 controller is about right for accuracy, but a little weak for textured floor, I chose Kp = 0.06.
 
 0.06|
 
@@ -246,6 +250,10 @@ PIDResult PID_calculation(float distance)
     return r;
 }
 ```
+
+[![pid_control_final](https://img.youtube.com/vi/80r9rGjIRYE/0.jpg)](https://www.youtube.com/watch?v=80r9rGjIRYE)
+
+This is the final performance of my car with the given PID parameters. In the video it demonstrates that it stops about 1 ft from the wall, and when I shift it further away or closer, it is able to recover back to about 1 ft.
 
 ### Extrapolation
 TOF sampling frequency
