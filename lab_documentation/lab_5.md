@@ -199,7 +199,7 @@ This is about the largest I can make Kp without the car hitting the wall. As we 
 
 Since the 0.05 controller is about right for accuracy, but a little weak for textured floor, I chose Kp = 0.06.
 
-0.06|
+0.06
 
 #### Kd control:
 
@@ -213,11 +213,16 @@ controlling overshoot with derivative
 
 0.05|
 
+![no_ki](../images/Lab5/no_ki.png)
+
 #### Ki control:
 
+It was already pretty accurate, but sometimes it had some trouble recovering back to 305mm when pushed too close to the wall.
 need anti wind up --> small Ki, overshooting a lot because it's cumulative
-0.0001|
 
+[![integral_control](https://img.youtube.com/vi/6McXPFOPtKU/0.jpg)](https://www.youtube.com/watch?v=6McXPFOPtKU)
+
+0.0001|
 
 why PID?
 
@@ -254,6 +259,11 @@ PIDResult PID_calculation(float distance)
 [![pid_control_final](https://img.youtube.com/vi/80r9rGjIRYE/0.jpg)](https://www.youtube.com/watch?v=80r9rGjIRYE)
 
 This is the final performance of my car with the given PID parameters. In the video it demonstrates that it stops about 1 ft from the wall, and when I shift it further away or closer, it is able to recover back to about 1 ft.
+
+![final_tof](../images/Lab5/final_tof.png)
+![final_motor_input](../images/Lab5/final_motor_input.png)
+
+These are the final ToF sensor outputs and the motor inputs of my PID controls. The motor inputs look a little strange due to the 
 
 ### Extrapolation
 TOF sampling frequency
