@@ -8,11 +8,11 @@ description: "writeup for lab 5"
 
 # LAB 5 - MAE4190 FAST ROBOTS
 
-Welcome to lab 5 of fast robots! In this lab we will be implementing linear PID control on our car.
+Welcome to lab 5 of fast robots! In this lab we will be implementing linear PID control on our car. The goal of this lab is for the car to be able to stop about 1 ft (305mm) away from a wall, regardless of starting position and any disturbances.
 
 ## Prelab
 
-Start PID controls
+In order to simply the debugging process, I made three Arduino to BLE commands: starting the PID control, stopping PID controls, sending data from PID run.
 
 ```C++
 /*
@@ -40,7 +40,6 @@ case START_CONTROL:
     break;
 ```
 
-Stop PID controls
 
 ```C++
 case STOP_CONTROL:
@@ -52,9 +51,6 @@ case STOP_CONTROL:
             
     break;
 ```
-
-Send PID controls
-(arduino & python; show stored arrays?)
 
 ```C++
         case SEND_PID_DATA:
@@ -263,7 +259,7 @@ This is the final performance of my car with the given PID parameters. In the vi
 ![final_tof](../images/Lab5/final_tof.png)
 ![final_motor_input](../images/Lab5/final_motor_input.png)
 
-These are the final ToF sensor outputs and the motor inputs of my PID controls. The motor inputs look a little strange due to the 
+These are the final ToF sensor outputs and the motor inputs of my PID controls. The motor inputs look a little strange due to the relatively gentle controls producing inputs that are manually constrained to have magnitudes higher than 40. Hence the motor controls keep spiking back and forwards as it performs fine adjustments to rearrange itself back into the 305mm position.
 
 ### Extrapolation
 TOF sampling frequency
@@ -311,10 +307,4 @@ Graph data should include Tof vs time and Motor input vs time (and whatever help
 
 ## References
 
-I took reference 
-
-
-**missing:
-testing, troubleshooting,
-extrapolation stuff
-running PID loop without TOF data
+I took reference from Jennie Redrovan's lab report, and I worked briefly with Apurva Hanwadikar.
