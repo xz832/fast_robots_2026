@@ -132,7 +132,7 @@ time.sleep(20)
 ble.stop_notify(ble.uuid['RX_STRING'])
 ```
 
-This allows me to 
+This allows me to change the PID values and the reference target angle easily without updating the code on the Artemis board.
 
 
 ## Lab Tasks
