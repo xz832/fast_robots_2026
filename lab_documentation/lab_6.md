@@ -13,7 +13,6 @@ Welcome to lab 6 of fast robots! In this lab we will be implementing orientation
 ## Prelab
 
 Similar to lab 5, but changed some variables
-**highlight on sending data, since this is about orientation and rotation, the inputs to the left and right motors will be needed separately for debugging --> added an array
 
 Clearly describe how you handle sending and receiving data over Bluetooth
 Consider adding code snippets as necessary to showcase how you implemented this on Arduino and Python
