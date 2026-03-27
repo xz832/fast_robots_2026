@@ -137,16 +137,35 @@ This allows me to change the PID values and the reference target angle easily wi
 
 ## Lab Tasks
 
+#### Digital Motion Processor (DMP)
 
-***
-Are there limitations on the sensor itself to be aware of? What is the maximum rotational velocity that the gyroscope can read (look at spec sheets and code documentation on github). Is this sufficient for our applications, and is there a way to configure this parameter?
+As I discovered from previous labs, my gyroscope has a pretty significant drift. Hence, I need to use the digital motion processor (DMP) for sensor fusion to mitigate the individual drawbacks of each sensor.
 
-the DMP is capable of error and drift correction by fusing readings from the ICM’s 3-axis gyroscope, 3-axis accelerometer, 3-axis magnetometer/compass.
+The DMP is capable of error and drift correction by fusing readings from the ICM’s 3-axis gyroscope, 3-axis accelerometer, 3-axis magnetometer/compass. For our purposes we will mostly only be fusing the accelerometer and gyroscope readings.
 
-According to the the ICM-20948 gyroscope has a maximum rotational velocity range of ±250/±500/±1000/±2000 DPS (degrees per second) for 3-axis gyroscope. The ±250 is typcially the default of ICM-20948, which is too small for rapid rotations. However, with the DMP automatically uses ±2000 DPS, and this is sufficient for the purposes of this lab.
-***
+The maximum rotational velocity that the gyroscope can read by default, according to specs documentaiton, is about 250 degrees per second. This is a little slow for fast adjustments, but is supplemented by the DMP as it uses 2000 degrees per second.
 
-DMP implementation needed --> I also decided to include the visualization as it may help with the debugging process
+I followed the instructions for the DMP. This is the code that I added to my loop:
+
+```C++
+//DMP
+                icm_20948_DMP_data_t data;
+                myICM.readDMPdataFromFIFO(&data);
+
+                // Is valid data available?
+                if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) {
+                    // We have asked for GRV data so we should receive Quat6
+                    if ((data.header & DMP_header_bitmap_Quat6) > 0) {
+                        double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
+                        double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
+                        double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
+```
+
+To convert quaternion data into euler angles for yaw:
+
+```C++
+
+
 
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
 Range/Sampling time discussion
