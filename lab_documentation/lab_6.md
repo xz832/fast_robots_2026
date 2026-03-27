@@ -30,7 +30,7 @@ the DMP is capable of error and drift correction by fusing readings from the ICM
 According to the the ICM-20948 gyroscope has a maximum rotational velocity range of ±250/±500/±1000/±2000 DPS (degrees per second) for 3-axis gyroscope. The ±250 is typcially the default of ICM-20948, which is too small for rapid rotations. However, with the DMP automatically uses ±2000 DPS, and this is sufficient for the purposes of this lab.
 ***
 
-DMP implementation needed
+DMP implementation needed --> I also decided to include the visualization as it may help with the debugging process
 
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
 Range/Sampling time discussion
