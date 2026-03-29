@@ -177,7 +177,7 @@ double curr_angle = atan2(t3, t4) * 180.0 / PI; //from radians to degrees
 yaw_doc[tindex] = curr_angle;
 ```
 
-
+![no_ki_yaw](../images/Lab6/no_ki_yaw.png)
 
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
 
@@ -187,6 +187,41 @@ after more experimentation I decided it wasn't the PID control giving it a stead
 
 I think the Kd is making it spin --> my initial kd value is very high due to the large differentce???
 
+Final values:
+ble.send_command(CMD.START_ORIENT, "90|2.2|0.3|0.0001")
+
+[![proportional_control](https://img.youtube.com/vi/xresUaMSk9s/0.jpg)](https://www.youtube.com/watch?v=xresUaMSk9s)
+
 Range/Sampling time discussion
 Graphs, code, videos, images, discussion of reaching task goal
 Graph data should at least include theta vs time (you can also consider angular velocity, motor input, etc)
+
+
+Difficulties:
+wow my motor inputs are very different, one side is significantly weaker than the other, and this is less serious during linear motion or turning on a wide arc but calibrating and tuning it to turn in place was a nightmare:
+adjusted speeds 1.4 to 2.5 ratio, moving the lower limit of the weaker motor to 120
+
+```C++
+void PID_forward(float PID_u, int i){ 
+    
+    float adj_speed = PID_u * 2.5; //adjusted for the weaker motor
+    float norm_speed = PID_u;
+
+    //make sure it doesn't go below the deadband or exceed the max PWM signal
+    adj_speed = constrain(adj_speed, 120, 255);
+    norm_speed = constrain(norm_speed, 70, 255);
+
+    analogWrite(MOTOR1PIN1, 0);
+    analogWrite(MOTOR2PIN1, norm_speed);
+    analogWrite(MOTOR1PIN2, adj_speed);
+    analogWrite(MOTOR2PIN2, 0);
+    motor_input[i] = adj_speed;
+
+}
+```
+I might need two different speed controls for driving and turning when we are to combine those two in the future.
+
+
+some future improvements:
+might tape the wheels to make turning a little easier and with less motor power
+speeding up the minor adjustments
