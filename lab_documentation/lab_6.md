@@ -163,8 +163,19 @@ I followed the instructions for the DMP. This is the code that I added to my loo
 
 To convert quaternion data into euler angles for yaw (reference from Example7):
 
+```C++
+double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
 
+double qw = q0; // See issue #145 - thank you @Gord1
+double qx = q2;
+double qy = q1;
+double qz = -q3;
 
+double t3 = +2.0 * (qw * qz + qx * qy);
+double t4 = +1.0 - 2.0 * (qy * qy + qz * qz);
+double curr_angle = atan2(t3, t4) * 180.0 / PI; //from radians to degrees
+yaw_doc[tindex] = curr_angle;
+```
 
 
 
@@ -173,6 +184,8 @@ P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of control
 --> known from previous labs that my car has difficulty turning, amp up the parameters for more power
 
 after more experimentation I decided it wasn't the PID control giving it a steady state error, it was due to the overpowering of one motor such that the other was not strong enough to correct it no matter how large the ki --> lead to overshoot, decreasing ki
+
+I think the Kd is making it spin --> my initial kd value is very high due to the large differentce???
 
 Range/Sampling time discussion
 Graphs, code, videos, images, discussion of reaching task goal
