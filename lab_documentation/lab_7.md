@@ -24,3 +24,8 @@ Using a step response and giving the motors a constant input, I obtained ToF sen
 
 ![d_eq](../images/Lab7/d_calc.png)
 ![m_eq](../images/Lab7/m_calc.png)
+
+to be of similar size to the PWM value you used in Lab 5 (to keep the dynamics similar). Pick something between 50%-100% of the maximum u.
+
+
+unfortunately at this point one of my motor drivers broke, so I will submit the videos and testing later during break on someone else's car

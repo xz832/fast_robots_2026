@@ -161,13 +161,19 @@ I followed the instructions for the DMP. This is the code that I added to my loo
                         double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
 ```
 
-To convert quaternion data into euler angles for yaw:
+To convert quaternion data into euler angles for yaw (reference from Example7):
 
-```C++
+
+
 
 
 
 P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
+
+--> known from previous labs that my car has difficulty turning, amp up the parameters for more power
+
+after more experimentation I decided it wasn't the PID control giving it a steady state error, it was due to the overpowering of one motor such that the other was not strong enough to correct it no matter how large the ki --> lead to overshoot, decreasing ki
+
 Range/Sampling time discussion
 Graphs, code, videos, images, discussion of reaching task goal
 Graph data should at least include theta vs time (you can also consider angular velocity, motor input, etc)
