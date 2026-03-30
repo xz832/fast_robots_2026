@@ -149,16 +149,16 @@ I followed the instructions for the DMP. This is the code that I added to my loo
 
 ```C++
 //DMP
-                icm_20948_DMP_data_t data;
-                myICM.readDMPdataFromFIFO(&data);
+icm_20948_DMP_data_t data;
+myICM.readDMPdataFromFIFO(&data);
 
-                // Is valid data available?
-                if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) {
-                    // We have asked for GRV data so we should receive Quat6
-                    if ((data.header & DMP_header_bitmap_Quat6) > 0) {
-                        double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
-                        double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
-                        double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
+// Is valid data available?
+if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) {
+// We have asked for GRV data so we should receive Quat6
+    if ((data.header & DMP_header_bitmap_Quat6) > 0) {
+        double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
+        double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
+        double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
 ```
 
 To convert quaternion data into euler angles for yaw (reference from Example7):
