@@ -177,26 +177,6 @@ double curr_angle = atan2(t3, t4) * 180.0 / PI; //from radians to degrees
 yaw_doc[tindex] = curr_angle;
 ```
 
-![no_ki_yaw](../images/Lab6/no_ki_yaw.png)
-
-P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
-
---> known from previous labs that my car has difficulty turning, amp up the parameters for more power
-
-after more experimentation I decided it wasn't the PID control giving it a steady state error, it was due to the overpowering of one motor such that the other was not strong enough to correct it no matter how large the ki --> lead to overshoot, decreasing ki
-
-I think the Kd is making it spin --> my initial kd value is very high due to the large differentce???
-
-Final values:
-ble.send_command(CMD.START_ORIENT, "90|2.2|0.3|0.0001")
-
-[![proportional_control](https://img.youtube.com/vi/xresUaMSk9s/0.jpg)](https://www.youtube.com/watch?v=xresUaMSk9s)
-
-Range/Sampling time discussion
-Graphs, code, videos, images, discussion of reaching task goal
-Graph data should at least include theta vs time (you can also consider angular velocity, motor input, etc)
-
-
 Difficulties:
 wow my motor inputs are very different, one side is significantly weaker than the other, and this is less serious during linear motion or turning on a wide arc but calibrating and tuning it to turn in place was a nightmare:
 adjusted speeds 1.4 to 2.5 ratio, moving the lower limit of the weaker motor to 120
@@ -221,7 +201,35 @@ void PID_forward(float PID_u, int i){
 ```
 I might need two different speed controls for driving and turning when we are to combine those two in the future.
 
+![no_ki_yaw](../images/Lab6/no_ki_yaw.png)
+
+P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
+
+--> known from previous labs that my car has difficulty turning, amp up the parameters for more power
+
+after more experimentation I decided it wasn't the PID control giving it a steady state error, it was due to the overpowering of one motor such that the other was not strong enough to correct it no matter how large the ki --> lead to overshoot, decreasing ki
+
+I think the Kd is making it spin --> my initial kd value is very high due to the large differentce???
+
+Final values:
+ble.send_command(CMD.START_ORIENT, "90|2.2|0.3|0.0001")
+
+[![orient_vid](https://img.youtube.com/vi/tOwG_m2LR2Q/0.jpg)](https://www.youtube.com/watch?v=tOwG_m2LR2Q)
+
+The spin in the beginning is either caused by too big of a kd, a slightly off kd initialization, or the fact that the 'starting' velocity of the wheels to overcome friction is much higher that that needed when it begins to run, and hence it overshoots like crazy.
+
+Range/Sampling time discussion
+Graphs, code, videos, images, discussion of reaching task goal
+Graph data should at least include theta vs time (you can also consider angular velocity, motor input, etc)
+
+
+![yaw_goes_crazy](../images/Lab6/yaw_goes_crazy.png)
+![motor_goes_crazy](../images/Lab6/motor_goes_crazy.png)
+
+
+![slow_adj_comp](../images/Lab6/slow_adj_comp.gif)
 
 some future improvements:
 might tape the wheels to make turning a little easier and with less motor power
 speeding up the minor adjustments
+stop the translational motion due to the motor imbalance: after it reaches its target the stronger motor drags the rest of the car and shimmies it forwards.
