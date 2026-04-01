@@ -207,11 +207,9 @@ PIDResult PID_calculation(float curr_yaw)
 }
 ```
 
-However, I encountered some difficulties during my tuning process for each of the PID parameters. Firstly, I quickly discovered that my power for moving linearly is much lower than that required for turning. As seen in my lab 4, the turning for my car is extremely slow, 
+However, I encountered some difficulties during my tuning process for each of the PID parameters. Firstly, I quickly discovered that my power for moving linearly is much lower than that required for turning. As seen in my lab 4, the turning for my car is extremely slow and often with a wide radius, even with wheels turning in opposite directions. I think this is mostly due to my motors being highly unbalanced, which was less pbvious while moving linearly, but becomes a big problem when one side of wheels cannot overpower the other to turn.
 
-Difficulties:
-wow my motor inputs are very different, one side is significantly weaker than the other, and this is less serious during linear motion or turning on a wide arc but calibrating and tuning it to turn in place was a nightmare:
-adjusted speeds 1.4 to 2.5 ratio, moving the lower limit of the weaker motor to 120
+To mitigate the difference in motor capabilities, I had to bump up the ratio between the normal and adjusted speeds from 1.4 to 2.5. I also increased the lower limit of the weaker motor to 120 while keeping the other at the lowest that it could use to turn. The new motor control with PID input now looks like this:
 
 ```C++
 void PID_forward(float PID_u, int i){ 
