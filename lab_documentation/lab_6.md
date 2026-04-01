@@ -231,12 +231,11 @@ void PID_forward(float PID_u, int i){
 ```
 I might need two different speed controls for driving and turning when we are to combine those two in the future.
 
+For proportional and derivative control, I took the values from my linear PID controller as a starting point. However, they were too weak for turning, so I gradually increased them until they could turn reliably, with Kp at 2.0 and Kd at 0.5. The Kd helped curb big oscillations and stopped overshoots, but there was a steady state error that remained:
+
 ![no_ki_yaw](../images/Lab6/no_ki_yaw.png)
 
-P/I/D discussion (Kp/Ki/Kd values chosen, why you chose a combination of controllers, etc.)
-
---> known from previous labs that my car has difficulty turning, amp up the parameters for more power
-
+Hence, I added a Ki of 0.0001.
 after more experimentation I decided it wasn't the PID control giving it a steady state error, it was due to the overpowering of one motor such that the other was not strong enough to correct it no matter how large the ki --> lead to overshoot, decreasing ki
 
 I think the Kd is making it spin --> my initial kd value is very high due to the large differentce???
