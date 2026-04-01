@@ -177,6 +177,38 @@ double curr_angle = atan2(t3, t4) * 180.0 / PI; //from radians to degrees
 yaw_doc[tindex] = curr_angle;
 ```
 
+The implementation of my PID controls is very similar to that in lab 5, with the code as follows:
+
+```C++
+PIDResult PID_calculation(float curr_yaw)
+{
+
+    unsigned long curr_time = millis();
+    float dt = (curr_time - prev_time)/1000.0;
+    prev_time = curr_time;
+
+    //calculate error for proportional
+    float curr_error = curr_yaw - target_angle;
+    //calculate integral term
+    integral += curr_error * dt;
+    //anti-wind up
+    integral = constrain(integral, -300, 300); //change this when Ki is decided
+    //calculate derivative term
+    derivative = (curr_error - prev_error)/dt;
+    prev_error = curr_error;
+    //calculate PID
+    float u = Kp * curr_error + Ki * integral  + Kd * derivative;
+
+    PIDResult r;
+    r.u_r = u;
+    r.error_r = curr_error;
+    r.time_r = curr_time;
+    return r;
+}
+```
+
+However, I encountered some difficulties during my tuning process for each of the PID parameters. Firstly, I quickly discovered that my power for moving linearly is much lower than that required for turning. As seen in my lab 4, the turning for my car is extremely slow, 
+
 Difficulties:
 wow my motor inputs are very different, one side is significantly weaker than the other, and this is less serious during linear motion or turning on a wide arc but calibrating and tuning it to turn in place was a nightmare:
 adjusted speeds 1.4 to 2.5 ratio, moving the lower limit of the weaker motor to 120
