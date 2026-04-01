@@ -251,7 +251,4 @@ Here is a short demonstration of my car readjusting back to the target angle aft
 
 ![slow_adj_comp](../images/Lab6/slow_adj_comp.gif)
 
-some future improvements:
-might tape the wheels to make turning a little easier and with less motor power
-speeding up the minor adjustments
-stop the translational motion due to the motor imbalance: after it reaches its target the stronger motor drags the rest of the car and shimmies it forwards.
+Some improvements I want to implement soon: I might tape the wheels to make turning a little easier and with less motor power; speeding up the minor adjustments; stopping the translational motion due to the motor imbalance: after it reaches its target the stronger motor drags the rest of the car and shimmies it forwards.
