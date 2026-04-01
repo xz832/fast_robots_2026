@@ -235,26 +235,19 @@ For proportional and derivative control, I took the values from my linear PID co
 
 ![no_ki_yaw](../images/Lab6/no_ki_yaw.png)
 
-Hence, I added a Ki of 0.0001.
-after more experimentation I decided it wasn't the PID control giving it a steady state error, it was due to the overpowering of one motor such that the other was not strong enough to correct it no matter how large the ki --> lead to overshoot, decreasing ki
-
-I think the Kd is making it spin --> my initial kd value is very high due to the large differentce???
+Hence, I decided to add a Ki. I started with 0.00001. After more experimentation, I figured out that the Ki only helped to some extent, therefore it wasn't quite the PID control giving it a steady state error, but the overpowering of one motor such that the other was not strong enough to correct it no matter how large the Ki. I changed the motor controls (as shown above) and set the Ki only to the max value that still had substantial effects in decreasing the error to avoid instabilities in setting it too high.
 
 Final values:
-ble.send_command(CMD.START_ORIENT, "90|2.2|0.3|0.0001")
+Kp: 2.2, Kd: 0.3 Ki: 0.0001
 
 [![orient_vid](https://img.youtube.com/vi/tOwG_m2LR2Q/0.jpg)](https://www.youtube.com/watch?v=tOwG_m2LR2Q)
 
-The spin in the beginning is either caused by too big of a kd, a slightly off kd initialization, or the fact that the 'starting' velocity of the wheels to overcome friction is much higher that that needed when it begins to run, and hence it overshoots like crazy.
-
-Range/Sampling time discussion
-Graphs, code, videos, images, discussion of reaching task goal
-Graph data should at least include theta vs time (you can also consider angular velocity, motor input, etc)
-
+I had to lower the Kd value a little since, as seen in the video, the car does a big spin in the beginning. My initial derivative calculation may be very high due to the large difference in error while initializing over a relatively short amount of time. It also may be caused by the fact that the 'starting' velocity of the wheels to overcome friction is much higher that that needed when it begins to run, and hence it overshoots significantly.
 
 ![yaw_goes_crazy](../images/Lab6/yaw_goes_crazy.png)
 ![motor_goes_crazy](../images/Lab6/motor_goes_crazy.png)
 
+Here is a short demonstration of my car readjusting back to the target angle after interference while running.
 
 ![slow_adj_comp](../images/Lab6/slow_adj_comp.gif)
 
