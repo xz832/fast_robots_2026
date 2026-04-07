@@ -18,7 +18,7 @@ In order to implement a Kalman Filter, we will first be needing a state space mo
 
 To get the estimates for our A and B matrices, we will therefore need the car's drag and momentum.
 
-#### 1. Testing for Drag and Momentum
+### 1. Testing for Drag and Momentum
 
 Using a step response and giving the motors a constant input, I obtained ToF sensor data with which I calculated velocity to plot against time. From the plots I obtained the steady state velocity and 90% rise time for the d and m calculations:
 
@@ -62,29 +62,16 @@ active braking
             distanceSensor2.stopRanging();
 ```
 
-Decided to save my data with a csv file
+Decided to save my data with a csv file so that my data is not lost when the kernel resets
 
-velocity = dd / dt
-velocity_KF = dd_KF / dt
-dt = dt[mask]
-dd = dd[mask]
-dd = np.diff(distances)
-dd_KF = np.diff(distances_KF)
-dt = np.diff(times)
+To calculate the velocity I changed the stored data into numpy arrays for easier calcs. 
 
-velocity_values = []
-for i in range(len(tof2_time_values) - 1):  # Loop over indices
-    if (tof2_time_values[i] == tof2_time_values[0]):
-        dt = 1
-        dd = .000001
-    else:
-        dt = tof2_time_values[i] - tof2_time_values[i-1]  # Time difference
-        dd = tof2_values[i] - tof2_values[i-1]  # Distance difference
-    
-    velocity = dd / dt  # Velocity calculation
-    velocity_values.append(round(velocity,3))
+```python
+dd = np.diff(dist_array)
+dt = np.diff(time_array)
+vel_array = dd / dt
+```
 
-velocity_values.append(0) # ensure arrays of equal length
 
 
 
