@@ -26,7 +26,7 @@ Using a step response and giving the motors a constant input, I obtained ToF sen
 ![m_eq](../images/Lab7/m_calc.png)
 
 I chose the step response input to be _____
-placed car ____ distance from wall
+placed car 3m from wall --> far enough to reach steady state, but close enough so that tof sensor does not lose range (still could be a bit farther as it still hit the wall before fully reaching stable steady state)
 active braking
 
 
@@ -69,11 +69,15 @@ To calculate the velocity I changed the stored data into numpy arrays for easier
 ```python
 dd = np.diff(dist_array)
 dt = np.diff(time_array)
-vel_array = dd / dt
+vel_array = - dd / dt
 ```
 
+since the distance reading becomes smaller, the np.diff returns negative numbers and hence the added sign during the velocity calculation.
 
 
+![step_dist](../images/Lab7/step_dist.png)
+![step_motor](../images/Lab7/step_motor.png)
+VELOCITY OUTPUT --> plotted in desmos from raw data to curve fit and find variables from fitted graph equation
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
 3-5pm coding
