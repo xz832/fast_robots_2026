@@ -29,7 +29,6 @@ I chose the step response input to be _____
 placed car ____ distance from wall
 active braking
 
-Decided to save my data with a csv or pickle file?
 
 ```C+++
             while (time_interval < step_time) {
@@ -62,6 +61,31 @@ Decided to save my data with a csv or pickle file?
             delay(1000);
             distanceSensor2.stopRanging();
 ```
+
+Decided to save my data with a csv file
+
+velocity = dd / dt
+velocity_KF = dd_KF / dt
+dt = dt[mask]
+dd = dd[mask]
+dd = np.diff(distances)
+dd_KF = np.diff(distances_KF)
+dt = np.diff(times)
+
+velocity_values = []
+for i in range(len(tof2_time_values) - 1):  # Loop over indices
+    if (tof2_time_values[i] == tof2_time_values[0]):
+        dt = 1
+        dd = .000001
+    else:
+        dt = tof2_time_values[i] - tof2_time_values[i-1]  # Time difference
+        dd = tof2_values[i] - tof2_values[i-1]  # Distance difference
+    
+    velocity = dd / dt  # Velocity calculation
+    velocity_values.append(round(velocity,3))
+
+velocity_values.append(0) # ensure arrays of equal length
+
 
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
