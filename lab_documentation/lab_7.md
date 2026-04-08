@@ -91,21 +91,11 @@ To find the 90% rise time, I found the point at which velocity reaches 1.98 m/s,
 
 With this obtained data, I calculated the following for my matrices:
 
-$$
-d = \frac{u}{dx}
-$$
+```math
+\d = \frac{u}{dx} = 0.036364
 
-$$
-d = 0.036364
-$$
-
-$$
-m =  \frac{- d \cdot t(0.9)}{ln(0.1)}
-$$
-
-$$
-m = 0.043635
-$$
+\m =  \frac{- d \cdot t(0.9)}{ln(0.1)} = 0.043635
+```
 
 
 ### 2. Initialize KF
@@ -143,13 +133,15 @@ x = np.array([[-TOF[0]],[0]])
 
 initialize process noise and sensor noise covariance matrices
 
-I started off with the equations for the position and velocity uncertainty shown in lecture:
+I started off with the equations for the position, velocity and measurement uncertainty shown in lecture:
 
-$$\sigma_1 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}$$
+```math
+\sigma_1 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}
 
-$$\sigma_2 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}$$
+\sigma_2 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}
+```
 
-and tweaked them later with trial and error.
+Both values were set to 31.6mm initially and tweaked later with trial and error.
 
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
