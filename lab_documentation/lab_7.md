@@ -84,19 +84,55 @@ VELOCITY OUTPUT --> plotted in desmos from raw data to curve fit and find variab
 
 Fitted exponential curve
 
-b = 2.9 is my steady state velocity
-a = 2 is the tau, the time constant
+b = 2.2 is my steady state velocity
+a = 1.2 is the tau, the time constant
 
-To find the 90% rise time, I found the point at which velocity reaches 2.61 m/s, which is about 4.6052s.
+To find the 90% rise time, I found the point at which velocity reaches 1.98 m/s, which is about 2.763s.
 
 With this obtained data, I calculated the following for my matrices:
 
 $$
-d = \frac{u}{dx} = 
+d = \frac{u}{dx} = 0.036364
 $$
 
 $$
-m =  \frac{- d \cdot t(0.9)}{ln(0.1)}
+m =  \frac{- d \cdot t(0.9)}{ln(0.1)} = 0.043635
+$$
+
+### Initialize KF
+
+My sampling rate:
+According to previous tests of the ToF sampling rate, it's on average about in 100ms intervals. The Delta_t should be 0.1 then.
+
+Matrix explanation + discretization
+
+```python
+d = 0.036364
+m = 0.043635
+Delta_t = 0.1
+#dimensions of state space
+n = 2
+
+A = np.array([[0, 1], [0, d/m]])
+B = np.array([[0], [1/m]])
+
+Ad = np.eye(n) + Delta_t * A
+Bd = Delta_t * B
+```
+
+C state explanation
+
+```python
+C = np.array([[-1,0]])
+```
+
+initializing state vector:
+```python
+TOF = np.array(dist_array)
+x = np.array([[-TOF[0]],[0]])
+```
+
+initialize covariance matrices
 
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
