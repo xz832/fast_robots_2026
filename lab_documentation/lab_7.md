@@ -137,11 +137,11 @@ initialize process noise and sensor noise covariance matrices
 I started off with the equations for the position, velocity and measurement uncertainty shown in lecture:
 
 
-$$\sigma_1 = {\sqrt{10^2 \cdot \frac{1}{\Delta T}}} = {31.6}
+$$\sigma_1 = {\sqrt{10^2 \cdot \frac{1}{\Delta T}}}$$
 
 \sigma_2 = {\sqrt{10^2 \cdot \frac{1}{\Delta T}}} = {31.6}
 
-\sigma_3 = {20}$$
+\sigma_3 = {20}
 
 These were tweaked later with trial and error.
 INSERT FINAL VALUES HERE
