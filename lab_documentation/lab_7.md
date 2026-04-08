@@ -92,14 +92,23 @@ To find the 90% rise time, I found the point at which velocity reaches 1.98 m/s,
 With this obtained data, I calculated the following for my matrices:
 
 $$
-d = \frac{u}{dx} = 0.036364
+d = \frac{u}{dx}
 $$
 
 $$
-m =  \frac{- d \cdot t(0.9)}{ln(0.1)} = 0.043635
+d = 0.036364
 $$
 
-### Initialize KF
+$$
+m =  \frac{- d \cdot t(0.9)}{ln(0.1)}
+$$
+
+$$
+m = 0.043635
+$$
+
+
+### 2. Initialize KF
 
 My sampling rate:
 According to previous tests of the ToF sampling rate, it's on average about in 100ms intervals. The Delta_t should be 0.1 then.
@@ -132,7 +141,15 @@ TOF = np.array(dist_array)
 x = np.array([[-TOF[0]],[0]])
 ```
 
-initialize covariance matrices
+initialize process noise and sensor noise covariance matrices
+
+I started off with the equations for the position and velocity uncertainty shown in lecture:
+
+$$\sigma_1 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}$$
+
+$$\sigma_2 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}$$
+
+and tweaked them later with trial and error.
 
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
