@@ -25,7 +25,7 @@ Using a step response and giving the motors a constant input, I obtained ToF sen
 ![d_eq](../images/Lab7/d_calc.png)
 ![m_eq](../images/Lab7/m_calc.png)
 
-I chose the step response input to be _____
+I chose the step response input to be 80 (and the calibrated speed 112)
 placed car 3m from wall --> far enough to reach steady state, but close enough so that tof sensor does not lose range (still could be a bit farther as it still hit the wall before fully reaching stable steady state)
 active braking
 
@@ -89,12 +89,19 @@ a = 2 is the tau, the time constant
 
 To find the 90% rise time, I found the point at which velocity reaches 2.61 m/s, which is about 4.6052s.
 
+With this obtained data, I calculated the following for my matrices:
+
+$$
+d = \frac{u}{dx} = 
+$$
+
+$$
+m =  \frac{- d \cdot t(0.9)}{ln(0.1)}
+
+
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
 3-5pm coding
 5-7pm rover (encoders?)
 Finish lab 7 today or I will explode
 
 to be of similar size to the PWM value you used in Lab 5 (to keep the dynamics similar). Pick something between 50%-100% of the maximum u.
-
-
-unfortunately at this point one of my motor drivers broke, so I will submit the videos and testing later during break on someone else's car
