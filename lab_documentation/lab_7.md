@@ -25,7 +25,8 @@ Using a step response and giving the motors a constant input, I obtained ToF sen
 ![d_eq](../images/Lab7/d_calc.png)
 ![m_eq](../images/Lab7/m_calc.png)
 
-I chose the step response input to be 80 (and the calibrated speed 112)
+I chose the step response input to be 80 (and the calibrated speed 112); to be of similar size to the PWM value you used in Lab 5 (to keep the dynamics similar). Pick something between 50%-100% of the maximum u.
+
 placed car 3m from wall --> far enough to reach steady state, but close enough so that tof sensor does not lose range (still could be a bit farther as it still hit the wall before fully reaching stable steady state)
 active braking
 
@@ -136,17 +137,26 @@ initialize process noise and sensor noise covariance matrices
 I started off with the equations for the position, velocity and measurement uncertainty shown in lecture:
 
 ```math
-\sigma_1 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}
+\sigma_1 = \sqrt{10^2 \cdot \frac{1}{\Delta T}} = 31.6
 
-\sigma_2 = \sqrt{10^2 \cdot \frac{1}{\Delta T}}
+\sigma_2 = \sqrt{10^2 \cdot \frac{1}{\Delta T}} = 31.6
+
+\sigma_3 = 20
+```
+These were tweaked later with trial and error.
+INSERT FINAL VALUES HERE
+
+```python
+sig_u=np.array([[sigma_1**2,0],[0,sigma_2**2]])
+sig_z=np.array([[sigma_3**2]])
 ```
 
-Both values were set to 31.6mm initially and tweaked later with trial and error.
+### 3. Testing Kalman Filter in Python
+
+
 
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
 3-5pm coding
 5-7pm rover (encoders?)
 Finish lab 7 today or I will explode
-
-to be of similar size to the PWM value you used in Lab 5 (to keep the dynamics similar). Pick something between 50%-100% of the maximum u.
