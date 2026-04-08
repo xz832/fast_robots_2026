@@ -78,6 +78,8 @@ since the distance reading becomes smaller, the np.diff returns negative numbers
 ![step_dist](../images/Lab7/step_dist.png)
 ![step_motor](../images/Lab7/step_motor.png)
 
+VELOCITY OUTPUT --> plotted in desmos from raw data to curve fit and find variables from fitted graph equation
+
 ![step_vel](../images/Lab7/step_vel.png)
 
 Fitted exponential curve
@@ -85,7 +87,7 @@ Fitted exponential curve
 b = 2.9 is my steady state velocity
 a = 2 is the tau, the time constant
 
-VELOCITY OUTPUT --> plotted in desmos from raw data to curve fit and find variables from fitted graph equation
+To find the 90% rise time, I found the point at which velocity reaches 2.61 m/s, which is about 4.6052s.
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
 3-5pm coding
