@@ -202,7 +202,7 @@ initializing matrices
 KF function
 implementing into my PID function (does my funky PID function work with KF)
 
-oops so turns out the KF was actually smoothing out the data a little too much,  I think I dialed it back to around 26
+oops so turns out the KF was actually smoothing out the data a little too much, the distance vs time graphs show a substantial offset from the actual measurements. The Kalman filter lags behind and ends up estimating that we are farther from the wall than reality, so my car would sometimes run into the wall. I dialed it back to around 26
 
 [![Kalman_run](https://img.youtube.com/vi/t0iPy6u97GY/0.jpg)](https://www.youtube.com/watch?v=t0iPy6u97GY)
 
