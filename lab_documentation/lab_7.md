@@ -140,7 +140,7 @@ I started off with the equations for the position, velocity and measurement unce
 
 $$
 \begin{aligned}
-\sigma_1 &= \sqrt{10^2 \cdot \frac{1}{\Delta T}} \\
+\sigma_1 &= \sqrt{10^2 \cdot \frac{1}{\Delta T}} = 31.6 \\
 \sigma_2 &= \sqrt{10^2 \cdot \frac{1}{\Delta T}} = 31.6 \\
 \sigma_3 &= 20
 \end{aligned}
