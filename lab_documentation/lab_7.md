@@ -188,10 +188,8 @@ for i in range(len(dist_array)):
 
 Turns out, having the sigma3 be around 20 was already a pretty good estimate. The Kalman filter followed the raw data pretty closely. However, as I increased it to 50 and 70 respectively below:
 
-
-  <img src="../images/Lab7/kf_50.png" width="300" />
-  <img src="../images/Lab7/kf_70.png" width="300" />
-
+![kf_50](../images/Lab7/kf_50.png)
+![kf_70](../images/Lab7/kf_70.png)
 
 (see if I can put a caption on these and put them side by side)
 
@@ -204,9 +202,13 @@ initializing matrices
 KF function
 implementing into my PID function (does my funky PID function work with KF)
 
-![Kalman_run](../images/Lab7/Kalman_run.png)
-![Kalman_run_vel](../images/Lab7/Kalman_run_vel.png)
+oops so turns out the KF was actually smoothing out the data a little too much,  I think I dialed it back to around 26
 
-oops so turns out the KF was actually trusting the model a little too much I think I dialed it back to around 22
+[![Kalman_run](https://img.youtube.com/vi/t0iPy6u97GY/0.jpg)](https://www.youtube.com/watch?v=t0iPy6u97GY)
+
+[![Kalman_adjust](https://img.youtube.com/vi/r7EH0d4FWFg/0.jpg)](https://www.youtube.com/watch?v=r7EH0d4FWFg)
+
+![Kalman_run](../images/Lab7/Kalman_run_bet.png)
+![Kalman_run_vel](../images/Lab7/Kalman_run_vel_bet.png)
 
 the kalman filter was overall quite successful on my robot, the adjustment speed improved a lot (lab 5 was quite slow in small adjustments) and the robot responds faster
