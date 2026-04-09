@@ -187,9 +187,19 @@ for i in range(len(dist_array)):
 
 Turns out, having the sigma3 be around 20 was already a pretty good estimate. The Kalman filter followed the raw data pretty closely. However, as I increased it to 50 and 70 respectively below:
 
-![kf_50](../images/Lab7/kf_50.png)
 
-![kf_70](../images/Lab7/kf_70.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="../images/Lab7/kf_50.png" width="300"/><br/>
+      <sub>Kalman Filtered data: sigma3 = 50</sub>
+    </td>
+    <td align="center">
+      <img src="../images/Lab7/kf_70.png" width="300"/><br/>
+      <sub>Kalman Filtered data: sigma3 = 70</sub>
+    </td>
+  </tr>
+</table>
 
 (see if I can put a caption on these and put them side by side)
 
