@@ -192,11 +192,11 @@ Turns out, having the sigma3 be around 20 was already a pretty good estimate. Th
 <table>
   <tr>
     <td align="center">
-      <img src="../images/Lab7/kf_50.png" width="300"/><br/>
+      <img src="../images/Lab7/kf_50.png" width="300"><br>
       <sub>Kalman Filtered data: sigma3 = 50</sub>
     </td>
     <td align="center">
-      <img src="../images/Lab7/kf_70.png" width="300"/><br/>
+      <img src="../images/Lab7/kf_70.png" width="300"><br>
       <sub>Kalman Filtered data: sigma3 = 70</sub>
     </td>
   </tr>
