@@ -189,24 +189,24 @@ for i in range(len(dist_array)):
 Turns out, having the sigma3 be around 20 was already a pretty good estimate. The Kalman filter followed the raw data pretty closely. However, as I increased it to 50 and 70 respectively below:
 
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="../images/Lab7/kf_50.png" width="300"><br>
-      <sub>Kalman Filtered data: sigma3 = 50</sub>
-    </td>
-    <td align="center">
-      <img src="../images/Lab7/kf_70.png" width="300"><br>
-      <sub>Kalman Filtered data: sigma3 = 70</sub>
-    </td>
-  </tr>
-</table>
+<p float="left">
+  <img src="../images/Lab7/kf_50.png" width="300" />
+  <img src="../images/Lab7/kf_70.png" width="300" />
+</p>
+
+<p float="left">
+  <sub>Kalman Filtered data: sigma3 = 50</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub>Kalman Filtered data: sigma3 = 70</sub>
+</p>
 
 (see if I can put a caption on these and put them side by side)
 
 The filter begins to have a bigger and bigger mismatch as compared to the raw data, while it becomes smoother with less effects from the sensor noise. I decided in the end to have sigma3 be 30 to get a smooth enough prediction without straying from the raw data too much.
 
-11am-3pm class + shift, REMEMBER TO GO GET POSTERS
-3-5pm coding
-5-7pm rover (encoders?)
-Finish lab 7 today or I will explode
+### 4. Implementing KF on the Robot
+
+initializing matrices
+
+KF function
+implementing into my PID function (does my funky PID function work with KF)
