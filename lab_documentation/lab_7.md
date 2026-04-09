@@ -92,11 +92,13 @@ To find the 90% rise time, I found the point at which velocity reaches 1.98 m/s,
 
 With this obtained data, I calculated the following for my matrices:
 
-```math
-\d = \frac{u}{dx} = 0.036364
+$$
+d = \frac{u}{dx} = 0.036364
+$$
 
-\m =  \frac{- d \cdot t(0.9)}{ln(0.1)} = 0.043635
-```
+$$
+m = \frac{- d \cdot t(0.9)}{\ln(0.1)} = 0.043635
+$$
 
 
 ### 2. Initialize KF
@@ -136,15 +138,15 @@ initialize process noise and sensor noise covariance matrices
 
 I started off with the equations for the position, velocity and measurement uncertainty shown in lecture:
 
+$$
+\begin{aligned}
+\sigma_1 &= \sqrt{10^2 \cdot \frac{1}{\Delta T}} \\
+\sigma_2 &= \sqrt{10^2 \cdot \frac{1}{\Delta T}} = 31.6 \\
+\sigma_3 &= 20
+\end{aligned}
+$$
 
-$$\sigma_1 = {\sqrt{10^2 \cdot \frac{1}{\Delta T}}}$$
-
-\sigma_2 = {\sqrt{10^2 \cdot \frac{1}{\Delta T}}} = {31.6}
-
-\sigma_3 = {20}
-
-These were tweaked later with trial and error.
-INSERT FINAL VALUES HERE
+Sigma3 which determines how much the measurements are trusted against model predictions, was tweaked later with trial and error.
 
 ```python
 sig_u=np.array([[sigma_1**2,0],[0,sigma_2**2]])
@@ -153,8 +155,45 @@ sig_z=np.array([[sigma_3**2]])
 
 ### 3. Testing Kalman Filter in Python
 
+```python
+def kf(mu,sigma,u,y):
+    
+    mu_p = Ad.dot(mu) + Bd.dot(u) 
+    sigma_p = Ad.dot(sigma.dot(Ad.transpose())) + sig_u
+    
+    sigma_m = C.dot(sigma_p.dot(C.transpose())) + sig_z
+    kkf_gain = sigma_p.dot(C.transpose().dot(np.linalg.inv(sigma_m)))
+
+    y_m = y-C.dot(mu_p)
+    mu = mu_p + kkf_gain.dot(y_m)    
+    sigma=(np.eye(2)-kkf_gain.dot(C)).dot(sigma_p)
+
+    return mu,sigma
+```
+
+```python
+TOF = np.array(dist_array)
+x = np.array([[TOF[0]],[0]])
+sigma = np.eye(n)
+dist_kf = []
+ 
+for i in range(len(dist_array)):
+    x, sigma = kf(x, sigma, u_ss, dist_array[i])
+    dist_kf.append(x[0, 0])
+```
 
 
+![kf_initial](../images/Lab7/kf_initial.png)
+
+Turns out, having the sigma3 be around 20 was already a pretty good estimate. The Kalman filter followed the raw data pretty closely. However, as I increased it to 50 and 70 respectively below:
+
+![kf_50](../images/Lab7/kf_50.png)
+
+![kf_70](../images/Lab7/kf_70.png)
+
+(see if I can put a caption on these and put them side by side)
+
+The filter begins to have a bigger and bigger mismatch as compared to the raw data, while it becomes smoother with less effects from the sensor noise. I decided in the end to have sigma3 be 30 to get a smooth enough prediction without straying from the raw data too much.
 
 11am-3pm class + shift, REMEMBER TO GO GET POSTERS
 3-5pm coding
