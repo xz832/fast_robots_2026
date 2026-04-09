@@ -100,6 +100,7 @@ $$
 m = \frac{- d \cdot t(0.9)}{\ln(0.1)} = 0.043635
 $$
 
+[![step_response](https://img.youtube.com/vi/cX7JJ0ZW-UY/0.jpg)](https://www.youtube.com/watch?v=cX7JJ0ZW-UY)
 
 ### 2. Initialize KF
 
