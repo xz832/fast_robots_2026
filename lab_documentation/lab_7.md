@@ -203,3 +203,7 @@ initializing matrices
 
 KF function
 implementing into my PID function (does my funky PID function work with KF)
+
+so turns out the KF was actually trusting the model a little too much I think I dialed it back to around 22
+
+the kalman filter was overall quite successful on my robot, the adjustment speed improved a lot (lab 5 was quite slow in small adjustments) and the robot responds faster
