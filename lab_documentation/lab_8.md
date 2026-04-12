@@ -54,3 +54,8 @@ code:
             break;
 ```
 
+
+interestingly at almost max PWM the two motors run pretty similarly, I originally had the 1.4 ratio between them, but it just veered off to the side. I did resolder one of the motor input wires between this lab and the previous few since the wire broke, so it could have been bad connection as well?
+
+Made a sticky mat
+Added bearing to front of car
