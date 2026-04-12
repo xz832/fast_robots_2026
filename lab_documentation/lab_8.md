@@ -59,3 +59,7 @@ interestingly at almost max PWM the two motors run pretty similarly, I originall
 
 Made a sticky mat
 Added bearing to front of car
+
+flipped starting position since back of car too heavy by itself: would not flip even hitting a wall
+
+try 905
