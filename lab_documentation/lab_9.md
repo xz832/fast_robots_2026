@@ -8,4 +8,10 @@ description: "writeup for lab 9"
 
 # LAB 9 - MAE4190 FAST ROBOTS
 
-This is lab 9 of fast robots.
+This is lab 9 of fast robots. In this lab, our objective is to map out a static room. To build the map, we will place your robot in a couple of marked locations around the lab, and have it spin around its axis while collecting ToF readings.
+
+### Control
+
+I chose to perform this task with a PID orientation control.
+
+I added tape to my wheels as from previous labs it is known that my car has trouble turning and requires a lot of motor power to start the turn. For such a slow speed, precision based turn, I'll need it to be a smoother motion and ideally not giving the motors a burst of power and sending the car to overshoot.
