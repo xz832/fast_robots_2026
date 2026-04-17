@@ -112,3 +112,5 @@ try 905
             }
         }
 ```
+
+![hard_code_flip](../images/Lab8/hard_code_flip.gif)
