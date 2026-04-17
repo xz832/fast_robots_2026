@@ -62,4 +62,53 @@ Added bearing to front of car
 
 flipped starting position since back of car too heavy by itself: would not flip even hitting a wall
 
+Added a second bearing on the car
+taped the back wheels for less friction
+increased speed
+
 try 905
+
+```C++
+//stunt control
+            if (start_STUNT == true && tindex < tindex_max) {
+                unsigned long timer = millis();
+                while ((millis()-timer < 900)){
+                    //if (distanceSensor2.checkForDataReady()){
+                        //float distance1 = distanceSensor2.getDistance(); //Get the result of the measurement from the sensor
+                        //distance_doc[tindex] = distance1;
+                        //Serial.print(distance1);
+                        //distanceSensor2.clearInterrupt();
+
+                        analogWrite(MOTOR1PIN1, 240);
+                        analogWrite(MOTOR2PIN1, 240);
+                        analogWrite(MOTOR1PIN2, 0);
+                        analogWrite(MOTOR2PIN2, 0);
+
+                        time_doc[tindex] = millis();
+
+                        tindex++;
+                    //}
+                }
+                analogWrite(MOTOR1PIN1, 1);
+                analogWrite(MOTOR2PIN1, 1);
+                analogWrite(MOTOR1PIN2, 0);
+                analogWrite(MOTOR2PIN2, 0);
+                //delay(10);
+
+                control_stop();
+
+                analogWrite(MOTOR1PIN1, 0);
+                analogWrite(MOTOR2PIN1, 0);
+                analogWrite(MOTOR1PIN2, 250);
+                analogWrite(MOTOR2PIN2, 250);
+                delay(2000);
+
+                analogWrite(MOTOR1PIN1, 0);
+                analogWrite(MOTOR2PIN1, 0);
+                analogWrite(MOTOR1PIN2, 0);
+                analogWrite(MOTOR2PIN2, 0);
+                delay(3000);
+
+            }
+        }
+```
