@@ -57,18 +57,7 @@ code:
 
 interestingly at almost max PWM the two motors run pretty similarly, I originally had the 1.4 ratio between them, but it just veered off to the side. I did resolder one of the motor input wires between this lab and the previous few since the wire broke, so it could have been bad connection as well?
 
-Made a sticky mat
-Added bearing to front of car
-
-flipped starting position since back of car too heavy by itself: would not flip even hitting a wall
-
-![wrong_com_dist](../images/Lab8/stunt_wrong_com_dist.png)
-![wrong_com_motor](../images/Lab8/stunt_wrong_com_motor.png)
-
-Added a second bearing on the car
-taped the back wheels for less friction
-increased speed
-
+## Hard Coded Flip
 
 ```C++
 //stunt control
@@ -114,11 +103,23 @@ increased speed
             }
 ```
 
+Added bearing to front of car
+
+flipped starting position since back of car too heavy by itself: would not flip even hitting a wall, only going back and forth
+
+![wrong_com_dist](../images/Lab8/stunt_wrong_com_dist.png)
+![wrong_com_motor](../images/Lab8/stunt_wrong_com_motor.png)
+
+Added a second bearing to the front of the car
+taped the back wheels for less friction
+increased speed
+
+![car_setup_stunt](../images/Lab8/car_setup_stunt.jpeg)
 
 [![hard_code_flip](https://img.youtube.com/vi/vd0Yp2gF3XI/0.jpg)](https://www.youtube.com/watch?v=vd0Yp2gF3XI)
 
 
-### Distance based flip
+## Distance-Based Flip
 
 ```C++
 //stunt control
