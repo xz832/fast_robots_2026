@@ -114,3 +114,5 @@ try 905
 ```
 
 ![hard_code_flip](../images/Lab8/hard_code_flip.gif)
+
+it likes to turn sideways a little bit after flipping, I think because the speed at which the two wheels stop are different, one stops slower than the other, causing it to turns
