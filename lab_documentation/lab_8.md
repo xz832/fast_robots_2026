@@ -66,7 +66,6 @@ Added a second bearing on the car
 taped the back wheels for less friction
 increased speed
 
-try 905
 
 ```C++
 //stunt control
@@ -114,5 +113,10 @@ try 905
 ```
 
 ![hard_code_flip](../images/Lab8/hard_code_flip.gif)
+
+
+### Distance based flip
+
+![sideways](../images/Lab8/sideways.gif)
 
 it likes to turn sideways a little bit after flipping, I think because the speed at which the two wheels stop are different, one stops slower than the other, causing it to turns
