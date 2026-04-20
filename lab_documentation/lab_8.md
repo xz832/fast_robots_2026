@@ -62,6 +62,9 @@ Added bearing to front of car
 
 flipped starting position since back of car too heavy by itself: would not flip even hitting a wall
 
+![wrong_com_dist](../images/Lab8/stunt_wrong_com_dist.png)
+![wrong_com_motor](../images/Lab8/stunt_wrong_com_motor.png)
+
 Added a second bearing on the car
 taped the back wheels for less friction
 increased speed
@@ -123,3 +126,9 @@ increased speed
 ![sideways](../images/Lab8/sideways.gif)
 
 it likes to turn sideways a little bit after flipping, I think because the speed at which the two wheels stop are different, one stops slower than the other, causing it to turns
+
+[![Stunt_run_1](https://img.youtube.com/vi/yU46CBN-2M4/0.jpg)](https://www.youtube.com/watch?v=yU46CBN-2M4)
+
+[![Stunt_run_2](https://img.youtube.com/vi/M9IMlJxRE2o/0.jpg)](https://www.youtube.com/watch?v=M9IMlJxRE2o)
+
+[![Stunt_run_3](https://img.youtube.com/vi/M9IMlJxRE2o/0.jpg)](https://www.youtube.com/watch?v=M9IMlJxRE2o)
