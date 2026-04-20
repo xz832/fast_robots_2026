@@ -131,4 +131,12 @@ it likes to turn sideways a little bit after flipping, I think because the speed
 
 [![Stunt_run_2](https://img.youtube.com/vi/M9IMlJxRE2o/0.jpg)](https://www.youtube.com/watch?v=M9IMlJxRE2o)
 
-[![Stunt_run_3](https://img.youtube.com/vi/M9IMlJxRE2o/0.jpg)](https://www.youtube.com/watch?v=M9IMlJxRE2o)
+[![Stunt_run_3](https://img.youtube.com/vi/AQgau0eaHMU/0.jpg)](https://www.youtube.com/watch?v=AQgau0eaHMU)
+
+you can see it getting better! I added a slight delay to one of the wheels stopping, as well as added a difference in speeds when they start back up again to drive towards me.
+
+![flip_tof_2](../images/Lab8/flip_tof_2.png)
+
+![flip_motor_2](../images/Lab8/flip_motor_2.png)
+
+There is still a bit of an unwanted pivot, but unfortunately the mat was not sticky enough to perform my stunt anymore after too many tries. So I will be back when I get a better calibration on another sticky mat, or perhaps a DIY mat if I can find materials.
