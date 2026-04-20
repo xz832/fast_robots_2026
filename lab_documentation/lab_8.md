@@ -112,16 +112,58 @@ increased speed
                 delay(3000);
 
             }
-        }
 ```
 
-![hard_code_flip](../images/Lab8/hard_code_flip.gif)
 
-[<img src="../images/Lab8/hard_code_flip.gif" width="30" />](../images/Lab8/hard_code_flip.gif)
-
+[![hard_code_flip](https://img.youtube.com/vi/vd0Yp2gF3XI/0.jpg)](https://www.youtube.com/watch?v=vd0Yp2gF3XI)
 
 
 ### Distance based flip
+
+```C++
+//stunt control
+            if (start_STUNT == true && tindex < tindex_max) {
+                if (distanceSensor2.checkForDataReady()){
+                    float distance1 = distanceSensor2.getDistance(); //Get the result of the sensor
+                    distance_doc[tindex] = distance1;
+                    distanceSensor2.clearInterrupt();
+                    time_doc[tindex] = millis();
+                    if (distance1 > 805){
+
+                        analogWrite(MOTOR1PIN1, 250);
+                        analogWrite(MOTOR2PIN1, 250);
+                        analogWrite(MOTOR1PIN2, 0);
+                        analogWrite(MOTOR2PIN2, 0);                        
+
+                        tindex++;
+
+                    } else if (distance1 <= 805){
+                        analogWrite(MOTOR2PIN1, 1);
+                        analogWrite(MOTOR1PIN1, 1);
+                        analogWrite(MOTOR1PIN2, 0);
+                        analogWrite(MOTOR2PIN2, 0);
+
+                        control_stop();
+
+                        analogWrite(MOTOR1PIN1, 0);
+                        analogWrite(MOTOR2PIN1, 0);
+                        analogWrite(MOTOR1PIN2, 250);
+                        analogWrite(MOTOR2PIN2, 250);
+                        delay(2000);
+
+                        analogWrite(MOTOR1PIN1, 0);
+                        analogWrite(MOTOR2PIN1, 0);
+                        analogWrite(MOTOR1PIN2, 0);
+                        analogWrite(MOTOR2PIN2, 0);
+                        delay(5000);
+                    }
+
+                }
+            }
+```
+
+I started off with 305 as the benchmark for distance detection, but the TOF sensor was not fast enough to react with the flip. I incremented it in 100mm intervals and found that 805 was the distance that could reliably flip without colliding with the wall.
+
 
 ![sideways](../images/Lab8/sideways.gif)
 
