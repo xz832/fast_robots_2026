@@ -114,6 +114,9 @@ increased speed
 
 ![hard_code_flip](../images/Lab8/hard_code_flip.gif)
 
+[<img src="../images/Lab8/hard_code_flip.gif" width="30" />](../images/Lab8/hard_code_flip.gif)
+
+
 
 ### Distance based flip
 
