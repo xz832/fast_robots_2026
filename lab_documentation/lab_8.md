@@ -104,8 +104,7 @@ Interestingly at almost maximum PWM, the two motors run pretty similarly. I orig
 
 ### Hardware Adjustments
 
-
-Added bearing to front of car
+The center of mass of my car is closer towards the back, hence originally, no matter how fast I was going,  Added bearing to front of car
 
 flipped starting position since back of car too heavy by itself: would not flip even hitting a wall, only going back and forth
 
