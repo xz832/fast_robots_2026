@@ -100,7 +100,7 @@ To test if my hardware is able to do a flip first, I skipped the implementation 
             }
 ```
 
-Interestingly at almost maximum PWM, the two motors run pretty similarly. I originally had a 1.4 ratio between their speeds, similar to other labs, but it veered off to the side. Removing it gave it a fairly straight path. I did resolder one of the motor input wires between this lab and the previous few since the wire broke, so it could have been bad connection as well?
+Interestingly at almost maximum PWM, the two motors run pretty similarly. I originally had a 1.4 ratio between their speeds, similar to other labs, but it veered off to the side. Removing it gave the car a fairly straight path. However, I did resolder one of the motor input wires between this lab and the previous few, since the wire broke during lab 7, so the speed difference could have been due to bad connection as well.
 
 ### Hardware Adjustments
 
