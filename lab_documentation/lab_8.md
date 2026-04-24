@@ -104,18 +104,16 @@ Interestingly at almost maximum PWM, the two motors run pretty similarly. I orig
 
 ### Hardware Adjustments
 
-The center of mass of my car is closer towards the back, hence originally, no matter how fast I was going,  Added bearing to front of car
-
-flipped starting position since back of car too heavy by itself: would not flip even hitting a wall, only going back and forth
+The center of mass of my car is much closer towards the back, hence originally, no matter how fast I was going, the car would not flip, only going back and forth:
 
 ![wrong_com_dist](../images/Lab8/stunt_wrong_com_dist.png)
 ![wrong_com_motor](../images/Lab8/stunt_wrong_com_motor.png)
 
-Added a second bearing to the front of the car
-taped the back wheels for less friction
-increased speed
+I added two bearings to the top of the car towards the front to shift the center of mass, as well as taped the back wheels for less friction.
 
 ![car_setup_stunt](../images/Lab8/car_setup_stunt.jpeg)
+
+This proved successful for my car to perform the flip.
 
 [![hard_code_flip](https://img.youtube.com/vi/vd0Yp2gF3XI/0.jpg)](https://www.youtube.com/watch?v=vd0Yp2gF3XI)
 
