@@ -8,11 +8,9 @@ description: "writeup for lab 8"
 
 # LAB 8 - MAE4190 FAST ROBOTS
 
-Welcome to lab 8 of fast robots! In this lab we will be doing stunts with our cars!
+Welcome to lab 8 of fast robots! In this lab we will be doing stunts with our cars! I chose to do the flip.
 
-I chose to do the flip
-
-code:
+In order to control the car, I implemented the following code, fairly similar to that of the previous lab 5 and 6:
 
 ```C++
         case START_STUNT:
@@ -54,10 +52,9 @@ code:
             break;
 ```
 
-
-interestingly at almost max PWM the two motors run pretty similarly, I originally had the 1.4 ratio between them, but it just veered off to the side. I did resolder one of the motor input wires between this lab and the previous few since the wire broke, so it could have been bad connection as well?
-
 ## Hard Coded Flip
+
+To test if my hardware is able to do a flip first, I skipped the implementation of flipping based on my car's distance from the wall using my TOF sensors. Instead, I hard-coded the flip just by running the car at full speed for a set amount of time, stopping it briefly, and driving the other direction afterwards. The code is as follows:
 
 ```C++
 //stunt control
@@ -102,6 +99,11 @@ interestingly at almost max PWM the two motors run pretty similarly, I originall
 
             }
 ```
+
+Interestingly at almost maximum PWM, the two motors run pretty similarly. I originally had a 1.4 ratio between their speeds, similar to other labs, but it veered off to the side. Removing it gave it a fairly straight path. I did resolder one of the motor input wires between this lab and the previous few since the wire broke, so it could have been bad connection as well?
+
+### Hardware Adjustments
+
 
 Added bearing to front of car
 
