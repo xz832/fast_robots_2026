@@ -27,3 +27,12 @@ debugging:
 speed adjustment
 angles not matching up due to wrapping/lack thereof
 NAN outputs
+
+angle wrapping/PID recognition --> sometimes it thinks it's 180 away (30 to -150 etc)
+
+ble.send_command(CMD.START_SPIN, "1|0.3|0.0001") --> originally 2.2
+#Kp|Kd|Ki
+
+motor speed adjusting
+
+the point turn graphs look like that because the spin was not long enough to fill the full array sent over bluetooth
