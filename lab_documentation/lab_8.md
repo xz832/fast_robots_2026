@@ -174,16 +174,18 @@ It tends to turn sideways a little bit after flipping, possibly due to the fact 
 
 To fix this issue, I tweaked the ratio between the motor speeds at which the car drives back away from the wall such that it can course-correct itself after it flips. Instead of sending the same PWM signal to both motors, I lowered one just enough to not veer off to the side, but not too much as to affect the reliability of my flips. I also added a very small delay to the motor that stops earlier, such that it runs a little longer to match the other.
 
+Here are my three runs:
+
 [![Stunt_run_1](https://img.youtube.com/vi/yU46CBN-2M4/0.jpg)](https://www.youtube.com/watch?v=yU46CBN-2M4)
 
 [![Stunt_run_2](https://img.youtube.com/vi/M9IMlJxRE2o/0.jpg)](https://www.youtube.com/watch?v=M9IMlJxRE2o)
 
 [![Stunt_run_3](https://img.youtube.com/vi/AQgau0eaHMU/0.jpg)](https://www.youtube.com/watch?v=AQgau0eaHMU)
 
-you can see it getting better! I added a slight delay to one of the wheels stopping, as well as added a difference in speeds when they start back up again to drive towards me.
+These are one of the sets of graphs obtained from the data during the flip:
 
 ![flip_tof_2](../images/Lab8/flip_tof_2.png)
 
 ![flip_motor_2](../images/Lab8/flip_motor_2.png)
 
-There is still a bit of an unwanted pivot, but unfortunately the mat was not sticky enough to perform my stunt anymore after too many tries. So I will be back when I get a better calibration on another sticky mat, or perhaps a DIY mat if I can find materials.
+There is still a bit of an unwanted pivot, but unfortunately the mat was not sticky enough to perform my stunt anymore after too many tries. So I will be back when I get a better calibration on another sticky mat, or perhaps a DIY mat if I can find materials. Overall, the car flips reliably, and this was an interesting lab for "debugging" the physical system.
