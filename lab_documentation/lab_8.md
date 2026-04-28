@@ -166,10 +166,13 @@ Now that I have confirmed that my hardware is suited to perform the flip, I adde
 
 I started off with 305 as the benchmark for distance detection, but the TOF sensor was not fast enough to react with the flip. I incremented it in 100mm intervals and found that 805 was the distance that could reliably flip without colliding with the wall.
 
+This was what happened for the first few attempts:
 
 ![sideways](../images/Lab8/sideways.gif)
 
-it likes to turn sideways a little bit after flipping, I think because the speed at which the two wheels stop are different, one stops slower than the other, causing it to turns
+It tends to turn sideways a little bit after flipping, possibly due to the fact that the speed at which the two wheels stop are different. One motor seems to have a delay in stopping as compared to the other, causing it to turn mid-flip.
+
+To fix this issue, I tweaked the speeds at which 
 
 [![Stunt_run_1](https://img.youtube.com/vi/yU46CBN-2M4/0.jpg)](https://www.youtube.com/watch?v=yU46CBN-2M4)
 
