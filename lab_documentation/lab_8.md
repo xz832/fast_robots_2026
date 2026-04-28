@@ -172,7 +172,7 @@ This was what happened for the first few attempts:
 
 It tends to turn sideways a little bit after flipping, possibly due to the fact that the speed at which the two wheels stop are different. One motor seems to have a delay in stopping as compared to the other, causing it to turn mid-flip.
 
-To fix this issue, I tweaked the speeds at which 
+To fix this issue, I tweaked the ratio between the motor speeds at which the car drives back away from the wall such that it can course-correct itself after it flips. Instead of sending the same PWM signal to both motors, I lowered one just enough to not veer off to the side, but not too much as to affect the reliability of my flips. I also added a very small delay to the motor that stops earlier, such that it runs a little longer to match the other.
 
 [![Stunt_run_1](https://img.youtube.com/vi/yU46CBN-2M4/0.jpg)](https://www.youtube.com/watch?v=yU46CBN-2M4)
 
