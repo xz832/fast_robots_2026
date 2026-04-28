@@ -36,3 +36,7 @@ ble.send_command(CMD.START_SPIN, "1|0.3|0.0001") --> originally 2.2
 motor speed adjusting
 
 the point turn graphs look like that because the spin was not long enough to fill the full array sent over bluetooth
+
+
+1. Derivative control spiking in the start (low pass filter with raw gyro data + time step being too small no guard for that)
+2. starting angles change to offset

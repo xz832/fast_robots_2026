@@ -120,6 +120,8 @@ This proved successful for my car to perform the flip.
 
 ## Distance-Based Flip
 
+Now that I have confirmed that my hardware is suited to perform the flip, I added the distance-based controls from the TOF sensor readings such that the car flips at the right distance from the wall regardless of starting position. The relevant code is as follows:
+
 ```C++
 //stunt control
             if (start_STUNT == true && tindex < tindex_max) {
