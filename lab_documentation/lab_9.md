@@ -20,7 +20,6 @@ I want the car to be abel to turn 360 regardless of starting orientation
 
 
 ***TO DO:
-LAB 8 CODE ALL THE TOF AND MOTOR INPUT ARRAYS AND GRAPH
 
 LAB 9 MAKE CAR ABEL TO TURN 360 REGARDLESS OF STARTING ORIENTATION
 debugging:
