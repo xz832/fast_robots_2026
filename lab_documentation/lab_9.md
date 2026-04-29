@@ -163,9 +163,8 @@ Here are the polar plots for the data points collected:
 ![polar_0_0](../images/Lab9/polar_0_0.png)
 ![polar_0_3](../images/Lab9/polar_0_3.png)
 ![polar_5_3](../images/Lab9/polar_5_3.png)
-
-![polar_5_-3](../images/Lab9/polar_5_-3.png)
-![polar_-3_2](../images/Lab9/polar_-3_2.png)
+![polar_5_-3](../images/Lab9/polar_5_neg3.png)
+![polar_-3_2](../images/Lab9/polar_neg3_2.png)
 
 
 
