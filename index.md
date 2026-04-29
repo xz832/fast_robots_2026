@@ -17,8 +17,10 @@ Take a look at my documentation here:
 
 <a href="{{ '/lab_documentation/lab_6/' | relative_url }}" class = "btn"> Lab 6 Documentation</a> 
 
-<a href="{{ '/lab_documentation/lab_7/' | relative_url }}" class = "btn"> Lab 7 Documentation</a> !
+<a href="{{ '/lab_documentation/lab_7/' | relative_url }}" class = "btn"> Lab 7 Documentation</a> 
 
-<a href="{{ '/lab_documentation/lab_8/' | relative_url }}" class = "btn"> Lab 8 Documentation</a> !
+<a href="{{ '/lab_documentation/lab_8/' | relative_url }}" class = "btn"> Lab 8 Documentation</a> 
 
 <a href="{{ '/lab_documentation/lab_9/' | relative_url }}" class = "btn"> Lab 9 Documentation</a> !
+
+<a href="{{ '/lab_documentation/lab_10/' | relative_url }}" class = "btn"> Lab 10 Documentation</a> !
