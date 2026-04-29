@@ -190,6 +190,8 @@ scaling the set coordinates I took the measurements from, changing their units f
 
 The crosses mark the set coordinates where the readings were taken. The scatter plot looks a little rough. But it does seem to work best in more enclosed spaces (where the car is more in a corner). Aside from the uncertainty from the drift of the car turning, some of the data looks to be skewed possibly due to slight variations in my starting orientation.
 
+![scatter_plot_line](../images/Lab9/scatter_plot_line.png)
+
 Improvements:
 1. Derivative control spiking in the start (low pass filter with raw gyro data + time step being too small no guard for that)
 2. starting angles change to offset
