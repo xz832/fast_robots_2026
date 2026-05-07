@@ -16,4 +16,8 @@ In order to match the observation loop in world.yaml of our base code and to ens
 
 positive angles are in the counterclockwise direction
 
+1. Testing Bayes filter in simulator
+
+
+
 labs only opens on Thursday!!!
