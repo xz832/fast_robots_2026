@@ -14,7 +14,7 @@ This is lab 11 of fast robots. In this lab, our objective is perform localizatio
 
 In order to match the observation loop in world.yaml of our base code and to ensure the accuracy of my localized pose, I made adjustments to my lab 9 code. I decreased the increment at which my robot rotates to take a tof sensor reading to 20, and accordingly increased the number of turns to 18.
 
-positive angles are in the counterclockwise direction
+positive angles are in the counterclockwise direction!!
 
 1. Testing Bayes filter in simulator
 
@@ -22,4 +22,70 @@ positive angles are in the counterclockwise direction
 
 Testing the localization in the sim, the plot shows odometry in red, ground truth in green and belief in blue. The odometry is visibly quite off from what the path should be, due to the error that accumulates with each iteration. The ground truth and the belief follow each other closely, showing that the Bayes filter working well in simulation.
 
+2. Running Bayes filter on our car in a real map
+
+Unfortunately due to the motion noise of our robots, running the prediction step would not help us significantly. Hence, we will be implementing only the update function:
+
+```python
+    def perform_observation_loop(self, rot_vel=120):
+        """Perform the observation loop behavior on the real robot, where the robot does  
+        a 360 degree turn in place while collecting equidistant (in the angular space) sensor
+        readings, with the first sensor reading taken at the robot's current heading. 
+        The number of sensor readings depends on "observations_count"(=18) defined in world.yaml.
+        
+        Keyword arguments:
+            rot_vel -- (Optional) Angular Velocity for loop (degrees/second)
+                        Do not remove this parameter from the function definition, even if you don't use it.
+        Returns:
+            sensor_ranges   -- A column numpy array of the range values (meters)
+            sensor_bearings -- A column numpy array of the bearings at which the sensor readings were taken (degrees)
+                               The bearing values are not used in the Localization module, so you may return a empty numpy array
+        """
+        import asyncio
+        time_array.clear()
+        yaw_array.clear()
+        dist_array.clear()
+        
+        self.ble.start_notify(ble.uuid['RX_STRING'], notifyBle)
+        asyncio.run(asyncio.sleep(5))
+        
+        self.ble.send_command(CMD.START_SPIN, "1|0|0.0001")
+        #Kp|Kd|Ki
+        asyncio.run(asyncio.sleep(240))
+        
+        self.ble.send_command(CMD.STOP_SPIN, "")
+        
+        self.ble.send_command(CMD.SEND_SPIN_DATA, "")
+        asyncio.run(asyncio.sleep(60))
+        
+        self.ble.stop_notify(ble.uuid['RX_STRING'])
+
+        sensor_ranges = np.array(dist_array)[np.newaxis].T / 1000
+        sensor_bearings = np.array(yaw_array)[np.newaxis].T
+        #Do I need to clamp [:18]
+
+        return sensor_ranges, sensor_bearings
+```
+
+I used the shortcut asyncio function
+
+I also defined my notification handler in class RealRobot:
+
+```python
+    def notifyBle(uuid, data):
+        data = data.decode()
+        parts = data.split(",")
+    
+        time_array.append(float(parts[0]))
+        dist_array.append(float(parts[1]))
+        yaw_array.append(float(parts[2]))
+```
+
 labs only opens on Thursday!!!
+
+Place your robot in one of the four marked poses and run the update step of the Bayes filter once.
+How close is the localized pose w.r.t to the ground truth?
+Visualize your results
+Discuss your results
+Repeat (2) for every marked position.
+Does the robot localize better in certain poses? If so, why?
