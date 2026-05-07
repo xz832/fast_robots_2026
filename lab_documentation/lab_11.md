@@ -8,4 +8,8 @@ description: "writeup for lab 11"
 
 # LAB 11 - MAE4190 FAST ROBOTS
 
-This is lab 11 of fast robots. In this lab, our objective is to map out a static room. To build the map, we will place your robot in a couple of marked locations around the lab, and have it spin around its axis while collecting ToF readings.
+This is lab 11 of fast robots. In this lab, our objective is perform localization with the Bayes filter on our actual robot, and observe the differences between simulation from lab 10 and a real world system.
+
+### Lab Tasks
+
+In order to match the observation loop in world.yaml of our base code and to ensure the accuracy of my localized pose, I made adjustments to my lab 9 code. I decreased the increment at which my robot rotates to take a tof sensor reading to 20, and accordingly increased the number of turns to 18.
