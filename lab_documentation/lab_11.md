@@ -24,7 +24,7 @@ Testing the localization in the sim, the plot shows odometry in red, ground trut
 
 2. Running Bayes filter on our car in a real map
 
-Unfortunately due to the motion noise of our robots, running the prediction step would not help us significantly. Hence, we will be implementing only the update function:
+Unfortunately due to the motion noise of our robots, running the prediction step would not help us significantly. Hence, we will be implementing only the update function. I reused some code from lab 9 to implement the perform_observation_loop response, allowing the robot to turn 360 degrees in 20 degree increments for tof readings:
 
 ```python
     def perform_observation_loop(self, rot_vel=120):
