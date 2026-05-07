@@ -18,6 +18,6 @@ positive angles are in the counterclockwise direction
 
 1. Testing Bayes filter in simulator
 
-
+![lab_11_sim](../images/Lab11/lab_11_sim.png)
 
 labs only opens on Thursday!!!
