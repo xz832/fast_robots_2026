@@ -77,6 +77,10 @@ Unfortunately due to the motion noise of our robots, running the prediction step
 
 I used the shortcut asyncio function
 
+needs adjustment --> shimmying so much it landed here at the end:
+
+![needs_adj](../images/Lab11/needs_adj.jpeg)
+
 
 labs only opens on Thursday!!!
 
