@@ -42,9 +42,17 @@ Unfortunately due to the motion noise of our robots, running the prediction step
                                The bearing values are not used in the Localization module, so you may return a empty numpy array
         """
         import asyncio
-        time_array.clear()
-        yaw_array.clear()
-        dist_array.clear()
+        time_array = []
+        dist_array = []
+        yaw_array = []
+
+        def notifyBle(uuid, data):
+            data = data.decode()
+            parts = data.split(",")
+        
+            time_array.append(float(parts[0]))
+            dist_array.append(float(parts[1]))
+            yaw_array.append(float(parts[2]))
         
         self.ble.start_notify(ble.uuid['RX_STRING'], notifyBle)
         asyncio.run(asyncio.sleep(5))
@@ -69,21 +77,18 @@ Unfortunately due to the motion noise of our robots, running the prediction step
 
 I used the shortcut asyncio function
 
-I also defined my notification handler in class RealRobot:
-
-```python
-    def notifyBle(uuid, data):
-        data = data.decode()
-        parts = data.split(",")
-    
-        time_array.append(float(parts[0]))
-        dist_array.append(float(parts[1]))
-        yaw_array.append(float(parts[2]))
-```
 
 labs only opens on Thursday!!!
 
 Place your robot in one of the four marked poses and run the update step of the Bayes filter once.
+
+I may need to lower my Kp value
+
+(-3 ft ,-2 ft ,0 deg)
+(0 ft,3 ft, 0 deg)
+(5 ft,-3 ft, 0 deg)
+(5 ft,3 ft, 0 deg)
+
 How close is the localized pose w.r.t to the ground truth?
 Visualize your results
 Discuss your results
