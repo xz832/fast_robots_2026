@@ -80,13 +80,14 @@ I used the shortcut asyncio function
 needs adjustment --> shimmying so much it landed here at the end:
 
 ![needs_adj](../images/Lab11/needs_adj.jpeg)
+![needs_adj_belief](../images/Lab11/needs_adj_belief.png)
+Belief        : (-0.914, 0.305, 70.000)
 
+I may need to lower my Kp value
 
 labs only opens on Thursday!!!
 
 Place your robot in one of the four marked poses and run the update step of the Bayes filter once.
-
-I may need to lower my Kp value
 
 (-3 ft ,-2 ft ,0 deg)
 (0 ft,3 ft, 0 deg)
