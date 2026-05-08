@@ -68,31 +68,40 @@ Unfortunately due to the motion noise of our robots, running the prediction step
         
         self.ble.stop_notify(ble.uuid['RX_STRING'])
 
-        sensor_ranges = np.array(dist_array)[np.newaxis].T / 1000
-        sensor_bearings = np.array(yaw_array)[np.newaxis].T
-        #Do I need to clamp [:18]
+        sensor_ranges = np.array(dist_array[:18])[np.newaxis].T / 1000
+        sensor_bearings = np.array(yaw_array[:18])[np.newaxis].T
 
         return sensor_ranges, sensor_bearings
 ```
 
-I used the shortcut asyncio function
+I used the shortcut asyncio function, but have not observed any problems with the code running.
 
-needs adjustment --> shimmying so much it landed here at the end:
+My initial runs proved that my PID values needed adjustment. The yaw adjustments were too aggressive and that lead to the car drifting quite far away from the actual location. After experimenting, I ended up with Kp = 0.5, Kd = 0, and Ki = 0 for the most consistent on-axis turns.
 
-![needs_adj](../images/Lab11/needs_adj.jpeg)
-![needs_adj_belief](../images/Lab11/needs_adj_belief.png)
-Belief        : (-0.914, 0.305, 70.000)
+### (5 ft,3 ft, 0 deg)
 
-I may need to lower my Kp value
+![53_run](../images/Lab11/53_2_run.png)
+![53_2_run_map](../images/Lab11/53_2_run_map.png)
 
-labs only opens on Thursday!!!
+For this location, the localized pose isn't very close to the ground truth. Both the x and y coordinates are off by a foot or so. This is most likely due to my car not spinning perfectly in the same spot. The position is also tricky to localize as the left and bottom sides of the robot are not enclosed, and it only has two walls and a corner of an obstacle to work with. The TOF sensor would be reading distance values that are much farther away and potentially out of range, hence being less accurate. The orientation is fairly accurate, and remains consistent across multiple trials.
+
+### (5 ft,-3 ft, 0 deg)
+
+![5_3_belief](../images/Lab11/5_3_belief.png)
+![5_3_map](../images/Lab11/5_3_map.png)
+
+Again, the x and y coordinates of the localized pose are both about a foot off from the ground truth. The pose is however pretty accurate to the final location my car ended up at after drifting during its turns:
+
+![5_3_actual](../images/Lab11/5_3_actual.jpeg)
+
+
 
 Place your robot in one of the four marked poses and run the update step of the Bayes filter once.
 
 (-3 ft ,-2 ft ,0 deg)
 (0 ft,3 ft, 0 deg)
-(5 ft,-3 ft, 0 deg)
-(5 ft,3 ft, 0 deg)
+
+
 
 How close is the localized pose w.r.t to the ground truth?
 Visualize your results
