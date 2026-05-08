@@ -114,14 +114,10 @@ This supposedly should have similar accuracies to the position of (5,3), as they
 
 
 ### Overall Observations
+Unfortunately the Bayes filter does not perform as well as the simulation when used on a real system in a physical map. Our car has a lot of noise in both its motion and sensor readings, giving it difficulties in 
 long distance mode
 resolution
 
 
-How close is the localized pose w.r.t to the ground truth?
-Visualize your results
-Discuss your results
-Repeat (2) for every marked position.
-Does the robot localize better in certain poses? If so, why?
 
 I made car drift after doing a flip!! yahoo
