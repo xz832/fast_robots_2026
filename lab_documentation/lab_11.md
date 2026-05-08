@@ -14,7 +14,7 @@ This is lab 11 of fast robots. In this lab, our objective is perform localizatio
 
 In order to match the observation loop in world.yaml of our base code and to ensure the accuracy of my localized pose, I made adjustments to my lab 9 code. I decreased the increment at which my robot rotates to take a tof sensor reading to 20, and accordingly increased the number of turns to 18.
 
-positive angles are in the counterclockwise direction!!
+I also changed the PID controls such that my robot spins in a counterclockwise direction.
 
 1. Testing Bayes filter in simulator
 
