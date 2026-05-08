@@ -83,24 +83,39 @@ My initial runs proved that my PID values needed adjustment. The yaw adjustments
 ![53_run](../images/Lab11/53_2_run.png)
 ![53_2_run_map](../images/Lab11/53_2_run_map.png)
 
-For this location, the localized pose isn't very close to the ground truth. Both the x and y coordinates are off by a foot or so. This is most likely due to my car not spinning perfectly in the same spot. The position is also tricky to localize as the left and bottom sides of the robot are not enclosed, and it only has two walls and a corner of an obstacle to work with. The TOF sensor would be reading distance values that are much farther away and potentially out of range, hence being less accurate. The orientation is fairly accurate, and remains consistent across multiple trials.
+For this location, the localized pose isn't very close to the ground truth. Both the x and y coordinates are off by a foot or so. This is most likely due to my car not spinning perfectly in the same spot. The position is also tricky to localize as the left and bottom sides of the robot are not enclosed, and it only has two walls and a corner of an obstacle to work with. The TOF sensor would be reading distance values that are much farther away and potentially out of range, hence being less accurate. The orientation is mostly correct, and remains consistent across multiple trials.
 
 ### (5 ft,-3 ft, 0 deg)
 
 ![5_3_belief](../images/Lab11/5_3_belief.png)
 ![5_3_map](../images/Lab11/5_3_map.png)
 
-Again, the x and y coordinates of the localized pose are both about a foot off from the ground truth. The pose is however pretty accurate to the final location my car ended up at after drifting during its turns:
+Again, the x and y coordinates of the localized pose are both about a foot off from the ground truth. The pose is however pretty accurate to the final location my car ended up at after drifting during its turns, so the discrepancy is probably largely attributable to my car's movement:
 
 ![5_3_actual](../images/Lab11/5_3_actual.jpeg)
 
+The orientation is consistent. This corner is also not the best for localization, as there are open areas that could give inaccurate distance readings.
+
+### (-3 ft ,-2 ft ,0 deg)
+
+![_3_2_belief](../images/Lab11/_3_2_belief.png)
+![_3_2_map](../images/Lab11/_3_2_map.png)
+
+Now the localization gets better. Both the x and y coordinates are pretty much spot on, with the orientation angle a little off. This location is possibly giving very good results because it is mostly enclosed on all four sides. The car also did not drift as much, allowing the pose to be placed pretty accurately in the center of the square.
+
+### (0 ft,3 ft, 0 deg)
+
+![0_3_belief](../images/Lab11/0_3_belief.png)
+![0_3_map](../images/Lab11/0_3_map.png)
+
+This localization was also very accurate. The orientation was quite strange though. This may be due to a problem with my initialization in original yaw, or how my DMP fuses the absolute angular sensor readings from the IMU. 
+
+This supposedly should have similar accuracies to the position of (5,3), as they have similar levels of exposure to obstacles and walls, but this worked much better. I think it is most likely due to the inconsistent amounts of drifting that my car does when executing the full spin. It could also be due to (0,3) not having a long, empty hallway on one side and having some closer indicator of distance by the little partition wall.
 
 
-Place your robot in one of the four marked poses and run the update step of the Bayes filter once.
-
-(-3 ft ,-2 ft ,0 deg)
-(0 ft,3 ft, 0 deg)
-
+### Overall Observations
+long distance mode
+resolution
 
 
 How close is the localized pose w.r.t to the ground truth?
