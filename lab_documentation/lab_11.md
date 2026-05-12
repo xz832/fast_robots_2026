@@ -116,6 +116,3 @@ This supposedly should have similar accuracies to the position of (5,3), as they
 ### Overall Observations
 Unfortunately the Bayes filter does not perform as well as the simulation when used on a real system in a physical map. Our car has a lot of noise in both its motion and sensor readings, giving it difficulties in good localization. Moreover, I was using the long distance mode on my TOF sensor. While it gives more range for farther readings, useful for open spaces, using the short distance mode could give higher resolution readings for a more accurate guess as to where the car is.
 
-
-
-I made car drift after doing a flip!! yahoo

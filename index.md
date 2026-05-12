@@ -25,4 +25,6 @@ Take a look at my documentation here:
 
 <a href="{{ '/lab_documentation/lab_10/' | relative_url }}" class = "btn"> Lab 10 Documentation</a> !
 
-<a href="{{ '/lab_documentation/lab_11/' | relative_url }}" class = "btn"> Lab 11 Documentation</a> !
+<a href="{{ '/lab_documentation/lab_11/' | relative_url }}" class = "btn"> Lab 11 Documentation</a> 
+
+<a href="{{ '/lab_documentation/lab_12/' | relative_url }}" class = "btn"> Lab 12 Documentation</a> !
