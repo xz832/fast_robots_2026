@@ -32,7 +32,7 @@ read distance --> calculate distance to next waypoint --> execute PID linear con
 repeat
 
 Arduino:
-modify lab 11 code for only going to one target distance
+modify lab 11 code for only going to one target angle --> might have to change my initialization
 modify lab 5 code for going to set distance
 
 
