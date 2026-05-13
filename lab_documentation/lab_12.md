@@ -25,5 +25,16 @@ At each waypoint: calculate target angle to next waypoint, calculate target dist
 8. (0, 3)
 9. (0, 0)      <--end
 
+array of all waypoints --> cycle through
+since from lab 11 my localization is pretty poor, choose not to trust car, localize at every waypoint
+calculate angle to next way point --> execute PID turn control
+read distance --> calculate distance to next waypoint --> execute PID linear control
+repeat
+
+Arduino:
+modify lab 11 code for only going to one target distance
+modify lab 5 code for going to set distance
+
+
 
 capture both live video and mapped path
