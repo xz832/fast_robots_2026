@@ -81,31 +81,23 @@ def prediction_step(cur_odom, prev_odom):
     loc.bel_bar /= np.sum(loc.bel_bar)
 ```
 
-### sensor_model
+### sensor_model and update_step
 
+The sensor model function is the equivalent of calculating p(z|x). It models the measurement noise, which is used for the update step in the Bayes Filter.
 
-
+```python
 def sensor_model(obs):
-    """ This is the equivalent of p(z|x).
-
-
-    Args:
-        obs ([ndarray]): A 1D array consisting of the true observations for a specific robot pose in the map 
-
-    Returns:
-        [ndarray]: Returns a 1D array of size 18 (=loc.OBS_PER_CELL) with the likelihoods of each individual sensor measurement
-    """
     prob_array = loc.gaussian(loc.obs_range_data.flatten(), obs, loc.sensor_sigma)
-
     return prob_array
 
 def update_step():
     """ Update step of the Bayes Filter.
     Update the probabilities in loc.bel based on loc.bel_bar and the sensor model.
     """
-    likelihoods = np.prod(loc.gaussian(loc.obs_range_data.flatten(), mapper.obs_views, loc.sensor_sigma),axis=3)
-    loc.bel = likelihoods * loc.bel_bar
+    likelihood = np.prod(sensor_model(mapper.obs_views),axis=3)
+    loc.bel = likelihood * loc.bel_bar
+    #normalize
     loc.bel /= np.sum(loc.bel)
-
+```
 
 ![lab_10_final](../images/Lab10/lab_10_final.png)
