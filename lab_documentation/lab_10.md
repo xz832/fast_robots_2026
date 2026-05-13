@@ -54,7 +54,9 @@ def odom_motion_model(cur_pose, prev_pose, u):
 
 ### prediction_step
 
-The prediction step of the Bayes Filter needs to take the beliefs of the robot's every previous step, run them through the motion model, and combine them to give a projection of where the robot's next state will be.
+The prediction step of the Bayes Filter needs to take the belief distributions of the robot's every previous step, propagate them through the motion model, and combine them to give a belief distribution of where the robot's next state will be. 
+
+![predict_step](../images/Lab10/predict_step.png)
 
 ```python
 def prediction_step(cur_odom, prev_odom):
@@ -63,24 +65,25 @@ def prediction_step(cur_odom, prev_odom):
 
     loc.bel_bar = np.zeros((mapper.MAX_CELLS_X, mapper.MAX_CELLS_Y, mapper.MAX_CELLS_A))
 
-    for cx in range(mapper.MAX_CELLS_X):
-        for cy in range(mapper.MAX_CELLS_Y):
-            for ca in range(mapper.MAX_CELLS_A):
-                curr_pose = mapper.from_map(cx, cy, ca)
+    for px in range(mapper.MAX_CELLS_X):
+        for py in range(mapper.MAX_CELLS_Y):
+            for pa in range(mapper.MAX_CELLS_A):
+                prev_pose = mapper.from_map(px, py, pa)
 
-
-                for nx in range(mapper.MAX_CELLS_X):
-                    for ny in range(mapper.MAX_CELLS_Y):
-                        for na in range(mapper.MAX_CELLS_A):
-                            cur_pose = mapper.from_map(nx, ny, na)
-                            prob = odom_motion_model(cur_pose, prev_pose, u)
-                            loc.bel_bar[nx, ny, na] += prob * loc.bel[cx, cy, ca]
+                for cx in range(mapper.MAX_CELLS_X):
+                    for cy in range(mapper.MAX_CELLS_Y):
+                        for ca in range(mapper.MAX_CELLS_A):
+                            curr_pose = mapper.from_map(cx, cy, ca)
+                            prob = odom_motion_model(curr_pose, prev_pose, u)
+                            loc.bel_bar[cx, cy, ca] += prob * loc.bel[px, py, pa]
     
+    #normalize
     loc.bel_bar /= np.sum(loc.bel_bar)
 ```
 
+### sensor_model
 
-    
+
 
 def sensor_model(obs):
     """ This is the equivalent of p(z|x).
