@@ -33,16 +33,9 @@ TOF reading too!
 
 The arduino function is modified from 
 
-3. Since 
-since from lab 11 my localization is pretty poor, choose not to trust car, localize at every waypoint
-calculate angle to next way point --> execute PID turn control
-read distance --> calculate distance to next waypoint --> execute PID linear control
-repeat
+3. Since as seen from lab 11, the control of my car is fairly poor, so I chose not to trust calculated expected control inputs, and decided to localize at every waypoint
 
-Arduino:
-modify lab 11 code for only going to one target angle --> might have to change my initialization
-modify lab 5 code for going to set distance
+This did unfortunately make the entire path planning process incredibly slow, as it takes a long time for the car to localize as well as send data over through the BLE.
 
 
-
-capture both live video and mapped path
+The TOF feedback controls proved difficult as the angular adjustments were not the most reliable
