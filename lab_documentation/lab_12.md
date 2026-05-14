@@ -26,7 +26,8 @@ def TargetAngle(curr_x, curr_y, next_waypoint):
 ```
 
 ```C++
-    void waypointAngleControl(float waypoint_angle, float curr_angle, int index){
+    void
+    waypointAngleControl(float waypoint_angle, float curr_angle, int index){
     //ENABLE DMP
     bool success = true;
     //PID CALCULATION
@@ -68,9 +69,40 @@ def TargetDistance(x, y, curr_dist, next_waypoint):
 I needed the TOF reading for this, to get the current distance, hence I added an arduino command for that too.
 
 ```C++
+void
+waypointDistControl(float target_dist, float curr_dist, int index){
+    //PID CALCULATION
+    PID_calculation(curr_dist, target_dist, index);
+    //motor input
+    if (PID_doc[index] > 0){
+        PID_forward(PID_doc[index], index);
+    } else {
+        PID_backward(PID_doc[index], index);
+    }
+
+    if (abs(error_doc[index]) <= 2){
+        control_stop();
+        error_too_big = false;
+        delay(3000);
+    }
+}
 ```
 
-The arduino function is modified from 
+```C++
+        case SEND_DIST_DATA: {
+
+            float curr_tof = distanceSensor2.getDistance(); //Get the result of the measurement from the sensor
+            distanceSensor2.clearInterrupt();
+
+            tx_estring_value.clear();
+            tx_estring_value.append(curr_tof);
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+            break;
+        }
+```
+
+My PID calculations and motor controls are the same as previous labs.
 
 3. Since as seen from lab 11, the control of my car is fairly poor, so I chose not to trust calculated expected control inputs, and decided to localize at every waypoint
 
