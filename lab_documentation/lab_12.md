@@ -141,4 +141,12 @@ My PID calculations and motor controls are the same as previous labs.
 
 The TOF feedback controls proved difficult as the angular adjustments were not the most reliable and would often guide the TOF sensor within sight of some obstacles that does not match the expected distance we should be reading. Moreover, the localization at each waypoint introduced so much error and drift into its trajectory that the car would often lose its way. I decided to then reduce the number of waypoints at which it would localize.
 
+```python
+    if to_local[i]:
+        curr_pt = await RealRobot.localizeSpin(waypoints[i+1])
+    else
+        curr_pt = (waypoints[i+1])
+    print("localized: ", curr_pt)
+```
+
 I might have benefitted from a Kalman filter actually
