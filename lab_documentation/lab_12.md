@@ -53,7 +53,19 @@ The arduino function is modified from the localization code, but with one set ta
 2. Another python function will calculated the target distance that the car needs to travel towards the next waypoint, with which another arduino command would execute PID linear motion control to arrive at the next waypoint:
 
 ```python
-TOF reading too!
+def TargetDistance(x, y, curr_dist, next_waypoint):
+    
+        next_x = next_waypoint[0]
+        next_y = next_waypoint[1]
+       
+        distance = ( math.sqrt((x2 - x)**2 + (y2 - y)**2) ) * 304.8
+       
+        target_distance = curr_dist - distance
+
+        return target_distance
+```
+
+I needed the TOF reading for this, to get the current distance, hence I added an arduino command for that too.
 
 ```C++
 ```
