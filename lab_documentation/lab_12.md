@@ -38,4 +38,4 @@ The arduino function is modified from
 This did unfortunately make the entire path planning process incredibly slow, as it takes a long time for the car to localize as well as send data over through the BLE.
 
 
-The TOF feedback controls proved difficult as the angular adjustments were not the most reliable
+The TOF feedback controls proved difficult as the angular adjustments were not the most reliable and would often guide the TOF sensor within sight of some obstacles that does not match the expected distance we should be reading.
