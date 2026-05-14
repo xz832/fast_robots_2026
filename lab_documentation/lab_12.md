@@ -147,6 +147,12 @@ Here is a very bad first attempt:
 
 Moreover, similar to previous labs, my car's ability to localize reliably with an on-axis turn is not great. The localization at each waypoint introduced so much error and drift into its trajectory that the car would often lose its way. I decided to then reduce the number of waypoints at which it would localize.
 
+Here is a snippet of the car attempting to localize at (2, -3), sped up to x3 speed because it was so slow:
+
+[![bad_first_attempt](https://img.youtube.com/vi/8pgZIIrAEtg/0.jpg)](https://www.youtube.com/watch?v=8pgZIIrAEtg)
+
+I had to increased the Kp by much more than I expected to get a faster result. The original cycle took me maybe at least ten minutes to run in full.
+
 ```python
     if to_local[i]:
         curr_pt = await RealRobot.localizeSpin(waypoints[i+1])
@@ -155,9 +161,7 @@ Moreover, similar to previous labs, my car's ability to localize reliably with a
     print("localized: ", curr_pt)
 ```
 
-Unfortunately ultimately I decided to forego all of the localization points, and it turned almost into an open loop control, but I think with more time to calibrate and smooth out any redundancies in my code, I might have been able to do it. I might also have benefitted from implementing a Kalman filter.
-
-I had to increased the Kp by much more than I expected to get a faster result. The original cycle took me maybe at least ten minutes to run in full. The car wiggles a lot more during orientation control
+I had originally planned to localize at (2, -3), (5, 3) and (0, 3), since those waypoints are more enclosed and provides more reference points for accuracy. Unfortunately ultimately I decided to forego all of the localization points, and it turned almost into an open loop control, but I think with more time to calibrate and smooth out any redundancies in my code, I might have been able to do it. I might also have benefitted from implementing a Kalman filter.
 
 ### Final Pathing
 
