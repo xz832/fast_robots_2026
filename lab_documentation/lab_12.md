@@ -16,9 +16,36 @@ I started out trying to use the positional PID controls with the TOF sensors. Th
 1. At each waypoint, a python function would calculate the angle towards the next waypoint, and an arduino command, upon receiving the required angle, would run PID orientation control to steer the car towards it:
 
 ```python
+def TargetAngle(curr_x, curr_y, next_waypoint):
+        next_x = next_waypoint[0]
+        next_y = next_waypoint[1]
+        
+        target_angle = math.atan2(next_y - curr_y, next_x - curr_x) * 180/pi
+       
+        return target_angle
+```
 
 ```C++
+    void waypointAngleControl(float waypoint_angle, float curr_angle, int index){
+    //ENABLE DMP
+    bool success = true;
+    //PID CALCULATION
+    PID_calculation(curr_angle, waypoint_angle, index);
+    //motor input
+    if (PID_doc[index] < 0){
+        PID_leftward(PID_doc[index], index);
+    } else {
+        PID_rightward(PID_doc[index], index);
+    }
 
+    if (abs(error_doc[index]) <= 2){
+        control_stop();
+        error_too_big = false;
+        delay(3000);
+        // Reset FIFO
+        success &= (myICM.resetFIFO() == ICM_20948_Stat_Ok);
+    }
+}
 ```
 
 The arduino function is modified from the localization code, but with one set target angle instead of a gradually incrementing one.
