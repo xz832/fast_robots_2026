@@ -161,7 +161,7 @@ I had to increased the Kp by much more than I expected to get a faster result. T
     print("localized: ", curr_pt)
 ```
 
-I had originally planned to localize at (2, -3), (5, 3) and (0, 3), since those waypoints are more enclosed and provides more reference points for accuracy. Unfortunately ultimately I decided to forego all of the localization points, and it turned almost into an open loop control, but I think with more time to calibrate and smooth out any redundancies in my code, I might have been able to do it. I might also have benefitted from implementing a Kalman filter.
+I had originally planned to localize at (2, -3), (5, 3) and (0, 3), since those waypoints are more enclosed and provides more reference points for accuracy. Unfortunately ultimately I decided to forego all of the localization points, and it turned almost into an open loop control, but I think with more time to calibrate and smooth out any redundancies in my code, I might have been able to do it. I might also have benefitted from implementing a Kalman filter. While the final pathing was still not super accurate, the car was able to find its way around all the waypoints and avoid the obstacles in the map.
 
 ### Final Pathing
 
