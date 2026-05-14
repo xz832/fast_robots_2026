@@ -139,7 +139,13 @@ My PID calculations and motor controls are the same as previous labs.
         print("localized: ", curr_pt)
 ```
 
-The TOF feedback controls proved difficult as the angular adjustments were not the most reliable and would often guide the TOF sensor within sight of some obstacles that does not match the expected distance we should be reading. Moreover, the localization at each waypoint introduced so much error and drift into its trajectory that the car would often lose its way. I decided to then reduce the number of waypoints at which it would localize.
+The TOF feedback controls proved difficult as the angular adjustments were not the most reliable and would often guide the TOF sensor within sight of some obstacles that does not match the expected distance we should be reading.
+
+Here is a very bad first attempt:
+
+[![bad_first_attempt](https://img.youtube.com/vi/3r3Guliwuts/0.jpg)](https://www.youtube.com/watch?v=3r3Guliwuts)
+
+Moreover, similar to previous labs, my car's ability to localize reliably with an on-axis turn is not great. The localization at each waypoint introduced so much error and drift into its trajectory that the car would often lose its way. I decided to then reduce the number of waypoints at which it would localize.
 
 ```python
     if to_local[i]:
@@ -149,4 +155,10 @@ The TOF feedback controls proved difficult as the angular adjustments were not t
     print("localized: ", curr_pt)
 ```
 
-I might have benefitted from a Kalman filter actually
+Unfortunately ultimately I decided to forego all of the localization points, and it turned almost into an open loop control, but I think with more time to calibrate and smooth out any redundancies in my code, I might have been able to do it. I might also have benefitted from implementing a Kalman filter.
+
+I had to increased the Kp by much more than I expected to get a faster result. The original cycle took me maybe at least ten minutes to run in full. The car wiggles a lot more during orientation control
+
+### Final Pathing
+
+[![full_run](https://img.youtube.com/vi/vxYq2N79kq8/0.jpg)](https://www.youtube.com/watch?v=vxYq2N79kq8)
