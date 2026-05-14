@@ -16,7 +16,7 @@ I started out trying to use the positional PID controls with the TOF sensors. Th
 1. At each waypoint, a python function would calculate the angle towards the next waypoint, and an arduino command, upon receiving the required angle, would run PID orientation control to steer the car towards it:
 
 ```python
-def TargetAngle(curr_x, curr_y, next_waypoint):
+def targetAngle(curr_x, curr_y, next_waypoint):
         next_x = next_waypoint[0]
         next_y = next_waypoint[1]
         
@@ -54,7 +54,7 @@ The arduino function is modified from the localization code, but with one set ta
 2. Another python function will calculated the target distance that the car needs to travel towards the next waypoint, with which another arduino command would execute PID linear motion control to arrive at the next waypoint:
 
 ```python
-def TargetDistance(x, y, curr_dist, next_waypoint):
+def targetDistance(x, y, curr_dist, next_waypoint):
     
         next_x = next_waypoint[0]
         next_y = next_waypoint[1]
@@ -104,9 +104,41 @@ waypointDistControl(float target_dist, float curr_dist, int index){
 
 My PID calculations and motor controls are the same as previous labs.
 
-3. Since as seen from lab 11, the control of my car is fairly poor, so I chose not to trust calculated expected control inputs, and decided to localize at every waypoint
+3. Since as seen from lab 11, the control of my car is fairly poor, so I chose not to trust calculated expected control inputs, and decided to localize at every waypoint. This did unfortunately make the entire path planning process incredibly slow, as it takes a long time for the car to localize as well as send data over through the BLE.
 
-This did unfortunately make the entire path planning process incredibly slow, as it takes a long time for the car to localize as well as send data over through the BLE.
+```python
+    for i in range(len(waypoints)):
 
+        target_angle = RealRobot.targetAngle(curr_pt[0], curr_pt[1], waypoints[i+1])
+        print("target angle calculated: ", target_angle)
+   
+        ble.send_command(CMD.TARGET_ANGLE_TURN, f"0.8|0|0|{target_angle}")
+        #Kp needs to be pretty small
 
-The TOF feedback controls proved difficult as the angular adjustments were not the most reliable and would often guide the TOF sensor within sight of some obstacles that does not match the expected distance we should be reading.
+        await asyncio.sleep(10)
+
+        ble.send_command(CMD.SEND_DIST_DATA, "")
+        curr_dist = float(ble.receive_string(ble.uuid['RX_STRING']))
+        
+        await asyncio.sleep(3)
+        
+        print("tof data sent: ", curr_dist)
+
+        target_dist = RealRobot.targetDistance(curr_pt[0], curr_pt[1], curr_dist, waypoints[i+1])
+
+        print("target distance calculated: ", target_dist)
+        
+        ble.send_command(CMD.TARGET_DIST_RUN, f"0.1|0|0|{target_dist}")
+        # too fast
+
+        await asyncio.sleep(5)
+
+        #localization
+        curr_pt = await RealRobot.localizeSpin(waypoints[i+1])
+        #curr_pt = (waypoints[i+1])
+        print("localized: ", curr_pt)
+```
+
+The TOF feedback controls proved difficult as the angular adjustments were not the most reliable and would often guide the TOF sensor within sight of some obstacles that does not match the expected distance we should be reading. Moreover, the localization at each waypoint introduced so much error and drift into its trajectory that the car would often lose its way. I decided to then reduce the number of waypoints at which it would localize.
+
+I might have benefitted from a Kalman filter actually
